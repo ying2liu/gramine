@@ -153,16 +153,16 @@ Preferred Doxygen style
    .. code-block:: c
 
       /*!
-       * \brief An example function
+       * \brief  Sums two integers.
        *
-       * This function returns a number augmented by the Answer to the Ultimate
-       * Question of Life, the Universe, and Everything.
+       * \param  first   First addend.
+       * \param  second  Second addend.
        *
-       * \param n The number to be added
-       * \return A number 42 greater
+       * \returns  Sum of the arguments. Sometimes a longer description is needed,
+       *           then it should be wrapped and aligned like this.
        */
-      int foo(int n) {
-          return n + 42;
+      int foo(int first, int second) {
+          return first + second;
       }
 
    ::
