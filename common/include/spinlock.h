@@ -105,12 +105,12 @@ out:
 }
 
 /*!
- * \brief  Tries to acquire a spinlock, with a timeout.
+ * \brief Tries to acquire a spinlock, with a timeout.
  *
- * \param  lock        The lock.
- * \param  iterations  Number of iterations (tries) after which this function times out.
+ * \param lock        The lock.
+ * \param iterations  Number of iterations (tries) after which this function times out.
  *
- * \returns  true if acquiring the lock succeeded, false if timed out.
+ * \returns true if acquiring the lock succeeded, false if timed out.
  */
 static inline bool spinlock_lock_timeout(spinlock_t* lock, unsigned long iterations) {
     uint32_t val;

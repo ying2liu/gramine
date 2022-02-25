@@ -153,13 +153,13 @@ Preferred Doxygen style
    .. code-block:: c
 
       /*!
-       * \brief  Sums two integers.
+       * \brief Sums two integers.
        *
-       * \param  first   First addend.
-       * \param  second  Second addend.
+       * \param first   First addend.
+       * \param second  Second addend.
        *
-       * \returns  Sum of the arguments. Sometimes a longer description is needed,
-       *           then it should be wrapped and aligned like this.
+       * \returns Sum of the arguments. Sometimes a longer description is needed,
+       *          then it should be wrapped and aligned like this.
        */
       int foo(int first, int second) {
           return first + second;

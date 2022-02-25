@@ -345,18 +345,18 @@ typedef int (*migrate_func_t)(struct shim_cp_store*, struct shim_process*, struc
                               struct shim_ipc_ids*, va_list);
 
 /*!
- * \brief  Creates child process and migrate state to it.
+ * \brief Creates child process and migrate state to it.
  *
  * Called in parent process during fork/clone.
  *
- * \param  migrate_func         Migration function defined by the caller.
- * \param  child_process        Struct bookkeeping the child process, added to the children list.
- * \param  process_description  Struct describing the new process (child).
- * \param  thread_description   Struct describing main thread of the child process.
+ * \param migrate_func         Migration function defined by the caller.
+ * \param child_process        Struct bookkeeping the child process, added to the children list.
+ * \param process_description  Struct describing the new process (child).
+ * \param thread_description   Struct describing main thread of the child process.
  *
  * The remaining arguments are passed into the migration function.
  *
- * \returns  0 on success, negative POSIX error code on failure.
+ * \returns 0 on success, negative POSIX error code on failure.
  */
 int create_process_and_send_checkpoint(migrate_func_t migrate_func,
                                        struct shim_child_process* child_process,
@@ -364,13 +364,13 @@ int create_process_and_send_checkpoint(migrate_func_t migrate_func,
                                        struct shim_thread* thread_description, ...);
 
 /*!
- * \brief  Receives a checkpoint from parent process and restore state based on it.
+ * \brief Receives a checkpoint from parent process and restore state based on it.
  *
  * Called in child process during initialization.
  *
- * \param  hdr  Checkpoint header already received from the parent.
+ * \param hdr  Checkpoint header already received from the parent.
  *
- * \returns  0 on success, negative POSIX error code on failure.
+ * \returns 0 on success, negative POSIX error code on failure.
  */
 int receive_checkpoint_and_restore(struct checkpoint_hdr* hdr);
 

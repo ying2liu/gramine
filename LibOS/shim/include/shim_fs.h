@@ -206,9 +206,9 @@ typedef int (*readdir_callback_t)(const char* name, void* arg);
 
 struct shim_d_ops {
     /*
-     * \brief  Looks up a file.
+     * \brief Looks up a file.
      *
-     * \param  dent  Dentry, not valid.
+     * \param dent  Dentry, not valid.
      *
      * Queries the underlying filesystem for a path described by a dentry (`dent->name` and
      * `dent->parent`). On success, prepares the dentry for use by the filesystem. Always sets the
@@ -220,11 +220,11 @@ struct shim_d_ops {
     int (*lookup)(struct shim_dentry* dent);
 
     /*
-     * \brief  Opens an existing file.
+     * \brief Opens an existing file.
      *
-     * \param  hdl    A newly created handle.
-     * \param  dent   Dentry, valid and non-negative.
-     * \param  flags  Open flags, including access mode (O_RDONLY / O_WRONLY / O_RDWR).
+     * \param hdl    A newly created handle.
+     * \param dent   Dentry, valid and non-negative.
+     * \param flags  Open flags, including access mode (O_RDONLY / O_WRONLY / O_RDWR).
      *
      * Opens a file, and if successful, prepares the handle for use by the filesystem. Always sets
      * the `type` field.
@@ -235,12 +235,12 @@ struct shim_d_ops {
     int (*open)(struct shim_handle* hdl, struct shim_dentry* dent, int flags);
 
     /*
-     * \brief  Creates and opens a new regular file.
+     * \brief Creates and opens a new regular file.
      *
-     * \param  hdl    A newly created handle.
-     * \param  dent   Dentry, not valid (file to be created).
-     * \param  flags  Open flags, including access mode (O_RDONLY / O_WRONLY / O_RDWR).
-     * \param  perm   Permissions of the new file.
+     * \param hdl    A newly created handle.
+     * \param dent   Dentry, not valid (file to be created).
+     * \param flags  Open flags, including access mode (O_RDONLY / O_WRONLY / O_RDWR).
+     * \param perm   Permissions of the new file.
      *
      * Creates and opens a new regular file at path described by `dent`. On success, prepares the
      * handle and the dentry for use by the filesystem (as in `open` and `lookup`).
@@ -251,10 +251,10 @@ struct shim_d_ops {
     int (*creat)(struct shim_handle* hdl, struct shim_dentry* dent, int flags, mode_t perm);
 
     /*
-     * \brief  Creates a directory.
+     * \brief Creates a directory.
      *
-     * \param  dent  dentry, not valid (directory to be created).
-     * \param  perm  Permissions of the new directory.
+     * \param dent  dentry, not valid (directory to be created).
+     * \param perm  Permissions of the new directory.
      *
      * Creates a new directory at path described by `dent`. On success, prepares the dentry for use
      * by the filesystem (as in `lookup`).
@@ -265,9 +265,9 @@ struct shim_d_ops {
     int (*mkdir)(struct shim_dentry* dent, mode_t perm);
 
     /*
-     * \brief  Unlinks a file.
+     * \brief Unlinks a file.
      *
-     * \param  dent  Dentry, valid and non-negative, must have a parent.
+     * \param dent  Dentry, valid and non-negative, must have a parent.
      *
      * Unlinks a file described by `dent`. Note that there might be handles for that file; if
      * possible, they should still work.
@@ -278,10 +278,10 @@ struct shim_d_ops {
     int (*unlink)(struct shim_dentry* dent);
 
     /*
-     * \brief  Gets file status.
+     * \brief Gets file status.
      *
-     * \param  dent  Dentry, valid and non-negative.
-     * \param  buf   Status buffer to fill.
+     * \param dent  Dentry, valid and non-negative.
+     * \param buf   Status buffer to fill.
      *
      * Fills `buf` with information about a file. Omits `st_ino` (which is later filled by the
      * caller).
@@ -291,10 +291,10 @@ struct shim_d_ops {
     int (*stat)(struct shim_dentry* dent, struct stat* buf);
 
     /*
-     * \brief  Extracts the target of a symbolic link.
+     * \brief Extracts the target of a symbolic link.
      *
-     * \param  dent        Dentry, valid and non-negative, describing a symlink.
-     * \param  out_target  On success, contains link target.
+     * \param dent        Dentry, valid and non-negative, describing a symlink.
+     * \param out_target  On success, contains link target.
      *
      * Determines the target of a symbolic link, and sets `*out_target` to an allocated string.
      *
@@ -303,10 +303,10 @@ struct shim_d_ops {
     int (*follow_link)(struct shim_dentry* dent, char** out_target);
 
     /*
-     * \brief  Changes file permissions.
+     * \brief Changes file permissions.
      *
-     * \param  dent  Dentry, valid and non-negative.
-     * \param  perm  New permissions for the file.
+     * \param dent  Dentry, valid and non-negative.
+     * \param perm  New permissions for the file.
      *
      * Changes the permissions for a file.
      *
@@ -315,10 +315,10 @@ struct shim_d_ops {
     int (*chmod)(struct shim_dentry* dent, mode_t perm);
 
     /*
-     * \brief  Renames a file.
+     * \brief Renames a file.
      *
-     * \param  old  Source dentry, valid and non-negative.
-     * \param  new  Target dentry, valid, can be negative or non-negative.
+     * \param old  Source dentry, valid and non-negative.
+     * \param new  Target dentry, valid, can be negative or non-negative.
      *
      * Moves a file described by `old` to the path described by `new`. Updates the fields of `new`
      * (same as `lookup`).
@@ -332,11 +332,11 @@ struct shim_d_ops {
     int (*rename)(struct shim_dentry* old, struct shim_dentry* new);
 
     /*!
-     * \brief  Lists all files in the directory.
+     * \brief Lists all files in the directory.
      *
-     * \param  dent      The dentry, must be valid, non-negative and describing a directory.
-     * \param  callback  The callback to invoke on each file name.
-     * \param  arg       Argument to pass to the callback.
+     * \param dent      The dentry, must be valid, non-negative and describing a directory.
+     * \param callback  The callback to invoke on each file name.
+     * \param arg       Argument to pass to the callback.
      *
      * Calls `callback(name, arg)` for all file names in the directory. `name` is not guaranteed to
      * be valid after callback returns, so the callback should copy it if necessary.
@@ -351,9 +351,9 @@ struct shim_d_ops {
     int (*readdir)(struct shim_dentry* dent, readdir_callback_t callback, void* arg);
 
     /*!
-     * \brief  Deallocates inode data.
+     * \brief Deallocates inode data.
      *
-     * \param  inode  The inode about to be freed.
+     * \param inode  The inode about to be freed.
      *
      * Deallocates any custom data stored in the inode by filesystem. Called before deleting the
      * inode.
@@ -363,11 +363,11 @@ struct shim_d_ops {
     void (*idrop)(struct shim_inode* inode);
 
     /*!
-     * \brief  Checkpoints inode data.
+     * \brief Checkpoints inode data.
      *
-     * \param  inode     The inode to be checkpointed.
-     * \param  out_data  On success, contains a newly allocated buffer with data.
-     * \param  out_size  On success, contains data size.
+     * \param inode     The inode to be checkpointed.
+     * \param out_data  On success, contains a newly allocated buffer with data.
+     * \param out_size  On success, contains data size.
      *
      * Prepares any custom data necessary to migrate the inode. Called when checkpointing the inode.
      *
@@ -376,10 +376,10 @@ struct shim_d_ops {
     int (*icheckpoint)(struct shim_inode* inode, void** out_data, size_t* out_size);
 
     /*!
-     * \brief  Restores inode data from checkpoint.
+     * \brief Restores inode data from checkpoint.
      *
-     * \param  inode  Newly restored inode.
-     * \param  data   Checkpoint data (prepared by the `icheckpoint` callback).
+     * \param inode  Newly restored inode.
+     * \param data   Checkpoint data (prepared by the `icheckpoint` callback).
      *
      * Restores custom state of the inode. Called when restoring the inode from checkpoint, after
      * all other fields are set.
@@ -450,11 +450,11 @@ int init_mount(void);
 /* file system operations */
 
 /*!
- * \brief  Mounts a new filesystem.
+ * \brief Mounts a new filesystem.
  *
- * \param  type        Filesystem type (currently defined in `mountable_fs` in `shim_fs.c`).
- * \param  uri         PAL URI to mount, or NULL if not applicable.
- * \param  mount_path  Path to the mountpoint.
+ * \param type        Filesystem type (currently defined in `mountable_fs` in `shim_fs.c`).
+ * \param uri         PAL URI to mount, or NULL if not applicable.
+ * \param mount_path  Path to the mountpoint.
  *
  * Creates a new `shim_mount` structure (mounted filesystem) and attaches to the dentry under
  * `mount_path`. That means (assuming the dentry is called `mount_point`):
@@ -489,9 +489,9 @@ int init_dcache(void);
 extern struct shim_lock g_dcache_lock;
 
 /*!
- * \brief  Dumps dentry cache.
+ * \brief Dumps dentry cache.
  *
- * \param  dent  The starting dentry, or NULL (will default to dentry root).
+ * \param dent  The starting dentry, or NULL (will default to dentry root).
  *
  * Dumps the dentry cache using `log_always`, starting from the provided dentry. Intended for
  * debugging the filesystem - just add it manually to the code.
@@ -499,10 +499,10 @@ extern struct shim_lock g_dcache_lock;
 void dump_dcache(struct shim_dentry* dent);
 
 /*!
- * \brief  Checks file permissions, similar to Unix access.
+ * \brief Checks file permissions, similar to Unix access.
  *
- * \param  dentry  The dentry to check.
- * \param  mask    Mask, same as for Unix access.
+ * \param dentry  The dentry to check.
+ * \param mask    Mask, same as for Unix access.
  *
  * Checks permissions for a dentry. Because Gramine currently has no notion of users, this will
  * always use the "user" part of file mode.
@@ -533,13 +533,13 @@ int check_permissions(struct shim_dentry* dent, mode_t mask);
 #define MAX_LINK_DEPTH 8
 
 /*!
- * \brief  Looks up a path, retrieving a dentry.
+ * \brief Looks up a path, retrieving a dentry.
  *
- * \param       start  The start dentry for relative paths, or NULL (in which case it will default
- *                     to process' cwd).
- * \param       path   The path to look up.
- * \param       flags  Lookup flags (see description below).
- * \param[out]  found  Pointer to retrieved dentry.
+ * \param      start  The start dentry for relative paths, or NULL (in which case it will default
+ *                    to process' cwd).
+ * \param      path   The path to look up.
+ * \param      flags  Lookup flags (see description below).
+ * \param[out] found  Pointer to retrieved dentry.
  *
  * The caller should hold `g_dcache_lock`. If you do not already hold `g_dcache_lock`, use
  * `path_lookupat` instead.
@@ -591,15 +591,15 @@ int path_lookupat(struct shim_dentry* start, const char* path, int flags,
 int get_dirfd_dentry(int dirfd, struct shim_dentry** dir);
 
 /*!
- * \brief  Opens a file under a given path, similar to Unix open.
+ * \brief Opens a file under a given path, similar to Unix open.
  *
- * \param       hdl    Handle to associate with dentry, can be NULL.
- * \param       start  The start dentry for relative paths, or NULL (in which case it will default
- *                     to process' cwd).
- * \param       path   The path to look up.
- * \param       flags  Unix open flags (see below).
- * \param       mode   Unix file mode, used when creating a new file/directory.
- * \param[out]  found  Pointer to retrieved dentry, can be NULL.
+ * \param      hdl    Handle to associate with dentry, can be NULL.
+ * \param      start  The start dentry for relative paths, or NULL (in which case it will default
+ *                    to process' cwd).
+ * \param      path   The path to look up.
+ * \param      flags  Unix open flags (see below).
+ * \param      mode   Unix file mode, used when creating a new file/directory.
+ * \param[out] found  Pointer to retrieved dentry, can be NULL.
  *
  * If `hdl` is provided, on success it will be associated with the dentry. Otherwise, the file will
  * just be retrieved or created.
@@ -633,11 +633,11 @@ int open_namei(struct shim_handle* hdl, struct shim_dentry* start, const char* p
                int mode, struct shim_dentry** found);
 
 /*!
- * \brief  Opens an already retrieved dentry, and associates a handle with it.
+ * \brief Opens an already retrieved dentry, and associates a handle with it.
  *
- * \param  hdl    Handle to associate with dentry.
- * \param  dent   The dentry to open.
- * \param  flags  Unix open flags.
+ * \param hdl    Handle to associate with dentry.
+ * \param dent   The dentry to open.
+ * \param flags  Unix open flags.
  *
  * The dentry has to already correspond to a file (i.e. has to be valid and non-negative). The
  * caller has to hold `g_dcache_lock`.
@@ -648,9 +648,9 @@ int open_namei(struct shim_handle* hdl, struct shim_dentry* start, const char* p
 int dentry_open(struct shim_handle* hdl, struct shim_dentry* dent, int flags);
 
 /*!
- * \brief  Populates a directory handle with current dentries.
+ * \brief Populates a directory handle with current dentries.
  *
- * \param  hdl  A directory handle.
+ * \param hdl  A directory handle.
  *
  * This function populates the `hdl->dir_info` structure with current dentries in a directory, so
  * that the directory can be listed using `getdents/getdents64` syscalls.
@@ -663,9 +663,9 @@ int dentry_open(struct shim_handle* hdl, struct shim_dentry* dent, int flags);
 int populate_directory_handle(struct shim_handle* hdl);
 
 /*!
- * \brief  Clears dentries from a directory handle.
+ * \brief Clears dentries from a directory handle.
  *
- * \param  hdl  A directory handle.
+ * \param hdl  A directory handle.
  *
  * This function discards an array of dentries previously prepared by `populate_directory_handle`.
  *
@@ -680,9 +680,9 @@ void get_dentry(struct shim_dentry* dent);
 void put_dentry(struct shim_dentry* dent);
 
 /*!
- * \brief  Reset dentry state related to a file.
+ * \brief Reset dentry state related to a file.
  *
- * \param  dent  The dentry (should be either invalid or negative).
+ * \param dent  The dentry (should be either invalid or negative).
  *
  * Resets the following dentry fields: `state`, `fs`, `type`, `perm`, `inode`. Ensures that there is
  * no leftover state from a file previously associated with the dentry, and the dentry can be used
@@ -699,11 +699,11 @@ void put_dentry(struct shim_dentry* dent);
 void reset_dentry(struct shim_dentry* dent);
 
 /*!
- * \brief  Get the dentry one level up.
+ * \brief Get the dentry one level up.
  *
- * \param  dent  The dentry.
+ * \param dent  The dentry.
  *
- * \returns  The dentry one level up, or NULL if one does not exist.
+ * \returns The dentry one level up, or NULL if one does not exist.
  *
  * Computes the dentry pointed to by ".." from the current one, unless the current dentry is at
  * global root. Unlike the `parent` field, this traverses mounted filesystems (i.e. works also for a
@@ -712,9 +712,9 @@ void reset_dentry(struct shim_dentry* dent);
 struct shim_dentry* dentry_up(struct shim_dentry* dent);
 
 /*!
- * \brief  Garbage-collect a dentry, if possible.
+ * \brief Garbage-collect a dentry, if possible.
  *
- * \param  dentry  The dentry (has to have a parent).
+ * \param dentry  The dentry (has to have a parent).
  *
  * This function checks if a dentry is unused, and deletes it if that's true. The caller must hold
  * `g_dcache_lock`.
@@ -740,13 +740,13 @@ struct shim_dentry* dentry_up(struct shim_dentry* dent);
 void dentry_gc(struct shim_dentry* dent);
 
 /*!
- * \brief  Computes an absolute path for dentry, allocating memory for it.
+ * \brief Computes an absolute path for dentry, allocating memory for it.
  *
- * \param       dent  The dentry.
- * \param[out]  path  Will be set to computed path.
- * \param[out]  size  If not NULL, will be set to path size, including null terminator.
+ * \param      dent  The dentry.
+ * \param[out] path  Will be set to computed path.
+ * \param[out] size  If not NULL, will be set to path size, including null terminator.
  *
- * \returns  0 on success, negative error code otherwise.
+ * \returns 0 on success, negative error code otherwise.
  *
  * This function computes an absolute path for dentry, allocating a new buffer for it. The path
  * should later be freed using `free`.
@@ -760,13 +760,13 @@ void dentry_gc(struct shim_dentry* dent);
 int dentry_abs_path(struct shim_dentry* dent, char** path, size_t* size);
 
 /*!
- * \brief  Computes a relative path for dentry, allocating memory for it.
+ * \brief Computes a relative path for dentry, allocating memory for it.
  *
- * \param       dent  The dentry.
- * \param[out]  path  Will be set to computed path.
- * \param[out]  size  If not NULL, will be set to path size, including null terminator.
+ * \param      dent  The dentry.
+ * \param[out] path  Will be set to computed path.
+ * \param[out] size  If not NULL, will be set to path size, including null terminator.
  *
- * \returns  0 on success, negative error code otherwise.
+ * \returns 0 on success, negative error code otherwise.
  *
  * This function computes a relative path for dentry, allocating a new buffer for it. The path
  * should later be freed using `free`.
@@ -782,14 +782,14 @@ int dentry_rel_path(struct shim_dentry* dent, char** path, size_t* size);
 ino_t dentry_ino(struct shim_dentry* dent);
 
 /*!
- * \brief  Allocates and initializes a new dentry.
+ * \brief Allocates and initializes a new dentry.
  *
- * \param  mount     The mount the dentry is under.
- * \param  parent    The parent node, or NULL if this is supposed to be the mount root.
- * \param  name      Name of the new dentry.
- * \param  name_len  Length of the name.
+ * \param mount     The mount the dentry is under.
+ * \param parent    The parent node, or NULL if this is supposed to be the mount root.
+ * \param name      Name of the new dentry.
+ * \param name_len  Length of the name.
  *
- * \returns  The new dentry, or NULL in case of allocation failure.
+ * \returns The new dentry, or NULL in case of allocation failure.
  *
  * The caller should hold `g_dcache_lock`.
  *
@@ -806,13 +806,13 @@ struct shim_dentry* get_new_dentry(struct shim_mount* mount, struct shim_dentry*
                                    const char* name, size_t name_len);
 
 /*!
- * \brief  Searches for a child of a dentry with a given name.
+ * \brief Searches for a child of a dentry with a given name.
  *
- * \param  parent    The dentry to search under.
- * \param  name      Name of searched dentry.
- * \param  name_len  Length of the name.
+ * \param parent    The dentry to search under.
+ * \param name      Name of searched dentry.
+ * \param name_len  Length of the name.
  *
- * \returns  The dentry, or NULL if not found.
+ * \returns The dentry, or NULL if not found.
  *
  * The caller should hold `g_dcache_lock`.
  *
@@ -830,11 +830,11 @@ bool dentry_is_ancestor(struct shim_dentry* anc, struct shim_dentry* dent);
  * under space pressure, although for a single app, this may be over-kill. */
 
 /*!
- * \brief  Allocates and initializes a new inode.
+ * \brief Allocates and initializes a new inode.
  *
- * \param  mount  The mount the inode is under.
- * \param  type   Inode type (S_IFREG, S_IFDIR, etc.).
- * \param  perm   Inode permissions (PERM_rwxrwxrwx, etc.).
+ * \param mount  The mount the inode is under.
+ * \param type   Inode type (S_IFREG, S_IFDIR, etc.).
+ * \param perm   Inode permissions (PERM_rwxrwxrwx, etc.).
  */
 struct shim_inode* get_new_inode(struct shim_mount* mount, mode_t type, mode_t perm);
 
@@ -876,13 +876,13 @@ extern struct shim_fs synthetic_builtin_fs;
 struct shim_fs* find_fs(const char* name);
 
 /*!
- * \brief  Computes file position for `seek`.
+ * \brief Computes file position for `seek`.
  *
- * \param       pos      Current file position (non-negative).
- * \param       size     File size (non-negative).
- * \param       offset   Desired offset.
- * \param       origin   `seek` origin parameter (SEEK_SET, SEEK_CUR, SEEK_END).
- * \param[out]  out_pos  On success, contains new file position.
+ * \param      pos      Current file position (non-negative).
+ * \param      size     File size (non-negative).
+ * \param      offset   Desired offset.
+ * \param      origin   `seek` origin parameter (SEEK_SET, SEEK_CUR, SEEK_END).
+ * \param[out] out_pos  On success, contains new file position.
  *
  * Computes new file position according to `seek` semantics. The new position will be non-negative,
  * although it can be larger than file size.
