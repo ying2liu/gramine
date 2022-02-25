@@ -90,7 +90,7 @@ static long sgx_exitless_ocall(uint64_t code, void* ms) {
      * - or OCALL is still pending and the request is still blocked on spinlock
      *   (OCALL is not done, locked == false, let's wait on futex) */
 
-    if (locked) {
+    if (!locked) {
         /* OCALL takes a lot of time, so fallback to waiting on a futex; at this point we exit
          * enclave to perform syscall; this code is based on Mutex 2 from Futexes are Tricky */
         uint32_t c = SPINLOCK_UNLOCKED;
