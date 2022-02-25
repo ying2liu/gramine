@@ -110,9 +110,9 @@ out:
  * \param  lock        The lock.
  * \param  iterations  Number of iterations (tries) after which this function times out.
  *
- * \returns  0 if acquiring the lock succeeded, negative if timed out.
+ * \returns  true if acquiring the lock succeeded, false if timed out.
  */
-static inline int spinlock_lock_timeout(spinlock_t* lock, unsigned long iterations) {
+static inline bool spinlock_lock_timeout(spinlock_t* lock, unsigned long iterations) {
     uint32_t val;
 
     /* First check if lock is already free. */
@@ -124,7 +124,7 @@ static inline int spinlock_lock_timeout(spinlock_t* lock, unsigned long iteratio
         /* This check imposes no inter-thread ordering, thus does not slow other threads. */
         while (__atomic_load_n(&lock->lock, __ATOMIC_RELAXED) != SPINLOCK_UNLOCKED) {
             if (iterations == 0) {
-                return -1;
+                return false;
             }
             iterations--;
             CPU_RELAX();
@@ -137,7 +137,7 @@ static inline int spinlock_lock_timeout(spinlock_t* lock, unsigned long iteratio
 
 out_success:
     debug_spinlock_take_ownership(lock);
-    return 0;
+    return true;
 }
 
 /*!
