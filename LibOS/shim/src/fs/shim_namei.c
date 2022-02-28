@@ -609,7 +609,7 @@ static int populate_directory(struct shim_dentry* dent) {
         struct shim_inode* inode = child->inode;
         /* Check `inode->fs` so that we don't remove files added by Gramine (named pipes, sockets,
          * synthetic mountpoints) */
-        if (inode && inode->fs == child->mount->fs) {
+        if (inode && inode->fs == inode->mount->fs) {
             struct temp_dirent* ent;
             bool removed = true;
             LISTP_FOR_EACH_ENTRY(ent, &ents, list) {
