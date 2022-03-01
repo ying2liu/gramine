@@ -345,7 +345,7 @@ typedef int (*migrate_func_t)(struct shim_cp_store*, struct shim_process*, struc
                               struct shim_ipc_ids*, va_list);
 
 /*!
- * \brief Creates child process and migrate state to it.
+ * \brief Create child process and migrate state to it.
  *
  * Called in parent process during fork/clone.
  *
@@ -364,7 +364,7 @@ int create_process_and_send_checkpoint(migrate_func_t migrate_func,
                                        struct shim_thread* thread_description, ...);
 
 /*!
- * \brief Receives a checkpoint from parent process and restore state based on it.
+ * \brief Receive a checkpoint from parent process and restore state based on it.
  *
  * Called in child process during initialization.
  *

@@ -201,7 +201,7 @@ long strtol(const char* s, char** endptr, int base);
 long long strtoll(const char* s, char** endptr, int base);
 
 /*!
- * \brief Converts a string to number.
+ * \brief Convert a string to number.
  *
  * \param      str        Input string.
  * \param      base       Digit base, between 2 and 36.
@@ -363,7 +363,7 @@ int get_norm_path(const char* path, char* buf, size_t* inout_size);
 int get_base_name(const char* path, char* buf, size_t* inout_size);
 
 /*!
- * \brief Parses a size (number with optional "G"/"M"/"K" suffix) into an uint64_t.
+ * \brief Parse a size (number with optional "G"/"M"/"K" suffix) into an uint64_t.
  *
  * \param      str      A string containing a non-negative, decimal number. The string may end with
  *                      "G"/"g" suffix denoting value in GBs, "M"/"m" for MBs, or "K"/"k" for KBs.

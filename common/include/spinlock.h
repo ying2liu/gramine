@@ -105,7 +105,7 @@ out:
 }
 
 /*!
- * \brief Tries to acquire a spinlock, with a timeout.
+ * \brief Try to acquire a spinlock, with a timeout.
  *
  * \param lock        The lock.
  * \param iterations  Number of iterations (tries) after which this function times out.

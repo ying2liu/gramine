@@ -9,7 +9,7 @@
 #include "toml.h"
 
 /*!
- * \brief Checks if a key was specified in TOML manifest.
+ * \brief Check if a key was specified in TOML manifest.
  *
  * \param root  Root table of the TOML manifest.
  * \param key   Dotted key (e.g. "loader.insecure__use_cmdline_argv").
@@ -17,7 +17,7 @@
 bool toml_key_exists(const toml_table_t* root, const char* key);
 
 /*!
- * \brief Finds a bool key-value in TOML manifest.
+ * \brief Find a bool key-value in TOML manifest.
  *
  * \param root        Root table of the TOML manifest.
  * \param key         Dotted key (e.g. "loader.insecure__use_cmdline_argv").
@@ -30,7 +30,7 @@ bool toml_key_exists(const toml_table_t* root, const char* key);
 int toml_bool_in(const toml_table_t* root, const char* key, bool defaultval, bool* retval);
 
 /*!
- * \brief Finds an integer key-value in TOML manifest.
+ * \brief Find an integer key-value in TOML manifest.
  *
  * \param root        Root table of the TOML manifest.
  * \param key         Dotted key (e.g. "sgx.thread_num").
@@ -43,7 +43,7 @@ int toml_bool_in(const toml_table_t* root, const char* key, bool defaultval, boo
 int toml_int_in(const toml_table_t* root, const char* key, int64_t defaultval, int64_t* retval);
 
 /*!
- * \brief Finds a string key-value in TOML manifest.
+ * \brief Find a string key-value in TOML manifest.
  *
  * \param root    Root table of the TOML manifest.
  * \param key     Dotted key (e.g. "fs.root.uri").
@@ -55,7 +55,7 @@ int toml_int_in(const toml_table_t* root, const char* key, int64_t defaultval, i
 int toml_string_in(const toml_table_t* root, const char* key, char** retval);
 
 /*!
- * \brief Finds a "size" string key-value in TOML manifest (parsed via `parse_size_str()`).
+ * \brief Find a "size" string key-value in TOML manifest (parsed via `parse_size_str()`).
  *
  * \param root        Root table of the TOML manifest.
  * \param key         Dotted key (e.g. "sys.stack.size").

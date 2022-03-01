@@ -206,7 +206,7 @@ typedef int (*readdir_callback_t)(const char* name, void* arg);
 
 struct shim_d_ops {
     /*
-     * \brief Looks up a file.
+     * \brief Look up a file.
      *
      * \param dent  Dentry, not valid.
      *
@@ -220,7 +220,7 @@ struct shim_d_ops {
     int (*lookup)(struct shim_dentry* dent);
 
     /*
-     * \brief Opens an existing file.
+     * \brief Open an existing file.
      *
      * \param hdl    A newly created handle.
      * \param dent   Dentry, valid and non-negative.
@@ -235,7 +235,7 @@ struct shim_d_ops {
     int (*open)(struct shim_handle* hdl, struct shim_dentry* dent, int flags);
 
     /*
-     * \brief Creates and opens a new regular file.
+     * \brief Create and open a new regular file.
      *
      * \param hdl    A newly created handle.
      * \param dent   Dentry, not valid (file to be created).
@@ -251,7 +251,7 @@ struct shim_d_ops {
     int (*creat)(struct shim_handle* hdl, struct shim_dentry* dent, int flags, mode_t perm);
 
     /*
-     * \brief Creates a directory.
+     * \brief Create a directory.
      *
      * \param dent  dentry, not valid (directory to be created).
      * \param perm  Permissions of the new directory.
@@ -265,7 +265,7 @@ struct shim_d_ops {
     int (*mkdir)(struct shim_dentry* dent, mode_t perm);
 
     /*
-     * \brief Unlinks a file.
+     * \brief Unlink a file.
      *
      * \param dent  Dentry, valid and non-negative, must have a parent.
      *
@@ -278,7 +278,7 @@ struct shim_d_ops {
     int (*unlink)(struct shim_dentry* dent);
 
     /*
-     * \brief Gets file status.
+     * \brief Get file status.
      *
      * \param dent  Dentry, valid and non-negative.
      * \param buf   Status buffer to fill.
@@ -291,7 +291,7 @@ struct shim_d_ops {
     int (*stat)(struct shim_dentry* dent, struct stat* buf);
 
     /*
-     * \brief Extracts the target of a symbolic link.
+     * \brief Extract the target of a symbolic link.
      *
      * \param dent        Dentry, valid and non-negative, describing a symlink.
      * \param out_target  On success, contains link target.
@@ -303,7 +303,7 @@ struct shim_d_ops {
     int (*follow_link)(struct shim_dentry* dent, char** out_target);
 
     /*
-     * \brief Changes file permissions.
+     * \brief Change file permissions.
      *
      * \param dent  Dentry, valid and non-negative.
      * \param perm  New permissions for the file.
@@ -315,7 +315,7 @@ struct shim_d_ops {
     int (*chmod)(struct shim_dentry* dent, mode_t perm);
 
     /*
-     * \brief Renames a file.
+     * \brief Rename a file.
      *
      * \param old  Source dentry, valid and non-negative.
      * \param new  Target dentry, valid, can be negative or non-negative.
@@ -332,7 +332,7 @@ struct shim_d_ops {
     int (*rename)(struct shim_dentry* old, struct shim_dentry* new);
 
     /*!
-     * \brief Lists all files in the directory.
+     * \brief List all files in the directory.
      *
      * \param dent      The dentry, must be valid, non-negative and describing a directory.
      * \param callback  The callback to invoke on each file name.
@@ -351,7 +351,7 @@ struct shim_d_ops {
     int (*readdir)(struct shim_dentry* dent, readdir_callback_t callback, void* arg);
 
     /*!
-     * \brief Deallocates inode data.
+     * \brief Deallocate inode data.
      *
      * \param inode  The inode about to be freed.
      *
@@ -363,7 +363,7 @@ struct shim_d_ops {
     void (*idrop)(struct shim_inode* inode);
 
     /*!
-     * \brief Checkpoints inode data.
+     * \brief Checkpoint inode data.
      *
      * \param inode     The inode to be checkpointed.
      * \param out_data  On success, contains a newly allocated buffer with data.
@@ -376,7 +376,7 @@ struct shim_d_ops {
     int (*icheckpoint)(struct shim_inode* inode, void** out_data, size_t* out_size);
 
     /*!
-     * \brief Restores inode data from checkpoint.
+     * \brief Restore inode data from checkpoint.
      *
      * \param inode  Newly restored inode.
      * \param data   Checkpoint data (prepared by the `icheckpoint` callback).
@@ -450,7 +450,7 @@ int init_mount(void);
 /* file system operations */
 
 /*!
- * \brief Mounts a new filesystem.
+ * \brief Mount a new filesystem.
  *
  * \param type        Filesystem type (currently defined in `mountable_fs` in `shim_fs.c`).
  * \param uri         PAL URI to mount, or NULL if not applicable.
@@ -489,7 +489,7 @@ int init_dcache(void);
 extern struct shim_lock g_dcache_lock;
 
 /*!
- * \brief Dumps dentry cache.
+ * \brief Dump dentry cache.
  *
  * \param dent  The starting dentry, or NULL (will default to dentry root).
  *
@@ -499,7 +499,7 @@ extern struct shim_lock g_dcache_lock;
 void dump_dcache(struct shim_dentry* dent);
 
 /*!
- * \brief Checks file permissions, similar to Unix access.
+ * \brief Check file permissions, similar to Unix access.
  *
  * \param dentry  The dentry to check.
  * \param mask    Mask, same as for Unix access.
@@ -533,7 +533,7 @@ int check_permissions(struct shim_dentry* dent, mode_t mask);
 #define MAX_LINK_DEPTH 8
 
 /*!
- * \brief Looks up a path, retrieving a dentry.
+ * \brief Look up a path, retrieving a dentry.
  *
  * \param      start  The start dentry for relative paths, or NULL (in which case it will default
  *                    to process' cwd).
@@ -591,7 +591,7 @@ int path_lookupat(struct shim_dentry* start, const char* path, int flags,
 int get_dirfd_dentry(int dirfd, struct shim_dentry** dir);
 
 /*!
- * \brief Opens a file under a given path, similar to Unix open.
+ * \brief Open a file under a given path, similar to Unix open.
  *
  * \param      hdl    Handle to associate with dentry, can be NULL.
  * \param      start  The start dentry for relative paths, or NULL (in which case it will default
@@ -633,7 +633,7 @@ int open_namei(struct shim_handle* hdl, struct shim_dentry* start, const char* p
                int mode, struct shim_dentry** found);
 
 /*!
- * \brief Opens an already retrieved dentry, and associates a handle with it.
+ * \brief Open an already retrieved dentry, and associates a handle with it.
  *
  * \param hdl    Handle to associate with dentry.
  * \param dent   The dentry to open.
@@ -648,7 +648,7 @@ int open_namei(struct shim_handle* hdl, struct shim_dentry* start, const char* p
 int dentry_open(struct shim_handle* hdl, struct shim_dentry* dent, int flags);
 
 /*!
- * \brief Populates a directory handle with current dentries.
+ * \brief Populate a directory handle with current dentries.
  *
  * \param hdl  A directory handle.
  *
@@ -663,7 +663,7 @@ int dentry_open(struct shim_handle* hdl, struct shim_dentry* dent, int flags);
 int populate_directory_handle(struct shim_handle* hdl);
 
 /*!
- * \brief Clears dentries from a directory handle.
+ * \brief Clear dentries from a directory handle.
  *
  * \param hdl  A directory handle.
  *
@@ -740,7 +740,7 @@ struct shim_dentry* dentry_up(struct shim_dentry* dent);
 void dentry_gc(struct shim_dentry* dent);
 
 /*!
- * \brief Computes an absolute path for dentry, allocating memory for it.
+ * \brief Compute an absolute path for dentry, allocating memory for it.
  *
  * \param      dent  The dentry.
  * \param[out] path  Will be set to computed path.
@@ -760,7 +760,7 @@ void dentry_gc(struct shim_dentry* dent);
 int dentry_abs_path(struct shim_dentry* dent, char** path, size_t* size);
 
 /*!
- * \brief Computes a relative path for dentry, allocating memory for it.
+ * \brief Compute a relative path for dentry, allocating memory for it.
  *
  * \param      dent  The dentry.
  * \param[out] path  Will be set to computed path.
@@ -782,7 +782,7 @@ int dentry_rel_path(struct shim_dentry* dent, char** path, size_t* size);
 ino_t dentry_ino(struct shim_dentry* dent);
 
 /*!
- * \brief Allocates and initializes a new dentry.
+ * \brief Allocate and initializes a new dentry.
  *
  * \param mount     The mount the dentry is under.
  * \param parent    The parent node, or NULL if this is supposed to be the mount root.
@@ -806,7 +806,7 @@ struct shim_dentry* get_new_dentry(struct shim_mount* mount, struct shim_dentry*
                                    const char* name, size_t name_len);
 
 /*!
- * \brief Searches for a child of a dentry with a given name.
+ * \brief Search for a child of a dentry with a given name.
  *
  * \param parent    The dentry to search under.
  * \param name      Name of searched dentry.
@@ -830,7 +830,7 @@ bool dentry_is_ancestor(struct shim_dentry* anc, struct shim_dentry* dent);
  * under space pressure, although for a single app, this may be over-kill. */
 
 /*!
- * \brief Allocates and initializes a new inode.
+ * \brief Allocate and initialize a new inode.
  *
  * \param mount  The mount the inode is under.
  * \param type   Inode type (S_IFREG, S_IFDIR, etc.).
@@ -876,7 +876,7 @@ extern struct shim_fs synthetic_builtin_fs;
 struct shim_fs* find_fs(const char* name);
 
 /*!
- * \brief Computes file position for `seek`.
+ * \brief Compute file position for `seek`.
  *
  * \param      pos      Current file position (non-negative).
  * \param      size     File size (non-negative).
