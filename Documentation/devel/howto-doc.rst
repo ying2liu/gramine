@@ -158,8 +158,8 @@ Preferred Doxygen style
        * \param first   First addend.
        * \param second  Second addend.
        *
-       * \returns Sum of the arguments. Sometimes a longer description is
-       *          needed, then it should be wrapped and aligned like this.
+       * \returns Sum of the arguments. Sometimes a longer description is needed, then it should be
+       *          wrapped and aligned like this.
        */
       int foo(int first, int second) {
           return first + second;
