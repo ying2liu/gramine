@@ -1,0 +1,40 @@
+
+loader.preload = "file:{{ gramine.libos }}" # for compatibility with v1.0
+
+loader.entrypoint = "file:{{ gramine.libos }}"
+libos.entrypoint = "server"
+#loader.log_level = "{{ log_level }}"
+loader.log_file = "server_debug.log"
+loader.argv0_override = "server"
+loader.insecure__use_cmdline_argv = true
+loader.log_level ="trace"
+
+loader.env.LD_LIBRARY_PATH = "/lib"
+fs.mount.lib.type = "chroot"
+fs.mount.lib.path = "/lib"
+fs.mount.lib.uri = "file:{{ gramine.runtimedir() }}"
+
+fs.mount.etc.type = "chroot"
+fs.mount.etc.path = "/etc"
+fs.mount.etc.uri = "file:/etc"
+
+sgx.enclave_size = "8G"
+sys.stack.size = "256M"
+sgx.thread_num = 16
+
+sgx.debug = true
+sgx.nonpie_binary = true
+sys.insecure__allow_eventfd = true 
+sgx.trusted_files = [
+  "file:{{ gramine.libos }}",
+  "file:server",
+  "file:/etc/localtime",
+  "file:{{ gramine.runtimedir() }}/",
+]
+sgx.allowed_files = [
+  "file:/etc/losthosts",
+  "file:/etc/hostname",
+  "file:/etc/resolv.conf",
+  "file:/etc/localtime",
+]
+

@@ -1,0 +1,2 @@
+make SGX=1 clean
+make SGX=1 DEBUG=1 SGX_SIGNER_KEY="$HOME"/gramine/gramine/Pal/src/host/Linux-SGX/signer/enclave-key.pem
