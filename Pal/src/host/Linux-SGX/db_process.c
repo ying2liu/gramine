@@ -281,9 +281,28 @@ out_error:
     return ret < 0 ? ret : -PAL_ERROR_DENIED;
 }
 
+noreturn void exithandler(void) {
+#if 0
+    char* entrypoint = NULL;
+    char* exithanlder = NULL;
+    bool reuse_enclave;
+
+    ret = toml_bool_in(g_manifest_root, "sys.enable_enclave_reuse_with_exit_handler",
+&reuse_enclave);
+
+    ret = toml_string_in(g_manifest_root, "loader.entrypoint", &entrypoint);
+    ret = toml_string_in(g_manifest_root, "loader.entrypoint", &exithanlder);
+    if ((strcmp(entrypoint, exithanlder) != 0) && reuse_enclave) {
+        execv(exithandler); //will parse parameters
+    }
+#endif
+}
+
+
 noreturn void _DkProcessExit(int exitcode) {
     if (exitcode)
         log_debug("DkProcessExit: Returning exit code %d", exitcode);
+    exithandler();
     ocall_exit(exitcode, /*is_exitgroup=*/true);
     /* Unreachable. */
 }
@@ -364,6 +383,7 @@ static int proc_attrquerybyhdl(PAL_HANDLE handle, PAL_STREAM_ATTR* attr) {
 
     attr->handle_type  = HANDLE_HDR(handle)->type;
     attr->nonblocking  = handle->process.nonblocking;
+    attr->disconnected = handle->flags & PAL_HANDLE_FD_ERROR;
 
     /* get number of bytes available for reading */
     ret = ocall_fionread(handle->process.stream);
