@@ -36,5 +36,7 @@ sgx.allowed_files = [
   "file:/etc/hostname",
   "file:/etc/resolv.conf",
   "file:/etc/localtime",
+  "file:payload_receiver",
+  "file:helloworld",
 ]
 

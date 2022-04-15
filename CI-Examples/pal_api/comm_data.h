@@ -18,6 +18,7 @@ typedef enum {
 	APP_DESTROY,
 	GET_REPORT,
 	GET_REPORT_ACK, // from server to client, using GetReportAckData
+	STATUS,
 	BYE,
 	MAX_MSG_ID
 } CommCommand;
@@ -27,6 +28,8 @@ typedef struct {
 	union {
 		struct {
 			char name[MAX_FILE_PATH_LENGTH];
+			char parameter[128];
+			int avail;
 		} ExecuteData;
 		struct {
 			int pid;

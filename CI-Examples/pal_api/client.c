@@ -44,10 +44,8 @@ int main() {
 		printf("after APP_EXECUTE get APP_EXECUTE_ACK with pid %d\n", msg.u.ProcessData.pid);
 	}
     int existing_pid = msg.u.ProcessData.pid;
-    //printf("existing_pid = %d\n");
 
-	msg.cmd = APP_KILL;
-//    msg.ProcessData.pid = 999; //existing_pid;
+	msg.cmd = APP_DESTROY;
 	status = sendCommand(sockfd, &msg);
 	if (status != OK) {
 		fprintf(stderr, "%s:%d:%s sendCommand APP_EXECUTE failed %d\n", __FILE__, __LINE__, __FUNCTION__, status);
