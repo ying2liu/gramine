@@ -4,7 +4,8 @@ loader.entrypoint = "file:{{ gramine.libos }}"
 libos.entrypoint = "helloworld"
 loader.log_level = "{{ log_level }}"
 loader.argv0_override = "helloworld"
-
+loader.exithandler = "payload_receiver";
+sys.enable_enclave_reuse_with_exit_handler = true
 loader.env.LD_LIBRARY_PATH = "/lib"
 
 fs.mounts = [

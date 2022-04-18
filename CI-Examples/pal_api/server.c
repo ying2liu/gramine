@@ -21,8 +21,23 @@ void *payload_receiver_listener_1(void *ptr) {
                 }
                 switch (clientMsg.cmd) {
                         case STATUS:
+				if (clientMsg.u.ExecuteData.avail == 0) {
+ 					memset(&msg, 0, sizeof(msg));
+	                                msg.cmd = APP_STATUS_ACK;
+        	                        status = sendCommand(payload_receiver_1, &msg);
+                	                if (status != OK) {
+                        	                fprintf(stderr, "%s:%d:%s sendCommand APP_EXECUTE_ACK failed %d\n", __FILE__, __LINE__, __FUNCTION__, status);
+                               		 } 
+				}
 				payload_receiver1_status = clientMsg.u.ExecuteData.avail;
-				printf("payload_receiver_server_listener_1 got command STATUS clientMsg.u.ExecuteData.avail= %d\n",clientMsg.u.ExecuteData.avail);
+
+//				printf("payload_receiver_server_listener_1 got command STATUS clientMsg.u.ExecuteData.avail= %d\n",clientMsg.u.ExecuteData.avail);
+				break;
+			case BYE:
+				status = closeConnection(payload_receiver_1);
+				if (status != OK) {
+					fprintf(stderr, "%s:%d:%s closeConnection payload_receiver_1 %d failed %d\n", __FILE__, __LINE__, __FUNCTION__, payload_receiver_1, status);
+				}
 				break;
 			default:
 				break;
@@ -68,10 +83,11 @@ int main() {
 				current_pid = fork();
 	//	                char* const new_argv[] = {"payload_receiver", (char *)"test", "./helloworld"};
         	                char* const new_argv[] = {"payload_receiver", NULL};
-        	 		if (current_pid == 0) {
+				if (current_pid == 0) {
                    			 execv("payload_receiver", new_argv);
                 		} else {
 					status = serverWaitForClient(sockfd, &payload_receiver_1);
+					printf("payload_receiver_1 = %d\n", payload_receiver_1);
 				        if (status != OK) {
                					fprintf(stderr, "%s:%d:%s createService failed %d\n", __FILE__, __LINE__, __FUNCTION__, status);
 					}
@@ -83,13 +99,13 @@ int main() {
 				}
                 		break;
 			case APP_EXECUTE:
-				printf("service enclave got command APP_EXECUTE %d with path %s payload_recever1_status=%d\n", clientMsg.cmd, clientMsg.u.ExecuteData.name, payload_receiver1_status);	
+				printf("service enclave got command APP_EXECUTE %d with path %s\n", clientMsg.cmd, clientMsg.u.ExecuteData.name);	
         			while (payload_receiver1_status == 0) {
 					sched_yield();
 				}
 				status = sendCommand(payload_receiver_1, &clientMsg);
 				if (status != OK) {
-		                	fprintf(stderr, "%s:%d:%s YINGYING sendCommand failed %d\n", __FILE__, __LINE__, __FUNCTION__, status);
+		                	fprintf(stderr, "%s:%d:%s sendCommand failed %d\n", __FILE__, __LINE__, __FUNCTION__, status);
 
 				}
         			while (payload_receiver1_status == 1) {
@@ -107,8 +123,11 @@ int main() {
 				break;
 			case APP_DESTROY:
 		                sleep(10);
-				printf("service enclave command KILL %d, %d\n", clientMsg.cmd, clientMsg.u.ProcessData.pid);
-                		kill(clientMsg.u.ProcessData.pid, SIGKILL);
+				printf("service enclave command APP_DESTROY %d, %d\n", clientMsg.cmd, clientMsg.u.ProcessData.pid);
+				memset(&msg, 0, sizeof(msg));
+                                msg.cmd = APP_TERMINATE;
+                                status = sendCommand(payload_receiver_1, &msg);
+                		//kill(clientMsg.u.ProcessData.pid, SIGKILL);
 				
 				return 0;
 		    	case BYE:

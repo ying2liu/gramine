@@ -131,8 +131,6 @@ ErrorCode serverWaitForClient(int sock_fd, int *comm_socket) {
 		return AcceptErr;
 	}
 
-	printf("server get commenction \n");
-
 	*comm_socket = new_fd;
 	return OK;
 }
@@ -154,9 +152,10 @@ ErrorCode receiveCommand(int comm_socket, CommInfo *cmd) {
 		return InvalidArgument;
 	}
 	if ((numbytes = recv(comm_socket, cmd, sizeof(CommInfo), MSG_WAITALL)) == -1) {
-		fprintf(stderr, "%s: receive cmd failed %s\n", __FUNCTION__, strerror(errno));
+		fprintf(stderr, "%s: receive cmd failed socket id= %d, %s\n", __FUNCTION__, comm_socket, strerror(errno));
 		return SendErr;
-	}	
+	}
+	
 	return OK;
 }
 

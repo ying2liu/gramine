@@ -18,7 +18,9 @@ typedef enum {
 	APP_DESTROY,
 	GET_REPORT,
 	GET_REPORT_ACK, // from server to client, using GetReportAckData
+	APP_TERMINATE,
 	STATUS,
+	APP_STATUS_ACK,
 	BYE,
 	MAX_MSG_ID
 } CommCommand;
