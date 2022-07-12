@@ -1,0 +1,1374 @@
+debug: Gramine parsed TOML manifest file successfully
+debug: Token file: agent_app.token
+debug: Read dummy DCAP token
+debug: Enclave created:
+debug:     base:           0x0000000000000000
+debug:     size:           0x0000000400000000
+debug:     misc_select:    0x00000000
+debug:     attr.flags:     0x0000000000000007
+debug:     attr.xfrm:      0x00000000000000e7
+debug:     ssa_frame_size: 4
+debug:     isv_prod_id:    0x00000000
+debug:     isv_svn:        0x00000000
+debug: Adding pages to SGX enclave, this may take some time...
+debug: Adding pages to enclave: 0x3ffb2f000-0x400000000 [REG:R--] (manifest) measured
+debug: Adding pages to enclave: 0x3ffaaf000-0x3ffb2f000 [REG:RW-] (ssa) measured
+debug: Adding pages to enclave: 0x3ffa9f000-0x3ffaaf000 [TCS:---] (tcs) measured
+debug: Adding pages to enclave: 0x3ffa8f000-0x3ffa9f000 [REG:RW-] (tls) measured
+debug: Adding pages to enclave: 0x3ffa4f000-0x3ffa8f000 [REG:RW-] (stack) measured
+debug: Adding pages to enclave: 0x3ffa0f000-0x3ffa4f000 [REG:RW-] (stack) measured
+debug: Adding pages to enclave: 0x3ff9cf000-0x3ffa0f000 [REG:RW-] (stack) measured
+debug: Adding pages to enclave: 0x3ff98f000-0x3ff9cf000 [REG:RW-] (stack) measured
+debug: Adding pages to enclave: 0x3ff94f000-0x3ff98f000 [REG:RW-] (stack) measured
+debug: Adding pages to enclave: 0x3ff90f000-0x3ff94f000 [REG:RW-] (stack) measured
+debug: Adding pages to enclave: 0x3ff8cf000-0x3ff90f000 [REG:RW-] (stack) measured
+debug: Adding pages to enclave: 0x3ff88f000-0x3ff8cf000 [REG:RW-] (stack) measured
+debug: Adding pages to enclave: 0x3ff84f000-0x3ff88f000 [REG:RW-] (stack) measured
+debug: Adding pages to enclave: 0x3ff80f000-0x3ff84f000 [REG:RW-] (stack) measured
+debug: Adding pages to enclave: 0x3ff7cf000-0x3ff80f000 [REG:RW-] (stack) measured
+debug: Adding pages to enclave: 0x3ff78f000-0x3ff7cf000 [REG:RW-] (stack) measured
+debug: Adding pages to enclave: 0x3ff74f000-0x3ff78f000 [REG:RW-] (stack) measured
+debug: Adding pages to enclave: 0x3ff70f000-0x3ff74f000 [REG:RW-] (stack) measured
+debug: Adding pages to enclave: 0x3ff6cf000-0x3ff70f000 [REG:RW-] (stack) measured
+debug: Adding pages to enclave: 0x3ff68f000-0x3ff6cf000 [REG:RW-] (stack) measured
+debug: Adding pages to enclave: 0x3ff67f000-0x3ff68f000 [REG:RW-] (sig_stack) measured
+debug: Adding pages to enclave: 0x3ff66f000-0x3ff67f000 [REG:RW-] (sig_stack) measured
+debug: Adding pages to enclave: 0x3ff65f000-0x3ff66f000 [REG:RW-] (sig_stack) measured
+debug: Adding pages to enclave: 0x3ff64f000-0x3ff65f000 [REG:RW-] (sig_stack) measured
+debug: Adding pages to enclave: 0x3ff63f000-0x3ff64f000 [REG:RW-] (sig_stack) measured
+debug: Adding pages to enclave: 0x3ff62f000-0x3ff63f000 [REG:RW-] (sig_stack) measured
+debug: Adding pages to enclave: 0x3ff61f000-0x3ff62f000 [REG:RW-] (sig_stack) measured
+debug: Adding pages to enclave: 0x3ff60f000-0x3ff61f000 [REG:RW-] (sig_stack) measured
+debug: Adding pages to enclave: 0x3ff5ff000-0x3ff60f000 [REG:RW-] (sig_stack) measured
+debug: Adding pages to enclave: 0x3ff5ef000-0x3ff5ff000 [REG:RW-] (sig_stack) measured
+debug: Adding pages to enclave: 0x3ff5df000-0x3ff5ef000 [REG:RW-] (sig_stack) measured
+debug: Adding pages to enclave: 0x3ff5cf000-0x3ff5df000 [REG:RW-] (sig_stack) measured
+debug: Adding pages to enclave: 0x3ff5bf000-0x3ff5cf000 [REG:RW-] (sig_stack) measured
+debug: Adding pages to enclave: 0x3ff5af000-0x3ff5bf000 [REG:RW-] (sig_stack) measured
+debug: Adding pages to enclave: 0x3ff59f000-0x3ff5af000 [REG:RW-] (sig_stack) measured
+debug: Adding pages to enclave: 0x3ff58f000-0x3ff59f000 [REG:RW-] (sig_stack) measured
+debug: Adding pages to enclave: 0x3ff173000-0x3ff1b7000 [REG:R-X] (code) measured
+debug: Adding pages to enclave: 0x3ff1b7000-0x3ff1bb000 [REG:RW-] (data) measured
+debug: Adding pages to enclave: 0x3ff1bb000-0x3ff58f000 [REG:RW-] (bss) measured
+debug: Adding pages to enclave: 0x10000-0x3ff173000 [REG:RWX] (free)
+debug: Added all pages to SGX enclave
+debug: Enclave initializing:
+debug:     enclave id:   0x00000003fffff000
+debug:     mr_enclave:   d6445286536ccc51f594034a9edf7879c2461cc746cb4d6e06f4459a02274e36
+warning: PalVirtualMemoryProtect is unimplemented in Linux-SGX PAL
+debug: Gramine was built from commit: 044a4753785d77ddea79c1b04881b133456ae4d2
+debug: Host: Linux-SGX
+debug: LibOS xsave_enabled 1, xsave_size 0xa80(2688), xsave_features 0xe7
+debug: Initial VMA region 0x3fdf2f000-0x3fdfcc000 (LibOS) bookkeeped
+debug: Initial VMA region 0x3ffb2f000-0x400000000 (manifest) bookkeeped
+debug: ASLR top address adjusted to 0x12db4b000
+debug: host is Linux-SGX but remote attestation type is 'none', adding only /dev/attestation/attestation_type file and skipping others (report, etc.)
+debug: Shim loaded at 0x3fdf2f000, ready to initialize
+debug: mounting "file:." (chroot) under /
+debug: mounting "proc" (pseudo) under /proc
+debug: mounting "dev" (pseudo) under /dev
+debug: mounting "dev:tty" (chroot) under /dev/tty
+debug: mounting "sys" (pseudo) under /sys
+debug: Creating pipe: pipe.srv:1fbb709c9b63d793a61dc639f2656226d0eecf7a5499972988e7cda40a08cb6c
+[P1:T1:] debug: mounting "file:/usr/local/lib/x86_64-linux-gnu/gramine/runtime/glibc" (chroot) under /lib
+[P1:T1:] debug: mounting "file:/lib/x86_64-linux-gnu" (chroot) under /lib/x86_64-linux-gnu
+[P1:T1:] debug: mounting "file:/usr/lib/x86_64-linux-gnu" (chroot) under /usr/lib/x86_64-linux-gnu
+[P1:T1:] debug: mounting "file:/etc" (chroot) under /etc
+[P1:T1:] debug: mounting "file:enc" (encrypted) under /enc
+[P1:T1:] error: Detected deprecated syntax: 'sgx.protected_files'. Consider converting it to a list of mounts with 'type = "encrypted"' and 'key_name = "default"'.
+[P1:T1:] debug: mounting "file:helloworld_en" (encrypted) under helloworld_en
+[P1:T1:agent_app] debug: Creating pipe: pipe.srv:b71b97939ea7563e36b067690cfee4bddd09028f947b7fdb7e7bc31d87ab850b
+[P1:T1:agent_app] debug: Allocated stack at 0x10db4b000 (size = 0x20000000)
+[P1:T1:agent_app] debug: loading "file:./agent_app"
+[P1:T1:agent_app] debug: find_interp: searching for interpreter: /lib/ld-linux-x86-64.so.2
+[P1:T1:agent_app] debug: loading "file:/usr/local/lib/x86_64-linux-gnu/gramine/runtime/glibc/ld-linux-x86-64.so.2"
+[P1:T1:agent_app] debug: Creating pipe: pipe.srv:1
+[P1:T1:agent_app] debug: Creating pipe: pipe.srv:84dc5cdff4e3201aa843d1fe2786bf003a5c4f7ce6e4d4142af67b2044b19d43
+[P1:T1:agent_app] debug: LibOS initialized
+[P1:libos] debug: IPC worker started
+[P1:T1:agent_app] trace: ---- brk(0) = 0x10db04000
+[P1:T1:agent_app] trace: ---- uname(0x12db4a930) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10dac9000
+[P1:T1:agent_app] trace: ---- access("/etc/ld.so.preload", F_OK|X_OK) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v4/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v4", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v2/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v2", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/tls/haswell/avx512_1/x86_64/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/tls/haswell/avx512_1/x86_64", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/tls/haswell/avx512_1/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/tls/haswell/avx512_1", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/tls/haswell/x86_64/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/tls/haswell/x86_64", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/tls/haswell/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/tls/haswell", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/tls/avx512_1/x86_64/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/tls/avx512_1/x86_64", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/tls/avx512_1/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/tls/avx512_1", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/tls/x86_64/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/tls/x86_64", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/tls/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/tls", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/haswell/avx512_1/x86_64/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/haswell/avx512_1/x86_64", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/haswell/avx512_1/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/haswell/avx512_1", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/haswell/x86_64/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/haswell/x86_64", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/haswell/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/haswell", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/avx512_1/x86_64/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/avx512_1/x86_64", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/avx512_1/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/avx512_1", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/x86_64/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/x86_64", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/local/lib/x86_64-linux-gnu", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/glibc-hwcaps/x86-64-v4/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/glibc-hwcaps/x86-64-v4", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/glibc-hwcaps/x86-64-v3/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/glibc-hwcaps/x86-64-v3", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/glibc-hwcaps/x86-64-v2/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/glibc-hwcaps/x86-64-v2", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/tls/haswell/avx512_1/x86_64/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/tls/haswell/avx512_1/x86_64", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/tls/haswell/avx512_1/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/tls/haswell/avx512_1", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/tls/haswell/x86_64/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/tls/haswell/x86_64", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/tls/haswell/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/tls/haswell", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/tls/avx512_1/x86_64/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/tls/avx512_1/x86_64", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/tls/avx512_1/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/tls/avx512_1", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/tls/x86_64/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/tls/x86_64", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/tls/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/tls", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/haswell/avx512_1/x86_64/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/haswell/avx512_1/x86_64", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/haswell/avx512_1/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/haswell/avx512_1", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/haswell/x86_64/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/haswell/x86_64", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/haswell/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/haswell", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/avx512_1/x86_64/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/avx512_1/x86_64", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/avx512_1/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/avx512_1", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64/libsgx_util.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64", 0x12db49f60, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libsgx_util.so", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db4a0c8, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49f60, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x6b940, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10da5d000
+[P1:T1:agent_app] trace: ---- mmap(0x10da6e000, 0x3c000, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x11000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10da6e000
+[P1:T1:agent_app] trace: ---- mmap(0x10daaa000, 0x18000, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x4d000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10daaa000
+[P1:T1:agent_app] trace: ---- mmap(0x10dac2000, 0x4000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x64000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10dac2000
+[P1:T1:agent_app] trace: ---- mmap(0x10dac6000, 0x2940, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10dac6000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /lib/libsgx_util.so loaded at 0x10da5d000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v4/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v4", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v2/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v2", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/haswell/avx512_1/x86_64/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/haswell/avx512_1/x86_64", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/haswell/avx512_1/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/haswell/avx512_1", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/haswell/x86_64/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/haswell/x86_64", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/haswell/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/haswell", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/avx512_1/x86_64/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/avx512_1/x86_64", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/avx512_1/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/avx512_1", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/x86_64/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/x86_64", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/haswell/avx512_1/x86_64/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu/haswell/avx512_1/x86_64", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/haswell/avx512_1/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu/haswell/avx512_1", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/haswell/x86_64/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu/haswell/x86_64", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/haswell/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu/haswell", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/avx512_1/x86_64/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu/avx512_1/x86_64", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/avx512_1/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu/avx512_1", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/x86_64/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu/x86_64", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/lib/x86_64-linux-gnu", 0x12db49f40, 0) = 0x0
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v4/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v4", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v2/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v2", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/haswell/avx512_1/x86_64/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/haswell/avx512_1/x86_64", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/haswell/avx512_1/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/haswell/avx512_1", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/haswell/x86_64/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/haswell/x86_64", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/haswell/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/haswell", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/avx512_1/x86_64/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/avx512_1/x86_64", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/avx512_1/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/avx512_1", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/x86_64/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/x86_64", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/haswell/avx512_1/x86_64/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/haswell/avx512_1/x86_64", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/haswell/avx512_1/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/haswell/avx512_1", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/haswell/x86_64/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/haswell/x86_64", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/haswell/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/haswell", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/avx512_1/x86_64/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/avx512_1/x86_64", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/avx512_1/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/avx512_1", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/x86_64/libsgx_urts.so", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/x86_64", 0x12db49f40, 0) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libsgx_urts.so", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db4a0a8, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49f40, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x27488, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10da35000
+[P1:T1:agent_app] trace: ---- mmap(0x10da3c000, 0x12000, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x7000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10da3c000
+[P1:T1:agent_app] trace: ---- mmap(0x10da4e000, 0x8000, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10da4e000
+[P1:T1:agent_app] trace: ---- mmap(0x10da56000, 0x3000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x20000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10da56000
+[P1:T1:agent_app] trace: ---- mmap(0x10da59000, 0x3488, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10da59000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libsgx_urts.so loaded at 0x10da35000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libmbedcrypto_gramine.so.6", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db4a088, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49f20, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x73080, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d9c1000
+[P1:T1:agent_app] trace: ---- mprotect(0x10d9d3000, 0x5a000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x10d9d3000, 0x3e000, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x12000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d9d3000
+[P1:T1:agent_app] trace: ---- mmap(0x10da11000, 0x1b000, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x50000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10da11000
+[P1:T1:agent_app] trace: ---- mmap(0x10da2d000, 0x4000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x6b000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10da2d000
+[P1:T1:agent_app] trace: ---- mmap(0x10da31000, 0x3080, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10da31000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /lib/libmbedcrypto_gramine.so.6 loaded at 0x10d9c1000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libpthread.so.0", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db4a068, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49f00, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x4028, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d9bc000
+[P1:T1:agent_app] trace: ---- mmap(0x10d9bd000, 0x1000, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d9bd000
+[P1:T1:agent_app] trace: ---- mmap(0x10d9be000, 0x1000, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d9be000
+[P1:T1:agent_app] trace: ---- mmap(0x10d9bf000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d9bf000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /lib/libpthread.so.0 loaded at 0x10d9bc000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libc.so.6", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db4a048, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- pread64(3, 0x12db49a70, 0x310, 0x40) ...
+[P1:T1:agent_app] trace: ---- return from pread64(...) = 0x310
+[P1:T1:agent_app] trace: ---- pread64(3, 0x12db49a40, 0x20, 0x350) ...
+[P1:T1:agent_app] trace: ---- return from pread64(...) = 0x20
+[P1:T1:agent_app] trace: ---- pread64(3, 0x12db499f0, 0x44, 0x370) ...
+[P1:T1:agent_app] trace: ---- return from pread64(...) = 0x44
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49ee0, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- pread64(3, 0x12db49b30, 0x310, 0x40) ...
+[P1:T1:agent_app] trace: ---- return from pread64(...) = 0x310
+[P1:T1:agent_app] trace: ---- mmap(0, 0x1f3a50, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d7c8000
+[P1:T1:agent_app] trace: ---- mprotect(0x10d7f4000, 0x1ba000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x10d7f4000, 0x164000, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2c000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d7f4000
+[P1:T1:agent_app] trace: ---- mmap(0x10d958000, 0x55000, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x190000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d958000
+[P1:T1:agent_app] trace: ---- mmap(0x10d9ae000, 0x6000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e5000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d9ae000
+[P1:T1:agent_app] trace: ---- mmap(0x10d9b4000, 0x7a50, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d9b4000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /lib/libc.so.6 loaded at 0x10d7c8000
+[P1:T1:agent_app] trace: ---- mmap(0, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d7c6000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libcurl.so.4", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libcurl.so.4", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libcurl.so.4", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db4a028, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49ec0, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x481588, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d344000
+[P1:T1:agent_app] trace: ---- mmap(0x10d400000, 0x281588, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d400000
+[P1:T1:agent_app] trace: ---- munmap(0x10d344000, 0xbc000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x10d682000, 0x143588) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10d47f000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x10d67e000, 0x4000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x7e000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d67e000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libcurl.so.4 loaded at 0x10d400000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libsgx_enclave_common.so.1", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libsgx_enclave_common.so.1", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libsgx_enclave_common.so.1", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db4a008, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49ea0, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x8280, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d7bd000
+[P1:T1:agent_app] trace: ---- mmap(0x10d7be000, 0x4000, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d7be000
+[P1:T1:agent_app] trace: ---- mmap(0x10d7c2000, 0x2000, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x5000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d7c2000
+[P1:T1:agent_app] trace: ---- mmap(0x10d7c4000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x6000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d7c4000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libsgx_enclave_common.so.1 loaded at 0x10d7bd000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libdl.so.2", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49fe8, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49e80, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x4028, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d7b8000
+[P1:T1:agent_app] trace: ---- mmap(0x10d7b9000, 0x1000, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d7b9000
+[P1:T1:agent_app] trace: ---- mmap(0x10d7ba000, 0x1000, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d7ba000
+[P1:T1:agent_app] trace: ---- mmap(0x10d7bb000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d7bb000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /lib/libdl.so.2 loaded at 0x10d7b8000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libstdc++.so.6", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libstdc++.so.6", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libstdc++.so.6", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49fc8, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49e60, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x60c880, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10cdf3000
+[P1:T1:agent_app] trace: ---- mmap(0x10ce00000, 0x40c880, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10ce00000
+[P1:T1:agent_app] trace: ---- munmap(0x10cdf3000, 0xd000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x10d20d000, 0x1f2880) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10cffc000, 0x200000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x10d1fc000, 0xe000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1fc000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d1fc000
+[P1:T1:agent_app] trace: ---- mmap(0x10d20a000, 0x2880, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d20a000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libstdc++.so.6 loaded at 0x10ce00000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libgcc_s.so.1", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgcc_s.so.1", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49fa8, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49e40, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x417448, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10c9e8000
+[P1:T1:agent_app] trace: ---- mmap(0x10ca00000, 0x217448, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10ca00000
+[P1:T1:agent_app] trace: ---- munmap(0x10c9e8000, 0x18000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x10cc18000, 0x1e7448) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10ca17000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x10cc16000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x16000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10cc16000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /lib/x86_64-linux-gnu/libgcc_s.so.1 loaded at 0x10ca00000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libnghttp2.so.14", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libnghttp2.so.14", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libnghttp2.so.14", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49f68, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49e00, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x424f70, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10c5db000
+[P1:T1:agent_app] trace: ---- mmap(0x10c600000, 0x224f70, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10c600000
+[P1:T1:agent_app] trace: ---- munmap(0x10c5db000, 0x25000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x10c825000, 0x1daf70) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10c623000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x10c822000, 0x3000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x22000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10c822000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libnghttp2.so.14 loaded at 0x10c600000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libidn2.so.0", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libidn2.so.0", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libidn2.so.0", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49f48, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- mmap(0, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d7b6000
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49de0, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x41c018, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10c1e3000
+[P1:T1:agent_app] trace: ---- mmap(0x10c200000, 0x21c018, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10c200000
+[P1:T1:agent_app] trace: ---- munmap(0x10c1e3000, 0x1d000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x10c41d000, 0x1e2018) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10c21c000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x10c41b000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1b000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10c41b000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libidn2.so.0 loaded at 0x10c200000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/librtmp.so.1", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/librtmp.so.1", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/librtmp.so.1", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49f28, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49dc0, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x41b3b0, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10bde4000
+[P1:T1:agent_app] trace: ---- mmap(0x10be00000, 0x21b3b0, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10be00000
+[P1:T1:agent_app] trace: ---- munmap(0x10bde4000, 0x1c000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x10c01c000, 0x1e33b0) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10be1b000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x10c01a000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1a000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10c01a000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/librtmp.so.1 loaded at 0x10be00000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libpsl.so.5", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpsl.so.5", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libpsl.so.5", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49f08, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49da0, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x40d068, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10b9f2000
+[P1:T1:agent_app] trace: ---- mmap(0x10ba00000, 0x20d068, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10ba00000
+[P1:T1:agent_app] trace: ---- munmap(0x10b9f2000, 0xe000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x10bc0e000, 0x1f1068) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10ba0d000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x10bc0c000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xc000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10bc0c000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libpsl.so.5 loaded at 0x10ba00000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libssl.so.1.1", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libssl.so.1.1", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libssl.so.1.1", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49ee8, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49d80, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x48c980, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10b573000
+[P1:T1:agent_app] trace: ---- mmap(0x10b600000, 0x28c980, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10b600000
+[P1:T1:agent_app] trace: ---- munmap(0x10b573000, 0x8d000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x10b88d000, 0x172980) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10b681000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x10b880000, 0xd000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x80000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10b880000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libssl.so.1.1 loaded at 0x10b600000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libcrypto.so.1.1", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libcrypto.so.1.1", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libcrypto.so.1.1", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49ec8, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49d60, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x6caf60, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10af35000
+[P1:T1:agent_app] trace: ---- mmap(0x10b000000, 0x4caf60, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10b000000
+[P1:T1:agent_app] trace: ---- munmap(0x10af35000, 0xcb000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x10b4cb000, 0x134f60) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10b29b000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x10b49a000, 0x2e000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x29a000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10b49a000
+[P1:T1:agent_app] trace: ---- mmap(0x10b4c8000, 0x2f60, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10b4c8000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1 loaded at 0x10b000000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libgssapi_krb5.so.2", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgssapi_krb5.so.2", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libgssapi_krb5.so.2", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49ea8, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49d40, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x44a340, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10abb5000
+[P1:T1:agent_app] trace: ---- mmap(0x10ac00000, 0x24a340, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10ac00000
+[P1:T1:agent_app] trace: ---- munmap(0x10abb5000, 0x4b000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x10ae4b000, 0x1b4340) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10ac48000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x10ae47000, 0x4000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x47000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10ae47000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libgssapi_krb5.so.2 loaded at 0x10ac00000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libldap_r-2.4.so.2", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libldap_r-2.4.so.2", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libldap_r-2.4.so.2", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49e88, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49d20, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d7b4000
+[P1:T1:agent_app] trace: ---- mmap(0, 0x451ae8, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10a7ae000
+[P1:T1:agent_app] trace: ---- mmap(0x10a800000, 0x251ae8, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10a800000
+[P1:T1:agent_app] trace: ---- munmap(0x10a7ae000, 0x52000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x10aa52000, 0x1adae8) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10a84e000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x10aa4d000, 0x3000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x4d000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10aa4d000
+[P1:T1:agent_app] trace: ---- mmap(0x10aa50000, 0x1ae8, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10aa50000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libldap_r-2.4.so.2 loaded at 0x10a800000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/liblber-2.4.so.2", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/liblber-2.4.so.2", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/liblber-2.4.so.2", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49e68, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49d00, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x40d1e8, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10a3f2000
+[P1:T1:agent_app] trace: ---- mmap(0x10a400000, 0x20d1e8, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10a400000
+[P1:T1:agent_app] trace: ---- munmap(0x10a3f2000, 0xe000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x10a60e000, 0x1f11e8) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10a40d000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x10a60c000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xc000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10a60c000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/liblber-2.4.so.2 loaded at 0x10a400000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libz.so.1", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libz.so.1", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49e48, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49ce0, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x41c0b0, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x109fe3000
+[P1:T1:agent_app] trace: ---- mmap(0x10a000000, 0x21c0b0, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10a000000
+[P1:T1:agent_app] trace: ---- munmap(0x109fe3000, 0x1d000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x10a21d000, 0x1e20b0) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10a01c000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x10a21b000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1b000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10a21b000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /lib/x86_64-linux-gnu/libz.so.1 loaded at 0x10a000000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libm.so.6", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49e28, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49cc0, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0xdc100, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d6d7000
+[P1:T1:agent_app] trace: ---- mmap(0x10d6e7000, 0x70000, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x10000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d6e7000
+[P1:T1:agent_app] trace: ---- mmap(0x10d757000, 0x5b000, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x80000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d757000
+[P1:T1:agent_app] trace: ---- mmap(0x10d7b2000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xda000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d7b2000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /lib/libm.so.6 loaded at 0x10d6d7000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libunistring.so.2", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libunistring.so.2", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libunistring.so.2", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49e08, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49ca0, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x57d908, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x109a82000
+[P1:T1:agent_app] trace: ---- mmap(0x109c00000, 0x37d908, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x109c00000
+[P1:T1:agent_app] trace: ---- munmap(0x109a82000, 0x17e000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x109f7e000, 0x81908) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x109d7a000, 0x200000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x109f7a000, 0x4000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x17a000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x109f7a000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libunistring.so.2 loaded at 0x109c00000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libgnutls.so.30", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgnutls.so.30", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libgnutls.so.30", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49de8, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49c80, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d6d5000
+[P1:T1:agent_app] trace: ---- mmap(0, 0x565b48, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10969a000
+[P1:T1:agent_app] trace: ---- mmap(0x109800000, 0x365b48, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x109800000
+[P1:T1:agent_app] trace: ---- munmap(0x10969a000, 0x166000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x109b66000, 0x99b48) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x109958000, 0x200000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x109b58000, 0xd000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x158000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x109b58000
+[P1:T1:agent_app] trace: ---- mmap(0x109b65000, 0xb48, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x109b65000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libgnutls.so.30 loaded at 0x109800000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libhogweed.so.4", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libhogweed.so.4", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libhogweed.so.4", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49dc8, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49c60, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x435318, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x1093ca000
+[P1:T1:agent_app] trace: ---- mmap(0x109400000, 0x235318, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x109400000
+[P1:T1:agent_app] trace: ---- munmap(0x1093ca000, 0x36000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x109636000, 0x1c9318) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x109434000, 0x200000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x109634000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x34000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x109634000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libhogweed.so.4 loaded at 0x109400000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libnettle.so.6", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libnettle.so.6", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libnettle.so.6", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49da8, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49c40, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x435090, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x108fca000
+[P1:T1:agent_app] trace: ---- mmap(0x109000000, 0x235090, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x109000000
+[P1:T1:agent_app] trace: ---- munmap(0x108fca000, 0x36000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x109236000, 0x1c9090) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x109034000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x109233000, 0x3000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x33000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x109233000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libnettle.so.6 loaded at 0x109000000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libgmp.so.10", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgmp.so.10", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libgmp.so.10", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49d88, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49c20, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x4801c0, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x108b7f000
+[P1:T1:agent_app] trace: ---- mmap(0x108c00000, 0x2801c0, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x108c00000
+[P1:T1:agent_app] trace: ---- munmap(0x108b7f000, 0x81000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x108e81000, 0x17e1c0) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x108c7f000, 0x200000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x108e7f000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x7f000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x108e7f000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libgmp.so.10 loaded at 0x108c00000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libkrb5.so.3", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libkrb5.so.3", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libkrb5.so.3", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49d68, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49c00, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x4d5ce0, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10872a000
+[P1:T1:agent_app] trace: ---- mmap(0x108800000, 0x2d5ce0, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x108800000
+[P1:T1:agent_app] trace: ---- munmap(0x10872a000, 0xd6000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x108ad6000, 0x129ce0) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x1088c6000, 0x200000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x108ac6000, 0x10000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xc6000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x108ac6000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libkrb5.so.3 loaded at 0x108800000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libk5crypto.so.3", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libk5crypto.so.3", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libk5crypto.so.3", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49d48, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49be0, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x431078, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x1083ce000
+[P1:T1:agent_app] trace: ---- mmap(0x108400000, 0x231078, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x108400000
+[P1:T1:agent_app] trace: ---- munmap(0x1083ce000, 0x32000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x108632000, 0x1cd078) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10842e000, 0x200000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x10862e000, 0x3000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2e000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10862e000
+[P1:T1:agent_app] trace: ---- mmap(0x108631000, 0x78, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x108631000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libk5crypto.so.3 loaded at 0x108400000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libcom_err.so.2", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libcom_err.so.2", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49d28, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- mmap(0, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d6d3000
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49bc0, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x4030a8, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x107ffc000
+[P1:T1:agent_app] trace: ---- mmap(0x108000000, 0x2030a8, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x108000000
+[P1:T1:agent_app] trace: ---- munmap(0x107ffc000, 0x4000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x108204000, 0x1fb0a8) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x108003000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x108202000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x108202000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /lib/x86_64-linux-gnu/libcom_err.so.2 loaded at 0x108000000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libkrb5support.so.0", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libkrb5support.so.0", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libkrb5support.so.0", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49d08, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49ba0, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x40a3c8, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x107bf5000
+[P1:T1:agent_app] trace: ---- mmap(0x107c00000, 0x20a3c8, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x107c00000
+[P1:T1:agent_app] trace: ---- munmap(0x107bf5000, 0xb000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x107e0b000, 0x1f43c8) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x107c0a000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x107e09000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x9000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x107e09000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libkrb5support.so.0 loaded at 0x107c00000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libresolv.so.2", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49ce8, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49b80, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x12a28, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d6c0000
+[P1:T1:agent_app] trace: ---- mmap(0x10d6c4000, 0x8000, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x4000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d6c4000
+[P1:T1:agent_app] trace: ---- mmap(0x10d6cc000, 0x3000, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xc000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d6cc000
+[P1:T1:agent_app] trace: ---- mmap(0x10d6cf000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xe000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d6cf000
+[P1:T1:agent_app] trace: ---- mmap(0x10d6d1000, 0x1a28, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d6d1000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /lib/libresolv.so.2 loaded at 0x10d6c0000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libsasl2.so.2", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libsasl2.so.2", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libsasl2.so.2", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49cc8, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49b60, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x41a3e8, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x1077e5000
+[P1:T1:agent_app] trace: ---- mmap(0x107800000, 0x21a3e8, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x107800000
+[P1:T1:agent_app] trace: ---- munmap(0x1077e5000, 0x1b000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x107a1b000, 0x1e43e8) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x107819000, 0x200000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x107a19000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x107a19000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libsasl2.so.2 loaded at 0x107800000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libgssapi.so.3", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgssapi.so.3", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libgssapi.so.3", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49ca8, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49b40, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x440798, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x1073bf000
+[P1:T1:agent_app] trace: ---- mmap(0x107400000, 0x240798, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x107400000
+[P1:T1:agent_app] trace: ---- munmap(0x1073bf000, 0x41000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x107641000, 0x1be798) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10743d000, 0x200000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x10763d000, 0x4000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x3d000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10763d000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libgssapi.so.3 loaded at 0x107400000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libp11-kit.so.0", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libp11-kit.so.0", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libp11-kit.so.0", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49c88, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49b20, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d6be000
+[P1:T1:agent_app] trace: ---- mmap(0, 0x52e170, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x106ed1000
+[P1:T1:agent_app] trace: ---- mmap(0x107000000, 0x32e170, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x107000000
+[P1:T1:agent_app] trace: ---- munmap(0x106ed1000, 0x12f000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x10732f000, 0xd0170) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10711a000, 0x200000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x10731a000, 0x14000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x11a000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10731a000
+[P1:T1:agent_app] trace: ---- mmap(0x10732e000, 0x170, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10732e000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libp11-kit.so.0 loaded at 0x107000000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libtasn1.so.6", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libtasn1.so.6", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libtasn1.so.6", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49c68, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49b00, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x4122c8, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x106bed000
+[P1:T1:agent_app] trace: ---- mmap(0x106c00000, 0x2122c8, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x106c00000
+[P1:T1:agent_app] trace: ---- munmap(0x106bed000, 0x13000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x106e13000, 0x1ec2c8) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x106c11000, 0x200000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x106e11000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x11000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x106e11000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libtasn1.so.6 loaded at 0x106c00000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libkeyutils.so.1", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libkeyutils.so.1", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49c48, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49ae0, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x403010, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x1067fc000
+[P1:T1:agent_app] trace: ---- mmap(0x106800000, 0x203010, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x106800000
+[P1:T1:agent_app] trace: ---- munmap(0x1067fc000, 0x4000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x106a04000, 0x1fb010) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x106803000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x106a02000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x106a02000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /lib/x86_64-linux-gnu/libkeyutils.so.1 loaded at 0x106800000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libheimntlm.so.0", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libheimntlm.so.0", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libheimntlm.so.0", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49c28, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49ac0, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x408250, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x1063f7000
+[P1:T1:agent_app] trace: ---- mmap(0x106400000, 0x208250, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x106400000
+[P1:T1:agent_app] trace: ---- munmap(0x1063f7000, 0x9000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x106609000, 0x1f6250) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x106408000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x106607000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x7000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x106607000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libheimntlm.so.0 loaded at 0x106400000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libkrb5.so.26", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libkrb5.so.26", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libkrb5.so.26", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49c08, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49aa0, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x48c390, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x105f73000
+[P1:T1:agent_app] trace: ---- mmap(0x106000000, 0x28c390, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x106000000
+[P1:T1:agent_app] trace: ---- munmap(0x105f73000, 0x8d000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x10628d000, 0x172390) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x106087000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x106286000, 0x6000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x86000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x106286000
+[P1:T1:agent_app] trace: ---- mmap(0x10628c000, 0x390, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10628c000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libkrb5.so.26 loaded at 0x106000000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libasn1.so.8", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libasn1.so.8", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libasn1.so.8", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49be8, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49a80, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d6bc000
+[P1:T1:agent_app] trace: ---- mmap(0, 0x4a10f0, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x105b5e000
+[P1:T1:agent_app] trace: ---- mmap(0x105c00000, 0x2a10f0, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x105c00000
+[P1:T1:agent_app] trace: ---- munmap(0x105b5e000, 0xa2000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x105ea2000, 0x15d0f0) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x105c9e000, 0x200000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x105e9e000, 0x4000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x9e000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x105e9e000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libasn1.so.8 loaded at 0x105c00000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libhcrypto.so.4", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libhcrypto.so.4", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libhcrypto.so.4", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49bc8, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49a60, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x435a68, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x1057ca000
+[P1:T1:agent_app] trace: ---- mmap(0x105800000, 0x235a68, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x105800000
+[P1:T1:agent_app] trace: ---- munmap(0x1057ca000, 0x36000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x105a36000, 0x1c9a68) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x105833000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x105a32000, 0x3000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x32000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x105a32000
+[P1:T1:agent_app] trace: ---- mmap(0x105a35000, 0xa68, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x105a35000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libhcrypto.so.4 loaded at 0x105800000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libroken.so.18", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libroken.so.18", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libroken.so.18", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49ba8, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49a40, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x415430, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x1053ea000
+[P1:T1:agent_app] trace: ---- mmap(0x105400000, 0x215430, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x105400000
+[P1:T1:agent_app] trace: ---- munmap(0x1053ea000, 0x16000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x105616000, 0x1e9430) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x105415000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x105614000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x14000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x105614000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libroken.so.18 loaded at 0x105400000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libffi.so.6", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libffi.so.6", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libffi.so.6", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49b88, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49a20, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x407608, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x104ff8000
+[P1:T1:agent_app] trace: ---- mmap(0x105000000, 0x207608, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x105000000
+[P1:T1:agent_app] trace: ---- munmap(0x104ff8000, 0x8000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x105208000, 0x1f7608) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x105007000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x105206000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x6000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x105206000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libffi.so.6 loaded at 0x105000000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libwind.so.0", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libwind.so.0", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libwind.so.0", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49b68, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49a00, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x428030, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x104bd7000
+[P1:T1:agent_app] trace: ---- mmap(0x104c00000, 0x228030, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x104c00000
+[P1:T1:agent_app] trace: ---- munmap(0x104bd7000, 0x29000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x104e29000, 0x1d6030) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x104c28000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x104e27000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x27000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x104e27000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libwind.so.0 loaded at 0x104c00000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libheimbase.so.1", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libheimbase.so.1", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libheimbase.so.1", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49b48, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db499e0, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d6ba000
+[P1:T1:agent_app] trace: ---- mmap(0, 0x40e8d8, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x1047f1000
+[P1:T1:agent_app] trace: ---- mmap(0x104800000, 0x20e8d8, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x104800000
+[P1:T1:agent_app] trace: ---- munmap(0x1047f1000, 0xf000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x104a0f000, 0x1f08d8) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10480e000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x104a0d000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xd000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x104a0d000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libheimbase.so.1 loaded at 0x104800000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libhx509.so.5", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libhx509.so.5", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libhx509.so.5", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49b28, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db499c0, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x449428, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x1043b6000
+[P1:T1:agent_app] trace: ---- mmap(0x104400000, 0x249428, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x104400000
+[P1:T1:agent_app] trace: ---- munmap(0x1043b6000, 0x4a000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x10464a000, 0x1b5428) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x104446000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x104645000, 0x4000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x45000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x104645000
+[P1:T1:agent_app] trace: ---- mmap(0x104649000, 0x428, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x104649000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libhx509.so.5 loaded at 0x104400000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libsqlite3.so.0", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libsqlite3.so.0", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libsqlite3.so.0", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49b08, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db499a0, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x5084d8, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x103ef7000
+[P1:T1:agent_app] trace: ---- mmap(0x104000000, 0x3084d8, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x104000000
+[P1:T1:agent_app] trace: ---- munmap(0x103ef7000, 0x109000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x104309000, 0xf64d8) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x104104000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x104303000, 0x5000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x103000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x104303000
+[P1:T1:agent_app] trace: ---- mmap(0x104308000, 0x4d8, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x104308000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /usr/lib/x86_64-linux-gnu/libsqlite3.so.0 loaded at 0x104000000
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/libcrypt.so.1", O_RDONLY|0x80000, 0000) = -2
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libcrypt.so.1", O_RDONLY|0x80000, 0000) = 0x3
+[P1:T1:agent_app] trace: ---- read(3, 0x12db49ae8, 0x340) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x340
+[P1:T1:agent_app] trace: ---- newfstatat(3, "", 0x12db49980, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x437220, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x103bc8000
+[P1:T1:agent_app] trace: ---- mmap(0x103c00000, 0x237220, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x103c00000
+[P1:T1:agent_app] trace: ---- munmap(0x103bc8000, 0x38000) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- munmap(0x103e38000, 0x1c7220) ...
+[P1:T1:agent_app] trace: ---- return from munmap(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x103c09000, 0x1ff000, PROT_NONE) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0x103e08000, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x8000) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x103e08000
+[P1:T1:agent_app] trace: ---- mmap(0x103e0a000, 0x2d220, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x103e0a000
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] debug: glibc register library /lib/x86_64-linux-gnu/libcrypt.so.1 loaded at 0x103c00000
+[P1:T1:agent_app] trace: ---- mmap(0, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d6b8000
+[P1:T1:agent_app] trace: ---- mmap(0, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d6b6000
+[P1:T1:agent_app] trace: ---- mmap(0, 0x3000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d6b3000
+[P1:T1:agent_app] trace: ---- arch_prctl(4098, 0x10d6b3780) = 0x0
+[P1:T1:agent_app] trace: ---- set_tid_address(0x10d6b3a50) = 0x1
+[P1:T1:agent_app] trace: ---- set_robust_list(0x10d6b3a60, 0x18) = 0x0
+[P1:T1:agent_app] warning: Unsupported system call rseq
+[P1:T1:agent_app] trace: ---- mprotect(0x10d9ae000, 0x3000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x103e08000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10d7b2000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10d9bf000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10d7bb000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x104303000, 0x3000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x108202000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10d6cf000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x105614000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x105e9e000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x104a0d000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x105a32000, 0x2000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x104e27000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x104645000, 0x3000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x105206000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x106286000, 0x4000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x106607000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x106a02000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x106e11000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10731a000, 0xa000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10763d000, 0x2000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x107a19000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x107e09000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10862e000, 0x2000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x108ac6000, 0xe000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x108e7f000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x109233000, 0x2000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x109634000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10a21b000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x109f7a000, 0x3000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10c41b000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x109b58000, 0xc000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10a60c000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10aa4d000, 0x2000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10ae47000, 0x2000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10b49a000, 0x2c000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10b880000, 0x9000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10bc0c000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10c01a000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10c822000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10cc16000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10d1fc000, 0xb000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10d7c4000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10d67e000, 0x3000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10da2d000, 0x3000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10da56000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10dac2000, 0x3000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mprotect(0x10db48000, 0x1000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- mmap(0, 0x2000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d6b1000
+[P1:T1:agent_app] trace: ---- mprotect(0x10db00000, 0x2000, PROT_READ) ...
+[P1:T1:agent_app] trace: ---- return from mprotect(...) = 0x0
+[P1:T1:agent_app] trace: ---- prlimit64(0, 3, 0, 0x12db4aac0) = 0x0
+[P1:T1:agent_app] trace: ---- futex(0x10732e0e0, FUTEX_PRIVATE|FUTEX_WAKE, 2147483647, 0, 0x10d9b47a0, 1) ...
+[P1:T1:agent_app] trace: ---- return from futex(...) = 0x0
+[P1:T1:agent_app] trace: ---- getrandom(0x10d9b9198, 0x8, GRND_NONBLOCK) = 0x8
+[P1:T1:agent_app] trace: ---- brk(0) = 0x10db04000
+[P1:T1:agent_app] trace: ---- brk(0x10db25000) = 0x10db25000
+[P1:T1:agent_app] trace: ---- getrandom(0x12db4ad5f, 0x1, GRND_NONBLOCK) = 0x1
+[P1:T1:agent_app] trace: ---- stat("/etc/gnutls/default-priorities", 0x12db4ad80) = -2
+[P1:T1:agent_app] trace: ---- brk(0x10db53000) = 0x10db25000
+[P1:T1:agent_app] trace: ---- mmap(0, 0x100000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0) ...
+[P1:T1:agent_app] trace: ---- return from mmap(...) = 0x10d300000
+[P1:T1:agent_app] trace: ---- socket(INET, STREAM, 0) = 0x3
+[P1:T1:agent_app] trace: ---- setsockopt(3, 1, 2, 0x12db4aa18, 4) = 0x0
+[P1:T1:agent_app] trace: ---- bind(3, 0x12db4aa30, 16) = 0x0
+[P1:T1:agent_app] trace: ---- listen(3, 10) = 0x0
+[P1:T1:agent_app] trace: ---- accept(3, 0x12db4a9a0, 0x12db4a998) ...
+[P1:T1:agent_app] trace: ---- return from accept(...) = 0x4
+[P1:T1:agent_app] trace: ---- newfstatat(1, "", 0x12db4a900, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- ioctl(1, TCGETS, 0x12db4a870) ...
+[P1:T1:agent_app] trace: ---- return from ioctl(...) = -38
+[P1:T1:agent_app] trace: ---- recvfrom(4, 0x12db4aa90, 0x188, 0, 0, 0) = 0x188
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/dev/attestation/keys/default", O_WRONLY, 0000) = 0x5
+[P1:T1:agent_app] trace: ---- write(5, 0x10db471ac, 0x10) ...
+[P1:T1:agent_app] trace: ---- return from write(...) = 0x10
+[P1:T1:agent_app] trace: ---- close(5) = 0x0
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "/dev/attestation/keys/default", O_RDONLY, 0000) = 0x5
+[P1:T1:agent_app] trace: ---- read(5, 0x12db4adb0, 0x8) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x8
+[P1:T1:agent_app] trace: ---- close(5) = 0x0
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "key", O_RDONLY, 0000) = 0x5
+[P1:T1:agent_app] trace: ---- fstat(5, 0x12db4a820) = 0x0
+[P1:T1:agent_app] trace: ---- newfstatat(5, "", 0x12db4a760, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- read(5, 0x10db22550, 0x1000) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x10
+[P1:T1:agent_app] trace: ---- close(5) = 0x0
+[P1:T1:agent_app] trace: ---- stat("helloworld", 0x12db4a980) = 0x0
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "helloworld", O_RDONLY, 0000) = 0x5
+[P1:T1:agent_app] warning: cb_read: EOF
+[P1:T1:agent_app] warning: encrypted_file_internal_open: pf_open failed: Callback failed
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "helloworld_en", O_RDWR|O_CREAT, 0664) = -13
+[P1:T1:agent_app] trace: ---- newfstatat(2, "", 0x12db4a420, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- ioctl(2, TCGETS, 0x12db4a390) ...
+[P1:T1:agent_app] trace: ---- return from ioctl(...) = -38
+[P1:T1:agent_app] trace: ---- lseek(2, 0x0, SEEK_CUR) = 0x0
+[P1:T1:agent_app] trace: ---- write(2, 0x10db23560, 0x51) ...
+[P1:T1:agent_app] trace: ---- return from write(...) = 0x51
+[P1:T1:agent_app] trace: ---- close(5) = 0x0
+[P1:T1:agent_app] trace: ---- openat(AT_FDCWD, "key", O_RDONLY, 0000) = 0x5
+[P1:T1:agent_app] trace: ---- fstat(5, 0x12db4a820) = 0x0
+[P1:T1:agent_app] trace: ---- newfstatat(5, "", 0x12db4a760, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- read(5, 0x10db22550, 0x1000) ...
+[P1:T1:agent_app] trace: ---- return from read(...) = 0x10
+[P1:T1:agent_app] trace: ---- close(5) = 0x0
+[P1:T1:agent_app] warning: cb_read: EOF
+[P1:T1:agent_app] warning: encrypted_file_internal_open: pf_open failed: Callback failed
+[P1:T1:agent_app] trace: ---- stat("helloworld_en", 0x12db4a980) = -13
+[P1:T1:agent_app] trace: ---- newfstatat(2, "", 0x12db4a480, 4096) = 0x0
+[P1:T1:agent_app] trace: ---- ioctl(2, TCGETS, 0x12db4a3f0) ...
+[P1:T1:agent_app] trace: ---- return from ioctl(...) = -38
+[P1:T1:agent_app] trace: ---- lseek(2, 0x0, SEEK_CUR) = 0x0
+[P1:T1:agent_app] trace: ---- write(2, 0x10db22550, 0x4a) ...
+[P1:T1:agent_app] trace: ---- return from write(...) = 0x4a
+[P1:T1:agent_app] trace: ---- execve("helloworld_new", [helloworld_new,], [LD_LIBRARY_PATH=/lib:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu,]) ...
+[P1:T1:agent_app] trace: ---- return from execve(...) = -2
+[P1:T1:agent_app] trace: ---- sendto(4, 0x12db4ac20, 0x188, 0, 0, 0) = 0x188
+[P1:T1:agent_app] trace: ---- write(2, 0x12db48420, 0x3d) ...
+[P1:T1:agent_app] trace: ---- return from write(...) = 0x3d
+[P1:T1:agent_app] trace: ---- recvfrom(4, 0x12db4aa90, 0x188, 0, 0, 0) = 0x188
+[P1:T1:agent_app] trace: ---- close(4) = 0x0
+[P1:T1:agent_app] trace: ---- close(3) = 0x0
+[P1:T1:agent_app] trace: ---- write(1, 0x10db21360, 0xed) ...
+[P1:T1:agent_app] trace: ---- return from write(...) = 0xed
+[P1:T1:agent_app] debug: ---- exit_group (returning 0)
+[P1:T1:agent_app] debug: clearing POSIX locks for pid 1
+[P1:T1:agent_app] debug: sync client shutdown: closing handles
+[P1:T1:agent_app] debug: sync client shutdown: waiting for confirmation
+[P1:T1:agent_app] debug: sync client shutdown: finished
+[P1:libos] debug: IPC worker: exiting worker thread
+[P1:T1:agent_app] debug: process 1 exited with status 0

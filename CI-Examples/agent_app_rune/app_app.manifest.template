@@ -1,0 +1,46 @@
+
+loader.preload = "file:{{ gramine.libos }}" # for compatibility with v1.0
+
+loader.entrypoint = "file:{{ gramine.libos }}"
+libos.entrypoint = "app_app"
+#loader.log_level = "{{ log_level }}"
+loader.log_file = "app_app_debug.log"
+loader.argv0_override = "app_app"
+loader.insecure__use_cmdline_argv = true
+loader.log_level ="trace"
+
+loader.env.LD_LIBRARY_PATH = "/lib:{{ arch_libdir }}:/usr{{ arch_libdir }}"
+fs.mounts = [
+ { type = "chroot", path = "/lib", uri = "file:{{ gramine.runtimedir() }}" },
+ { type = "chroot", path = "/etc", uri = "file:/etc" },
+ { type = "encrypted", path = "/enc", uri = "file:enc",  key_name = "default"},
+]
+#sys.enclave_reuse = true
+sgx.enclave_size = "8G"
+sys.stack.size = "256M"
+sgx.thread_num = 16
+
+sgx.debug = true
+sgx.nonpie_binary = true
+sys.insecure__allow_eventfd = true 
+sgx.trusted_files = [
+  "file:{{ gramine.libos }}",
+  "file:app_app",
+  "file:/etc/localtime",
+  "file:{{ gramine.runtimedir() }}/",
+  "file:/usr{{ arch_libdir }}/",
+  "file:/lib/",
+  "file:key",
+]
+sgx.allowed_files = [
+  "file:/etc/losthosts",
+  "file:/etc/hostname",
+  "file:/etc/resolv.conf",
+  "file:/etc/localtime",
+  "file:payload_receiver",
+  "file:helloworld",
+  "file:helloworld_new",
+  "file:/enc/helloworld_new",
+  "file:/enc/helloworld",
+  "file:/enc/helloworld_new",
+]
