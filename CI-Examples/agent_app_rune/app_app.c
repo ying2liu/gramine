@@ -149,7 +149,7 @@ int main() {
 
 #if 0
             pf_decrypt_files("helloworld_en", "helloworld_new", KEY_PATH);
-            char* const new_argv[] = {msg.u.ExecuteData.name, NULL};
+            char* const new_argv[] = {execute_path, NULL};
             printf("buffer = %s\n", execute_path);
             execv(execute_path, new_argv);
 #endif
