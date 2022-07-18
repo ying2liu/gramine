@@ -13,6 +13,8 @@ loader.env.LD_LIBRARY_PATH = "/lib:{{ arch_libdir }}:/usr{{ arch_libdir }}"
 fs.mounts = [
  { type = "chroot", path = "/lib", uri = "file:{{ gramine.runtimedir() }}" },
  { type = "chroot", path = "/etc", uri = "file:/etc" },
+ { path = "{{ arch_libdir }}", uri = "file:{{ arch_libdir }}" },
+ { path = "/usr{{ arch_libdir }}", uri = "file:/usr{{ arch_libdir }}" },
  { type = "encrypted", path = "/enc", uri = "file:enc",  key_name = "default"},
 ]
 #sys.enclave_reuse = true

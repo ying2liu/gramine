@@ -94,9 +94,7 @@ int main() {
 	} else {
         printf("after APP_EXECUTE get GET_SECRETE_ACK with secret %s\n",
         msg.u.GetSecreteAckData.secrete);
-#if 0
 		write_key(msg.u.GetSecreteAckData.secrete);
-#endif
 	}
 
 	// send bye to agent 
@@ -124,6 +122,7 @@ int main() {
 	switch (msg.cmd) {
 		case APP_EXECUTE: {
             execute_path = malloc(strlen(msg.u.ExecuteData.name));
+			meset (execute_path, 0, sizeof(execute_path));
 			memcpy(execute_path, msg.u.ExecuteData.name, strlen(msg.u.ExecuteData.name));
 			printf("msg.u.ExecuteData.name=%s\n", msg.u.ExecuteData.name);
 				// get APP_EXECUTE to send APP_EXECUTE_ACK
@@ -147,12 +146,11 @@ int main() {
 				return -1;
 			}
 
-#if 0
             pf_decrypt_files("helloworld_en", "helloworld_new", KEY_PATH);
             char* const new_argv[] = {execute_path, NULL};
             printf("buffer = %s\n", execute_path);
             execv(execute_path, new_argv);
-#endif
+			
 			fprintf(stderr, "%s:%d:%s to execute\n", __FILE__, __LINE__, __FUNCTION__);
 		}
 		break;

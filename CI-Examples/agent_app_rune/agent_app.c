@@ -86,14 +86,16 @@ int main() {
 				char key_buf[16];
 	        	read_key(KEY_PATH, key_buf, sizeof(key_buf));
 	 	    	printf("YINGYING read back key = %s\n", key_buf);
-				pf_encrypt_files ("helloworld", "helloworld_en", "key");
-				pf_decrypt_files("helloworld_en", "helloworld_new", true, "key");
+				pf_encrypt_files ("helloworld", "helloworld_en", KEY_PATH);
+#if 0 /* the followings are debugging code*/
+
+				pf_decrypt_files("helloworld_en", "helloworld_new", true, KEY_PATH);
 		        char *execute_path ="helloworld_new";
 
 				char* const new_argv[] = {execute_path, NULL};
         		printf("buffer = %s\n", execute_path);
 		        execv(execute_path, new_argv);
-				
+#endif	/*end of debugging code*/
 				memset(&msg, 0, sizeof(msg));
 				msg.cmd = GET_SECRETE_ACK;
 				strcpy(msg.u.GetSecreteAckData.secrete, NEW_KEY);
