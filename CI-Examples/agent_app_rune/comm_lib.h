@@ -1,5 +1,6 @@
 #ifndef COMM_LIB_H
 #define COMM_LIB_H
+#include <stdint.h>
 #include <unistd.h>
 #pragma once
 
@@ -15,6 +16,14 @@
 #define APP_DATA_PORT (50053) // between app and rune, app is server
 
 #define LISTEN_BACKLOG (10)
+
+#define KEY_LEN 16
+#define NEW_KEY      "0011223344556677"
+#define KEY_PATH "/dev/attestation/keys/default"
+
+typedef uint8_t pf_key_t[KEY_LEN];
+static const pf_key_t default_key = {
+    0xff, 0xee, 0xdd, 0xcc, 0xbb, 0xaa, 0x99, 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0x00};
 
 typedef enum {
 	UNDEFINED = 0,
@@ -50,8 +59,8 @@ typedef struct {
 			char report[MAX_REPORT_SIZE];
 		} GetReportAckData;
 		struct {
-			char secrete[MAX_SECRETE_SIZE];
-		} GetSecreteAckData;		
+			pf_key_t secrete;
+		} GetSecreteAckData;
 		struct {
 			int pid;
 			int sig;
@@ -60,7 +69,7 @@ typedef struct {
 			int pid;
 			int sig;
 			int status; // return value of posix kill
-		} KillAckData;		
+		} KillAckData;
 	} u;
 } CommInfo;
 
@@ -91,12 +100,10 @@ extern ErrorCode send_command(int comm_socket, CommInfo *cmd);
 extern ErrorCode receive_command(int comm_socket, CommInfo *cmd);
 
 extern ErrorCode close_connection(int sock_fd);
-#define KEY_LEN 16
-#define NEW_KEY      "0011223344556677"
-#define KEY_PATH "/dev/attestation/keys/default"
-ssize_t posix_fd_rw(int fd, char* buf, size_t count, int do_write); 
-ssize_t posix_file_rw(const char* path, char* buf, size_t count, int do_write); 
-int write_key(const char* key);
+
+ssize_t posix_fd_rw(int fd, char* buf, size_t count, int do_write);
+ssize_t posix_file_rw(const char* path, char* buf, size_t count, int do_write);
+int write_key(const char* path, const pf_key_t* key);
 ssize_t read_key(const char* path, char* buf, size_t count);
 ssize_t posix_file_write(const char* path, const char* buf, size_t count);
 int write_file(const char* path, char* buf, size_t count);

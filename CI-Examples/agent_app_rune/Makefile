@@ -1,4 +1,5 @@
-SGX_SIGNER_KEY ?=  /home/yliu79/.config/gramine/enclave-key.pem
+#SGX_SIGNER_KEY ?= /home/vdhanraj/.config/gramine/enclave-key.pem
+SGX_SIGNER_KEY ?= /home/yliu79/.config/gramine/enclave-key.pem
 GRAMINEDIR ?= ../..
 GRAMINE_PKGLIBDIR ?= /usr/lib/x86_64-linux-gnu/gramine # this is debian/ubuntu specific
 
@@ -20,14 +21,14 @@ ifeq ($(SGX),1)
 all: agent_app.manifest.sgx agent_app.sig agent_app.token  app_app.manifest.sgx app_app.sig app_app.token
 endif
 
-CFLAGS += -Wall -std=c11 -I$(GRAMINEDIR)/pal/src/host/linux-sgx/tools/common \
+CFLAGS += -g -Wall -std=c11 -I$(GRAMINEDIR)/pal/src/host/linux-sgx/tools/common \
 			-I$(GRAMINEDIR)/common/src/protected_files  \
 			-I$(GRAMINEDIR)/tools/sgx/common \
           $(shell pkg-config --cflags mbedtls_gramine)
 LDFLAGS += $(shell pkg-config --libs mbedtls_gramine) \
-			-L/home/yliu79/20220624/gramine/build-debug/pal/src/host/linux-sgx/tools/common/ -lsgx_util \
-			-L/home/yliu79/20220624/gramine/build-debug/subprojects/mbedtls-mbedtls-2.26.0-2/ -lmbedcrypto_gramine \
-			-L/usr/lib/x86_64-linux-gnu -lcurl 
+			-L/home/vdhanraj/Gramine-dev/enclave-cc/ying-poc/gramine/build/tools/sgx/common/ -lsgx_util \
+			-L/home/vdhanraj/Gramine-dev/enclave-cc/ying-poc/gramine/build/subprojects/mbedtls-mbedtls-2.26.0-2/ -lmbedcrypto_gramine \
+			-L/usr/lib/x86_64-linux-gnu -lcurl
 
 
 
@@ -72,9 +73,9 @@ app_app.manifest.sgx: app_app.manifest app_app
 
 .PHONY: clean
 clean:
-	$(RM) *.token *.sig *.manifest.sgx *.manifest 
+	$(RM) agent_app app_app *.token *.sig *.manifest.sgx *.manifest
 
 .PHONY: distclean
 distclean: clean
-	$(RM) *.token *.sig *.manifest.sgx *.manifest 
+	$(RM) agent_app app_ap agent_app_debug.log app_app_debug.log *.token *.sig *.manifest.sgx *.manifest
 

@@ -44,22 +44,19 @@ int main() {
 	ErrorCode status;
 	int connection_sockfd;
 	CommInfo client_msg, msg;
-	pid_t current_pid;
-	pid_t payload_pid;
-	pthread_t thread1;
 
 	memset(&client_msg, 0, sizeof(client_msg));
 
 	status = create_service(AGNET_DATA_PORT, &sockfd);
 	if (status != OK) {
-		fprintf(stderr, "%s:%d:%s create_service failed %d\n", 
+		fprintf(stderr, "%s:%d:%s create_service failed %d\n",
 			__FILE__, __LINE__, __FUNCTION__, status);
 		return -1;
 	}
 
 	status = server_wait_for_client(sockfd, &connection_sockfd);
 	if (status != OK) {
-		fprintf(stderr, "%s:%d:%s server_wait_for_client failed %d\n", 
+		fprintf(stderr, "%s:%d:%s server_wait_for_client failed %d\n",
 			__FILE__, __LINE__, __FUNCTION__, status);
 		return -1;
 	}
@@ -68,7 +65,7 @@ int main() {
 	while (1) {
 		status = receive_command(connection_sockfd, &client_msg);
 		if (status != OK) {
-			fprintf(stderr, "%s:%d:%s receive_command failed %d\n", 
+			fprintf(stderr, "%s:%d:%s receive_command failed %d\n",
 				__FILE__, __LINE__, __FUNCTION__, status);
 			return -1;
 		} else {
@@ -77,16 +74,21 @@ int main() {
 
 		switch (client_msg.cmd) {
 			case APP_INIT:
-				printf("service enclave got command APP_INIT %d\n", client_msg.cmd);	
+				printf("service enclave got command APP_INIT %d\n", client_msg.cmd);
 				break;
 			case GET_SECRETE:
 				printf("service enclave got command GET_SECRETE %d\n", client_msg.cmd);
-				
-				write_key(NEW_KEY);
+
+				if (pf_init() != 0) {
+					fprintf(stderr, "%s:%d:%s Failed to initialize protected files\n", __FILE__,
+					                __LINE__, __FUNCTION__);
+					return -1;
+				}
+
+				write_key(KEY_PATH, &default_key);
 				char key_buf[16];
-	        	read_key(KEY_PATH, key_buf, sizeof(key_buf));
-	 	    	printf("YINGYING read back key = %s\n", key_buf);
-				pf_encrypt_files ("helloworld", "helloworld_en", KEY_PATH);
+				read_key(KEY_PATH, key_buf, sizeof(key_buf));
+				pf_encrypt_files ("test_encrypt.txt", "enc/test_encrypt.txt", KEY_PATH);
 #if 0 /* the followings are debugging code*/
 
 				pf_decrypt_files("helloworld_en", "helloworld_new", true, KEY_PATH);
@@ -98,14 +100,14 @@ int main() {
 #endif	/*end of debugging code*/
 				memset(&msg, 0, sizeof(msg));
 				msg.cmd = GET_SECRETE_ACK;
-				strcpy(msg.u.GetSecreteAckData.secrete, NEW_KEY);
+				memcpy(msg.u.GetSecreteAckData.secrete, default_key, KEY_LEN);
 				status = send_command(connection_sockfd, &msg);
 				if (status != OK) {
 					fprintf(stderr, "%s:%d:%s send_command GET_SECRETE_ACK failed %d\n", __FILE__, __LINE__, __FUNCTION__, status);
 					return -1;
 				} else {
 					fprintf(stderr, "%s:%d:%s send_command GET_SECRETE_ACK successful\n", __FILE__, __LINE__, __FUNCTION__);
-				}	
+				}
 				break;
 			case BYE:
 				printf("service enclave command BYE %d\n", client_msg.cmd);

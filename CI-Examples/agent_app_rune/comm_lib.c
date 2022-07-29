@@ -78,15 +78,15 @@ ssize_t posix_file_read(const char* path, char* buf, size_t count) {
 ssize_t posix_file_write(const char* path, const char* buf, size_t count) {
     return posix_file_rw(path, (char*)buf, count, /*do_write=*/1);
 }
-int write_key(const char* key) {
-    assert(strlen(key) == KEY_LEN);
+int write_key(const char* path, const pf_key_t* key) {
+    assert(sizeof(*key) == KEY_LEN);
 
-    ssize_t bytes = posix_file_write(KEY_PATH, key, KEY_LEN);
+    ssize_t bytes = posix_file_write(path, (char*)key, sizeof(*key));
     if (bytes < 0) {
         fprintf(stderr, "Error writing %s\n", KEY_PATH);
         return -1;
     }
-    if ((size_t)bytes != KEY_LEN) {
+    if ((size_t)bytes != sizeof(*key)) {
         fprintf(stderr, "Failed: not enough bytes written to %s\n", KEY_PATH);
         return 1;
     }
@@ -123,7 +123,6 @@ ssize_t read_key(const char* path, char* buf, size_t count) {
 }
 
 ErrorCode create_service(unsigned int port, int *sock_fd) {
-	struct addrinfo *serverinfo = NULL, *p = NULL;
 	int sockfd;
 
 	int yes = 1;
@@ -140,7 +139,7 @@ ErrorCode create_service(unsigned int port, int *sock_fd) {
 	}
 
 	if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int)) < 0) {
-		fprintf(stderr, "%s: server setsockopt  SO_REUSEADDR failed %d/%s\n", 
+		fprintf(stderr, "%s: server setsockopt  SO_REUSEADDR failed %d/%s\n",
 			__FUNCTION__, errno, strerror(errno));
 		return SetSockOptErr;
 	}
@@ -153,7 +152,7 @@ ErrorCode create_service(unsigned int port, int *sock_fd) {
   saddr.sin_port = htons(port);        /* for listening */
 
 	if (bind(sockfd, (struct sockaddr *) &saddr, sizeof(saddr)) < 0) {
-		fprintf(stderr, "%s: server bind failed %d/%s\n", 
+		fprintf(stderr, "%s: server bind failed %d/%s\n",
 			__FUNCTION__, errno, strerror(errno));
 		return CanNotBind;
 	}
@@ -164,9 +163,6 @@ ErrorCode create_service(unsigned int port, int *sock_fd) {
 
 ErrorCode create_client(unsigned int port, int *sock_fd) {
 	int sockfd;
-	struct addrinfo *servinfo, *p;
-	int rv;
-	char s[INET6_ADDRSTRLEN];
 
 	if (sock_fd == NULL) {
 		return InvalidArgument;
@@ -175,7 +171,7 @@ ErrorCode create_client(unsigned int port, int *sock_fd) {
                       SOCK_STREAM,  /* reliable, bidirectional */
                       0);           /* system picks protocol (TCP) */
 	if (sockfd < 0) {
-		fprintf(stderr, "%s: client create socket failed %d/%s\n", 
+		fprintf(stderr, "%s: client create socket failed %d/%s\n",
 			__FUNCTION__, errno, strerror(errno));
 		return CreateSocketErr;
 	}
@@ -186,9 +182,9 @@ ErrorCode create_client(unsigned int port, int *sock_fd) {
 		return CreateSocketErr;
 	}
 	if (hptr->h_addrtype != AF_INET) {
-		fprintf(stderr, "%s: client bad address family %d\n", 
+		fprintf(stderr, "%s: client bad address family %d\n",
 			__FUNCTION__, hptr->h_addrtype);
-		return BadAddressFamily;	
+		return BadAddressFamily;
     }      /* versus AF_LOCAL */
 
     /* connect to the server: configure server's address 1st */
@@ -200,7 +196,7 @@ ErrorCode create_client(unsigned int port, int *sock_fd) {
     saddr.sin_port = htons(port); /* port number in big-endian */
 
 		if (connect(sockfd, (struct sockaddr*) &saddr, sizeof(saddr)) < 0) {
-			fprintf(stderr, "%s: client connect failed %d/%s\n", 
+			fprintf(stderr, "%s: client connect failed %d/%s\n",
 				__FUNCTION__, errno, strerror(errno));
 			return ConnectErr;
 		}
@@ -213,7 +209,6 @@ ErrorCode create_client(unsigned int port, int *sock_fd) {
 	ErrorCode server_wait_for_client(int sock_fd, int *comm_socket) {
 		struct sockaddr_storage client_addr;
 		socklen_t sin_size;
-		char s[INET6_ADDRSTRLEN];
 		int new_fd;
 
 		if (comm_socket == NULL) {
@@ -221,15 +216,15 @@ ErrorCode create_client(unsigned int port, int *sock_fd) {
 		}
 
 		if (listen(sock_fd, LISTEN_BACKLOG) == -1) {
-			fprintf(stderr, "%s: listen failed %s\n", 
+			fprintf(stderr, "%s: listen failed %s\n",
 				__FUNCTION__, strerror(errno));
 			return ListenErr;
-		}	
+		}
 
 		sin_size = sizeof(client_addr);
 		new_fd = accept(sock_fd, (struct sockaddr *)&client_addr, &sin_size);
 		if (new_fd == -1) {
-			fprintf(stderr, "%s: accept failed %s\n", 
+			fprintf(stderr, "%s: accept failed %s\n",
 				__FUNCTION__, strerror(errno));
 			return AcceptErr;
 		}
@@ -243,13 +238,13 @@ ErrorCode create_client(unsigned int port, int *sock_fd) {
 		struct timeval tv;
 		tv.tv_sec = timeout_sec;
 		tv.tv_usec = 0;
-		int ret = setsockopt(sock_fd, 
-			SOL_SOCKET, 
-			SO_RCVTIMEO, 
-			(const char*)&tv, 
+		int ret = setsockopt(sock_fd,
+			SOL_SOCKET,
+			SO_RCVTIMEO,
+			(const char*)&tv,
 			sizeof tv);
 		if (ret != 0) {
-			fprintf(stderr, "%s: setsockopt for timeout %ds %d\n", 
+			fprintf(stderr, "%s: setsockopt for timeout %ds %d\n",
 				__FUNCTION__, timeout_sec, ret);
 			return SetOptErr;
 		}
@@ -261,7 +256,7 @@ ErrorCode create_client(unsigned int port, int *sock_fd) {
 			return InvalidArgument;
 		}
 		if (send(comm_socket, cmd, sizeof(CommInfo), 0) == -1) {
-			fprintf(stderr, "%s: send cmd %d failed %s\n", 
+			fprintf(stderr, "%s: send cmd %d failed %s\n",
 				__FUNCTION__, cmd->cmd, strerror(errno));
 			return SendErr;
 		}
@@ -275,7 +270,7 @@ ErrorCode create_client(unsigned int port, int *sock_fd) {
 		}
 		// note: MSG_WAITALL is not supported in gramine
 		if ((numbytes = recv(comm_socket, cmd, sizeof(CommInfo), 0 /*MSG_WAITALL*/)) == -1) {
-		fprintf(stderr, "%s: receive cmd failed socket id= %d, %s\n", 
+		fprintf(stderr, "%s: receive cmd failed socket id= %d, %s\n",
 			__FUNCTION__, comm_socket, strerror(errno));
 		return SendErr;
 	}
