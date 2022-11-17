@@ -1218,6 +1218,8 @@ static int set_socket_option(struct libos_handle* handle, int optname, char* opt
         case SO_PROTOCOL:
         case SO_ERROR:
             return -EPERM;
+        case SO_REUSEPORT:
+            return 0;
         default:
             return -ENOPROTOOPT;
     }

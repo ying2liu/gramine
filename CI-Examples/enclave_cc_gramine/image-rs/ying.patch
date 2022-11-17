@@ -1,0 +1,157 @@
+commit b86a5f6e4c79b9a2e7063cba0b9d43673358a310
+Author: Ying Liu <ying2.liu@intel.com>
+Date:   Mon Aug 15 18:39:12 2022 +0000
+
+    add encrypt and decrypt
+    
+    Signed-off-by: Ying Liu <ying2.liu@intel.com>
+
+diff --git a/build.rs b/build.rs
+index 1a72e52..959717c 100644
+--- a/build.rs
++++ b/build.rs
+@@ -4,6 +4,10 @@
+ //
+ 
+ fn main() -> shadow_rs::SdResult<()> {
++    let deps_dir="/home/yliu79/zhiwei/image-rs/deps";
++//    println!("cargo:rustc-link-search=native={}", deps_dir);
++     println!("cargo:rustc-link-search=/home/yliu79/zhiwei/image-rs/deps");
++     println!("cargo:rustc-link-lib=dylib=sgx_util");
+     tonic_build::compile_protos("./protos/getresource.proto")?;
+ 
+     shadow_rs::new()
+diff --git a/src/config.rs b/src/config.rs
+index 98a98c9..9276fb8 100644
+--- a/src/config.rs
++++ b/src/config.rs
+@@ -11,7 +11,7 @@ use std::path::{Path, PathBuf};
+ use crate::snapshots::SnapshotType;
+ use crate::CC_IMAGE_WORK_DIR;
+ 
+-const DEFAULT_WORK_DIR: &str = "/home/yliu79/var/lib/image-rs/";
++const DEFAULT_WORK_DIR: &str = "/yingying/var/lib/image-rs/";
+ 
+ /// `image-rs` configuration information.
+ #[derive(Clone, Debug, Deserialize)]
+@@ -72,7 +72,7 @@ mod tests {
+         assert_eq!(config.work_dir, work_dir);
+         assert_eq!(config.default_snapshot, SnapshotType::Overlay);
+ 
+-        let env_work_dir = "/home/yliu79/tmp";
++        let env_work_dir = "/yingying/tmp";
+         std::env::set_var(CC_IMAGE_WORK_DIR, env_work_dir);
+         let config = ImageConfig::default();
+         let work_dir = PathBuf::from(env_work_dir);
+diff --git a/src/image.rs b/src/image.rs
+index 4624f30..177a0ef 100644
+--- a/src/image.rs
++++ b/src/image.rs
+@@ -26,6 +26,12 @@ use crate::snapshots::occlum::unionfs::Unionfs;
+ 
+ use crate::snapshots::{SnapshotType, Snapshotter};
+ use crate::validate::security_validate;
++use dircpy::CopyBuilder;
++use std::str;
++use std::os::raw::{c_char, c_uint};
++use std::ffi::CString;
++use std::fs;
++use std::os::unix::fs::PermissionsExt;
+ 
+ /// The metadata info for container image layer.
+ #[derive(Clone, Debug, Default, Deserialize)]
+@@ -215,9 +221,47 @@ impl ImageClient {
+             .map(|l| l.store_path.as_str())
+             .collect::<Vec<&str>>();
+ 		println!("YINGYING client pull_image9");
++//YINGYING add encrpt file
++        #[link(name = "sgx_util")]
++        extern {
++            //int pf_encrypt_files(const char* input_dir, const char* output_dir, const char* wrap_key_path)
++            //int pf_decrypt_files(const char* input_dir, const char* output_dir, bool verify_path,
++              //       const char* wrap_key_path)
++            fn pf_encrypt_files(input_dir: *const c_char, output_dir: *const c_char, wrap_key_path: *const c_char)->u32;
++            fn pf_decrypt_files(input_dir: *const c_char, output_dir: *const c_char, Verify_path:bool, wrap_key_path: *const c_char)->u32;
++            fn pf_init()->u32;
++        }
+ 
++        let new_rootfs = "/tmp/rootfs";
+         if let Some(snapshot) = self.snapshots.get_mut(&self.config.default_snapshot) {
+ 			println!("YINGYING client pull_image10");
++             // copy dirs to the specified mount directory
++            let mut layer_path_vec = layer_path.to_vec();
++            let len = layer_path_vec.len();
++            for _i in 0..len {
++                println!("YINGYING pull_image10.1\n");
++                let layer = layer_path_vec.pop().ok_or(anyhow!("Pop() failed from Vec"))?;
++                println!("YINGYING pull_image10.2\n");
++                CopyBuilder::new(layer, new_rootfs)
++                    .overwrite(true)
++                    .run()?;
++                }
++             fs::set_permissions(new_rootfs, fs::Permissions::from_mode(0o777))?;
++
++            let NEW_KEY = "0011223344556677";
++            let KEY_PATH = "/dev/attestation/keys/default";
++            fs::write(KEY_PATH, NEW_KEY).expect("Unable to write key");
++
++            unsafe {
++                let cstring1 = CString::new(new_rootfs).expect("orignal folder failed");
++                let cstring2 = CString::new("/enc").expect("destination folder failed");
++                let cstring3 = CString::new(KEY_PATH).expect("key failed");
++                 let cstring4 = CString::new("/dec").expect("destination folder failed");
++                pf_init();
++                pf_encrypt_files (cstring1.as_ptr(), cstring2.as_ptr(), cstring3.as_ptr());    
++                //pf_decrypt_files (cstring2.as_ptr(), cstring4.as_ptr(), false, cstring3.as_ptr());
++            }
++
+ //            snapshot.mount(&layer_path, &bundle_dir.join(BUNDLE_ROOTFS))?;
+         } else {
+             return Err(anyhow!(
+@@ -234,6 +278,7 @@ impl ImageClient {
+ 		println!("YINGYING client pull_image11");
+ 
+         create_runtime_config(&image_config, bundle_dir)?;
++        println!("YINGYING client pull_image12");
+         let image_id = image_data.id.clone();
+         self.meta_store
+             .lock()
+diff --git a/src/snapshots/occlum/unionfs.rs b/src/snapshots/occlum/unionfs.rs
+index aec5134..68db03b 100644
+--- a/src/snapshots/occlum/unionfs.rs
++++ b/src/snapshots/occlum/unionfs.rs
+@@ -161,4 +161,34 @@ impl Snapshotter for Unionfs {
+         Ok(())
+     }
+ }
++/*
++impl Snapshotter for Unionfs {
++    fn copy(&mut self, layer_path: &[&str], mount_path: &Path) {
++        // From the description of https://github.com/occlum/occlum/blob/master/docs/runtime_mount.md#1-mount-trusted-unionfs-consisting-of-sefss ,
++        if !mount_path.exists() {
++            fs::create_dir_all(mount_path)?;
++        }
++        println!("YINGYING copy\n");
++        // clear the mount_path if there is something
++        clear_path(mount_path)?;
++        println!("YINGYING copy2\n");
++        
++        // copy dirs to the specified mount directory
++        let mut layer_path_vec = layer_path.to_vec();
++        println!("YINGYING copy3\n");
++        let len = layer_path_vec.len();
++         println!("YINGYING copy4\n");
++        for _i in 0..len {
++            println!("YINGYING copy5.1\n");
++            let layer = layer_path_vec.pop().ok_or(anyhow!("Pop() failed from Vec"))?;
++            println!("YINGYING copy5.2\n");
++            CopyBuilder::new(layer, &mount_path)
++                .overwrite(true)
++                .run()?;
++        }
++        // create environment for gramine
++//        create_environment(mount_path)?;
++
++    }
++}*/
+ 

@@ -1,0 +1,2 @@
+cargo:rustc-link-search=/home/yliu79/zhiwei/server/deps
+cargo:rustc-link-lib=dylib=sgx_util

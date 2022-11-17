@@ -1,0 +1,101 @@
+{
+  "resource_limits": {
+    "user_space_size": "1024MB"
+  },
+  "process": {
+    "default_stack_size": "4MB",
+    "default_heap_size": "32MB",
+    "default_mmap_size": "100MB"
+  },
+  "env": {
+    "default": [
+      "OCCLUM=yes",
+      "http_proxy=http://proxy-chain.intel.com:911",
+      "https_proxy=http://proxy-chain.intel.com:912"
+    ],
+    "untrusted": [
+      "EXAMPLE"
+    ]
+  },
+  "app": [
+    {
+      "entry_points": [
+        "/bin"
+      ],
+      "mount": [
+        {
+          "options": {
+            "layers": [
+              {
+                "options": {
+                  "MAC": "45-de-eb-c7-f4-cc-0f-d2-ea-08-c6-25-7c-18-cf-65"
+                },
+                "source": "./build/initfs/__ROOT",
+                "target": "/",
+                "type": "sefs"
+              },
+              {
+                "source": "./run/initfs/__ROOT",
+                "target": "/",
+                "type": "sefs"
+              }
+            ]
+          },
+          "target": "/",
+          "type": "unionfs"
+        },
+        {
+          "target": "/proc",
+          "type": "procfs"
+        },
+        {
+          "target": "/dev",
+          "type": "devfs"
+        }
+      ],
+      "stage": "init"
+    },
+    {
+      "entry_points": [
+        "/bin"
+      ],
+      "mount": [
+        {
+          "options": {
+            "layers": [
+              {
+                "options": {
+                  "MAC": "df-3a-76-04-c7-16-82-d7-a4-64-4c-e5-0f-8a-c1-d1"
+                },
+                "source": "./build/mount/__ROOT",
+                "target": "/",
+                "type": "sefs"
+              },
+              {
+                "source": "./run/mount/__ROOT",
+                "target": "/",
+                "type": "sefs"
+              }
+            ]
+          },
+          "target": "/",
+          "type": "unionfs"
+        },
+        {
+          "source": ".",
+          "target": "/host",
+          "type": "hostfs"
+        },
+        {
+          "target": "/proc",
+          "type": "procfs"
+        },
+        {
+          "target": "/dev",
+          "type": "devfs"
+        }
+      ],
+      "stage": "app"
+    }
+  ]
+}

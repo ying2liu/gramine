@@ -1,0 +1,4 @@
+/target
+Cargo.lock
+scripts/attestation_agent/
+.DS_Store

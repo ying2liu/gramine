@@ -1,0 +1,72 @@
+
+loader.preload = "file:{{ gramine.libos }}" # for compatibility with v1.0
+
+loader.entrypoint = "file:{{ gramine.libos }}"
+libos.entrypoint = "enclave-agent"
+#loader.log_level = "{{ log_level }}"
+loader.log_file = "enclave-agent_debug.log"
+loader.argv0_override = "enclave-agent"
+loader.insecure__use_cmdline_argv = true
+loader.insecure__use_host_env = true
+loader.log_level ="trace"
+ 
+loader.env.LD_LIBRARY_PATH = "/lib:{{ arch_libdir }}:/usr{{ arch_libdir }}"
+fs.mounts = [
+ { path = "/lib", uri = "file:{{ gramine.runtimedir() }}" },
+ { path = "{{ arch_libdir }}", uri = "file:{{ arch_libdir }}" },
+ { path = "/usr{{ arch_libdir }}", uri = "file:/usr{{ arch_libdir }}" },
+ { path = "/etc", uri = "file:/etc" },
+ { path = "/var", uri = "file:/var" },
+ { path = "/etc/ssl", uri = "file:/etc/ssl" },
+ { path = "/usr/lib", uri = "file:/usr/lib" },
+ { path = "/dev/random", uri = "file:/dev/random" },
+ { type = "tmpfs", path = "/tmp" }
+
+ { type = "encrypted", path = "/enc", uri = "file:enc", key_name = "default"},
+]
+#sys.enclave_reuse = true
+sgx.file_check_policy = "allow_all_but_log"
+
+loader.pal_internal_mem_size = "512M"
+sgx.enclave_size = "2048M"
+sys.stack.size = "512M"
+sgx.thread_num = 16
+
+sgx.debug = true
+sgx.nonpie_binary = true
+sys.insecure__allow_eventfd = true 
+sgx.trusted_files = [
+  "file:{{ gramine.libos }}/",
+  "file:enclave-agent",
+  "file:/etc/",
+  "file:{{ gramine.runtimedir() }}/",
+  "file:/usr{{ arch_libdir }}/",
+#  "file:/lib",
+]
+
+sgx.allowed_files = [
+#  "file:/etc/losthosts",
+#  "file:/etc/hostname",
+#  "file:/etc/resolv.conf",
+#  "file:/etc/localtime",
+#  "file:/etc/hosts",
+#  "file:/etc/host.conf",
+#  "file:/etc/gai.conf",
+#  "file:/etc/ssl/certs/ca-certificates.crt",
+#  "file:/usr/lib/ssl/certs/ca-certificates.crt",
+#  "file:/usr/lib/ssl/openssl.cnf",
+#  "file:/etc/nsswitch.conf",
+#  "file:/etc/ssl",
+#  "file:/usr/local/openssl",
+#  "file:/usr/lib/ssl",
+#  "file:/var",
+#  "file:",
+#  "file:/var/run/docker.sock",
+#  "file:/home/yliu79/.docker/config.json",
+#  "file:/home/yliu79/run/image",
+#  "file:/home/yliu79/images",
+#  "file:/home",
+#  "file:/home/yliu79/run/enclave-cc-containers/scratch-base_v1.8",
+#  "file:/dev/random",
+]
+

@@ -1,0 +1,8 @@
+Binary file src/occlum_instance/build/mount/__ROOT/04000000000000000000000000000000 matches
+Binary file src/occlum_instance/image/bin/enclave-agent matches
+src/libs/protocols/protos/image.proto:    // Image name (e.g. docker.io/library/busybox:latest).
+Binary file src/enclave-agent/target/release/deps/enclave_agent-8f3c914f5c3a4c97 matches
+Binary file src/enclave-agent/target/release/deps/liboci_distribution-4958ef5560bd574b.rlib matches
+Binary file src/enclave-agent/target/release/deps/enclave_agent-65a5be7aecaff0a1 matches
+Binary file src/enclave-agent/target/release/deps/liboci_distribution-4958ef5560bd574b.rmeta matches
+Binary file src/enclave-agent/target/release/enclave-agent matches

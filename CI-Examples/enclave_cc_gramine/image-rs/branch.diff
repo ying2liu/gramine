@@ -1,0 +1,340 @@
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+index 9a6a869..ee3124f 100644
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -29,7 +29,7 @@ jobs:
+ 
+       - name: Install nettle-sys building dependence
+         run: |
+-          sudo apt install clang llvm pkg-config nettle-dev protobuf-compiler libprotobuf-dev
++          sudo apt install clang llvm pkg-config nettle-dev
+ 
+       - name: Run cargo build
+         uses: actions-rs/cargo@v1
+diff --git a/.gitignore b/.gitignore
+index da5469a..d4817a2 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,4 +1,4 @@
+ /target
+ Cargo.lock
+-
+-.DS_Store
+\ No newline at end of file
++scripts/attestation_agent/
++.DS_Store
+diff --git a/Cargo.toml b/Cargo.toml
+index d735230..7a9c06d 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -16,7 +16,7 @@ libc = "0.2"
+ nix = "0.23.0"
+ oci-distribution = { git = "https://github.com/krustlet/oci-distribution", rev = "1ba0d94a900a97aa1bcac032a67ea23766bcfdef" }
+ oci-spec = { git = "https://github.com/containers/oci-spec-rs" }
+-ocicrypt-rs = { git = "https://github.com/confidential-containers/ocicrypt-rs", rev = "e28e1d922aad72f3faeff480fc26af9c7643124c" }
++ocicrypt-rs = { git = "https://github.com/HaokunX-intel/ocicrypt-rs", branch = "dev-native-aa" }
+ serde = { version = ">=1.0.27", features = ["serde_derive", "rc"] }
+ serde_json = ">=1.0.9"
+ sha2 = ">=0.10"
+@@ -27,10 +27,11 @@ fs_extra = "1.2.0"
+ walkdir = "2"
+ dircpy = "0.3.12"
+ signature = { path = "./signature" }
+-tonic = "0.5"
+-prost = "0.8"
++tonic = ">=0.8.0"
++prost = ">=0.11.0"
+ strum = { version = "0.23.0", features = ["derive"] }
+ log = "0.4.14"
++futures = "0.3"
+ 
+ [dev-dependencies]
+ filetime = "0.2"
+@@ -42,6 +43,6 @@ overlay_feature = []
+ occlum_feature = []
+ 
+ [build-dependencies]
+-tonic-build = "0.5"
+-shadow-rs = "0.5.25"
++tonic-build = ">=0.8.0"
++shadow-rs = "0.11.0"
+ 
+diff --git a/src/decrypt.rs b/src/decrypt.rs
+index 486fadc..b858724 100644
+--- a/src/decrypt.rs
++++ b/src/decrypt.rs
+@@ -110,3 +110,55 @@ fn decrypt_layer_data(
+         Err(anyhow!("no decrypt config available"))
+     }
+ }
++
++#[cfg(test)]
++mod tests {
++    use super::*;
++    use oci_distribution::manifest::{OciDescriptor};
++    use std::collections::HashMap;
++    use futures::executor::block_on;
++    use sha2::Digest;
++    #[tokio::test]
++    async fn test_get_plaintext_layer() {
++        // set env
++        let config_dir = std::env!("CARGO_MANIFEST_DIR");
++        let keyprovider_config =
++            format!("{}/{}", config_dir, "test_data/ocicrypt_keyprovider_native.conf");
++        std::env::set_var("OCICRYPT_KEYPROVIDER_CONFIG", keyprovider_config);
++
++        // layer meta data
++        let mut hm = HashMap::new();
++        hm.insert(
++            "org.opencontainers.image.enc.keys.provider.attestation-agent".to_string(),
++            "eyJraWQiOiJudWxsIiwid3JhcHBlZF9kYXRhIjpbMTksMjEzLDk5LDE0OCwxMTYsMjQ1LDIxLDE1MCwyNDIsMTczLDE1MywyMCwxMTQsMTIwLDE4Miw3MCw1MywyNSwxODUsMTU3LDU4LDM2LDE3OSwyMDAsMjMwLDMwLDIwNyw5NCwyMTgsMTY1LDE4LDI0LDI5LDIwMCw0NSw2MywyOSwxODIsMTgzLDE5LDE3NSwxNiwyMDAsMzQsMTMsMTM1LDI0MCwyNDIsMTQ3LDg3LDI0NiwxMDksMTM3LDIzNCwxMjksMjE5LDg5LDExNSwxOTYsMzAsMjEsMzcsMTkyLDI0LDE1Nyw2OSwxMTMsMTU2LDE2MCwxMzgsNzAsMzAsMzksNDMsMTcyLDE2OSwyMiwxNTUsMjUsMjQyLDIwMSw5OCwyNTAsNzYsMTU5LDEyOSwxODcsNSwyMzMsMTYwLDEzMywxOTEsNjQsMTg2LDAsMjE0LDE0NSw2MiwxNzksMTQyLDEzOCwxMjksMTY1LDIwOCwyMDcsMjEyLDUsMTIxLDIzLDQ1LDEwOSwxMDksMTMwLDE1LDE0NywxMzcsMjAyLDQxLDQ2LDM2LDEwMSwxMCwxNzcsMjYsMjUyLDEzOCwyOSwxNzYsMjI1LDEzMCw2NywxNzcsMTc4LDMwLDEwNSw2MiwxNjYsMjAsMCwxNzEsMTA4LDE1LDE4MywyMTgsMTExLDE5MSwxOTIsOTksMTA1LDIyNywxMywxNjQsMTYsMTA0LDI0MSwyMDgsMTY3LDEzNiwyOSw0OSwyNSwxOTIsOTksOTUsNzcsMjI4LDQsMTIwLDE5NSwzNiwyMTcsNjIsMTIxLDIzNyw2MSwyMCwxMDgsODMsMTkxLDE1Myw2MCwzOCwxODMsMTk2LDg0LDE5NiwyOSwxNTgsODcsMTQ4LDExMCwxMzMsMTMzLDExOCwxOTUsMTM2LDE2NSwyMzksMTIwLDQ2LDE4NywxNjgsNDUsMTI3LDI0NCw2MywyMTksMTYsMTldLCJpdiI6WzM5LDIzOCw2MCw0NywyMDUsMTIwLDEwNSwxMTksMjIzLDg5LDQ1LDQ2XSwid3JhcF90eXBlIjoiYWVzLWdjbSJ9".to_string());
++        hm.insert(
++            "org.opencontainers.image.enc.pubopts".to_string(),
++            "eyJjaXBoZXIiOiJBRVNfMjU2X0NUUl9ITUFDX1NIQTI1NiIsImhtYWMiOiI1TXNZSUZoRWdZMGhHNk50MUs2YWZhaUFrRVptV01wcSttbU8xemJkcytFPSIsImNpcGhlcm9wdGlvbnMiOnt9fQ==".to_string());
++        let layer_od = OciDescriptor {
++            media_type: "application/vnd.oci.image.layer.v1.tar+encrypted".to_string(),
++            digest: "sha256:39d2a3d8983573da8c7d9367e515b29148cae3acadc456fa5b4ed78a0e184b4f".to_string(),
++            size: 3072,
++            annotations: Some(hm),
++            ..Default::default()
++        };
++
++
++        // layer data
++        let layer_data = std::fs::read(&"test_data/encrypted_layer").unwrap();
++
++        // dc
++        let dc = "provider:attestation-agent:sample_kbc::null";
++        // decryption
++        let decryptor = Decryptor::from_media_type(&layer_od.media_type);
++        let plaintext_layer = block_on(decryptor.get_plaintext_layer(&layer_od, layer_data, &dc)).unwrap();
++        //println!("{:#?}", plaintext_layer);
++
++        // verify digest
++        let digest = format!("{}:{:x}", "sha256", sha2::Sha256::digest(&plaintext_layer.as_slice()));
++        let decrypted_digest = "sha256:dfe7577521f0d1ad9f82862f3550e12a615fcb07319265a3d23e96f2f21f62ec".to_string();
++        assert_eq!(digest, decrypted_digest);
++    }
++
++
++
++}
+diff --git a/src/pull.rs b/src/pull.rs
+index 01d0ad3..b033eac 100644
+--- a/src/pull.rs
++++ b/src/pull.rs
+@@ -135,8 +135,15 @@ impl PullClient {
+                 };
+ 
+                 if layer_meta.decoder == Compression::Uncompressed {
+-                    layer_meta.uncompressed_digest = layer.digest.clone();
+-                    layer_meta.compressed_digest = layer.digest.clone();
++                    let digest = if diff_ids[i].starts_with(DIGEST_SHA256) {
++                            format!("{}:{:x}", DIGEST_SHA256, sha2::Sha256::digest(&plaintext_layer.as_slice()))
++                    } else if diff_ids[i].starts_with(DIGEST_SHA512) {
++                            format!("{}:{:x}", DIGEST_SHA512, sha2::Sha512::digest(&plaintext_layer.as_slice()))
++                    } else {
++                        return Err(anyhow!("unsupported digest format: {}", diff_ids[i]));
++                    };
++                    layer_meta.uncompressed_digest = digest.clone();
++                    layer_meta.compressed_digest = digest.clone();
+                 } else {
+                     layer_meta.compressed_digest = layer.digest.clone();
+                     layer_meta
+@@ -192,7 +199,6 @@ mod tests {
+     use super::*;
+     use oci_spec::image::ImageConfiguration;
+     use tempfile;
+-
+     #[tokio::test]
+     async fn test_pull_client() {
+         let oci_images = vec![
+@@ -231,3 +237,5 @@ mod tests {
+         }
+     }
+ }
++
++
+diff --git a/src/snapshots/occlum/mod.rs b/src/snapshots/occlum/mod.rs
+index cf55d49..c413cf9 100644
+--- a/src/snapshots/occlum/mod.rs
++++ b/src/snapshots/occlum/mod.rs
+@@ -1,4 +1 @@
+-#[cfg(all(feature = "occlum_feature", not(target_arch = "x86_64")))]
+-compile_error!("occlum only available on Intel x86_64");
+-
+ pub mod unionfs;
+diff --git a/src/snapshots/occlum/unionfs.rs b/src/snapshots/occlum/unionfs.rs
+index 5b5dca8..d2d790e 100644
+--- a/src/snapshots/occlum/unionfs.rs
++++ b/src/snapshots/occlum/unionfs.rs
+@@ -16,8 +16,6 @@ use nix::mount::MsFlags;
+ 
+ use crate::snapshots::{MountPoint, Snapshotter};
+ 
+-const LD_LIB: &str = "ld-linux-x86-64.so.2";
+-
+ #[derive(Debug)]
+ pub struct Unionfs {
+     pub data_dir: PathBuf,
+@@ -52,28 +50,32 @@ fn create_environment(mount_path: &Path) -> Result<()> {
+     let mut copy_options = dir::CopyOptions::new();
+     copy_options.overwrite = true;
+ 
+-    // copy the libs required by occlum to the mount path
+-    let path_lib64 = mount_path.join("lib64");
+-    create_dir(&path_lib64)?;
++    #[cfg(target_arch = "x86_64")]
++    {
++        // copy the libs required by occlum to the mount path
++        let path_lib64 = mount_path.join("lib64");
++        create_dir(&path_lib64)?;
+ 
+-    let lib64_libs = vec![LD_LIB];
+-    let ori_path_lib64 = Path::new("/lib64");
+-    for lib in lib64_libs.iter() {
+-        from_paths.push(ori_path_lib64.join(lib));
+-    }
++        let lib64_libs = vec!["ld-linux-x86-64.so.2"];
++        let ori_path_lib64 = Path::new("/lib64");
++        for lib in lib64_libs.iter() {
++            from_paths.push(ori_path_lib64.join(lib));
++        }
+ 
+-    // if ld-linux-x86-64.so.2 as symlink exist in ${path_lib64},
+-    // copy ld-linux-x86-64.so.2 from occlum to ${path_lib64} failed (file exists).
+-    // so firstly remove it.
+-    let ld_lib = path_lib64.join(LD_LIB);
+-    if fs::symlink_metadata(ld_lib.as_path()).is_ok() {
+-        fs::remove_file(ld_lib)?;
+-    }
++        // if ld-linux-x86-64.so.2 as symlink exist in ${path_lib64},
++        // copy ld-linux-x86-64.so.2 from occlum to ${path_lib64} failed (file exists).
++        // so firstly remove it.
++        let ld_lib = path_lib64.join("ld-linux-x86-64.so.2");
++        if fs::symlink_metadata(ld_lib.as_path()).is_ok() {
++            fs::remove_file(ld_lib)?;
++        }
+ 
+-    fs_extra::copy_items(&from_paths, &path_lib64, &copy_options)?;
+-    from_paths.clear();
++        fs_extra::copy_items(&from_paths, &path_lib64, &copy_options)?;
++        from_paths.clear();
++    }
+ 
+-    let path_opt = mount_path
++    let mount_path_opt = mount_path;
++    let path_opt = mount_path_opt
+         .join("opt")
+         .join("occlum")
+         .join("glibc")
+@@ -88,12 +90,7 @@ fn create_environment(mount_path: &Path) -> Result<()> {
+         "libresolv.so.2",
+         "librt.so.1",
+     ];
+-
+-    let ori_occlum_lib_path = Path::new("/")
+-        .join("opt")
+-        .join("occlum")
+-        .join("glibc")
+-        .join("lib");
++    let ori_occlum_lib_path = Path::new("/opt/occlum/glibc/lib");
+     for lib in occlum_lib.iter() {
+         from_paths.push(ori_occlum_lib_path.join(lib));
+     }
+@@ -189,78 +186,3 @@ impl Snapshotter for Unionfs {
+         Ok(())
+     }
+ }
+-
+-#[cfg(test)]
+-mod tests {
+-    use super::*;
+-    use std::fs::File;
+-    use std::io::Write;
+-    use tempfile;
+-
+-    #[test]
+-    fn test_create_dir() {
+-        let tempdir = tempfile::tempdir().unwrap();
+-
+-        let foo_dir = tempdir.path().join("foo");
+-        assert!(!foo_dir.exists());
+-
+-        create_dir(&foo_dir).unwrap();
+-        assert!(foo_dir.exists());
+-    }
+-
+-    #[test]
+-    fn test_clear_path() {
+-        let tempdir = tempfile::tempdir().unwrap();
+-
+-        let file = tempdir.path().join("foo.txt");
+-        let mut f = File::create(file.as_path()).unwrap();
+-        f.write_all(b"Hello, world!").unwrap();
+-        assert!(file.exists());
+-
+-        clear_path(tempdir.path()).unwrap();
+-        assert!(!file.exists());
+-    }
+-
+-    #[allow(unused_macros)]
+-    macro_rules! skip_if_root {
+-        () => {
+-            if nix::unistd::Uid::effective().is_root() {
+-                println!("INFO: skipping {} which needs non-root", module_path!());
+-                return;
+-            }
+-        };
+-    }
+-
+-    #[allow(unused_macros)]
+-    macro_rules! skip_if_not_root {
+-        () => {
+-            if !nix::unistd::Uid::effective().is_root() {
+-                println!("INFO: skipping {} which needs root", module_path!());
+-                return;
+-            }
+-        };
+-    }
+-
+-    #[test]
+-    fn test_mount() {
+-        skip_if_root!();
+-
+-        let mnt_path = tempfile::tempdir().unwrap();
+-        let work_dir = tempfile::tempdir().unwrap().path().to_path_buf();
+-
+-        let unionfs_index = 0;
+-        let mut occlum_unionfs = Unionfs {
+-            data_dir: work_dir,
+-            index: AtomicUsize::new(unionfs_index),
+-        };
+-
+-        let path_1 = tempfile::tempdir().unwrap();
+-        let path_2 = tempfile::tempdir().unwrap();
+-        let layer_path = &[
+-            path_1.path().to_str().unwrap(),
+-            path_2.path().to_str().unwrap(),
+-        ];
+-
+-        assert!(!occlum_unionfs.mount(layer_path, mnt_path.as_ref()).is_ok());
+-    }
+-}
+diff --git a/test_data/encrypted_layer b/test_data/encrypted_layer
+new file mode 100644
+index 0000000..0996a86
+Binary files /dev/null and b/test_data/encrypted_layer differ
+diff --git a/test_data/ocicrypt_keyprovider_native.conf b/test_data/ocicrypt_keyprovider_native.conf
+new file mode 100644
+index 0000000..2eed8bc
+--- /dev/null
++++ b/test_data/ocicrypt_keyprovider_native.conf
+@@ -0,0 +1,7 @@
++{
++    "key-providers": {
++        "attestation-agent": {
++            "native": "attestation-agent"
++        }
++    }
++}

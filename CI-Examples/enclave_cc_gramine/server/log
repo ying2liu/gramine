@@ -1,0 +1,48 @@
+warning: unused variable: `deps_dir`
+  --> build.rs:12:9
+   |
+12 |     let deps_dir="/home/yliu79/zhiwei/image-rs/deps";
+   |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_deps_dir`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+warning: `ttrpc-example` (build script) generated 1 warning
+   Compiling ttrpc-example v0.2.0 (/home/yliu79/zhiwei/server)
+warning: unused import: `c_uint`
+  --> async-client.rs:14:28
+   |
+14 | use std::os::raw::{c_char, c_uint};
+   |                            ^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+
+warning: function is never used: `pf_encrypt_files`
+  --> async-client.rs:93:12
+   |
+93 |            fn pf_encrypt_files(input_dir: *const c_char, output_dir: *const c_char, wrap_key_path: *const c_char)->u32;
+   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: constant is never used: `APP`
+   --> async-client.rs:133:5
+    |
+133 |     const APP: &str = "/dec/usr/bin/hello_world";
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: variable `NEW_KEY` should have a snake case name
+  --> async-client.rs:98:17
+   |
+98 |             let NEW_KEY = "0011223344556677";
+   |                 ^^^^^^^ help: convert the identifier to snake case: `new_key`
+   |
+   = note: `#[warn(non_snake_case)]` on by default
+
+warning: variable `KEY_PATH` should have a snake case name
+  --> async-client.rs:99:17
+   |
+99 |             let KEY_PATH = "/dev/attestation/keys/default";
+   |                 ^^^^^^^^ help: convert the identifier to snake case: `key_path`
+
+warning: `ttrpc-example` (example "async-client") generated 5 warnings
+    Finished dev [unoptimized + debuginfo] target(s) in 8.27s
