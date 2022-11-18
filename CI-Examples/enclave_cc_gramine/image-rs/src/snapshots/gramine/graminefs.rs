@@ -63,12 +63,10 @@ impl Snapshotter for Graminefs {
         if !mount_path.exists() {
             fs::create_dir_all(mount_path)?;
         }
-        println!("YINGYING gramine_fs 2==20221020");
  
         let gramine_enc = Path::new(GRAMINE_ENC);
         //println!("{}", gramine_enc);
         if !gramine_enc.exists() {
-            println!("YINGYING gramine_enc doesn't exist");
             fs::create_dir_all(gramine_enc)?;
         }
 
@@ -139,7 +137,6 @@ impl Snapshotter for Graminefs {
                 .ok_or(anyhow!("Pop() failed from Vec"))?;
             CopyBuilder::new(layer, /*&mount_path*/ gramine_rootfs).overwrite(true).run()?;
         }
-//your_path.as_path().display().to_string();
         fs::set_permissions(gramine_rootfs, fs::Permissions::from_mode(0o777))?;
         let key_path = "/dev/attestation/keys/default";
         unsafe {
@@ -148,18 +145,12 @@ impl Snapshotter for Graminefs {
             fs::write(key_path, seal_key).expect("Unable to write key");
 	    println!("{:?}", seal_key);
         }
-        //as_ref().as_os_str().as_bytes()).unwrap()    
         unsafe {
             let orig_path = CString::new(gramine_rootfs).expect("orignal folder failed");
             let dest_path = CString::new(gramine_enc).expect("destination folder failed");
             let key = CString::new(key_path).expect("key failed");
- //           let orig_path = CString::new(gramine_rootfs.as_os_str().as_bytes().unwrap()).expect("orignal folder failed");
- //           let dest_path = CString::new(gramine_enc).expect("destination folder failed");
- //           let key = CString::new(key_path).expect("key failed");
             pf_init();
             pf_encrypt_files (orig_path.as_ptr(), dest_path.as_ptr(), key.as_ptr());
-//            pf_encrypt_files (gramine_rootfs.as_path().display().to_string(), gramine_enc.as_path().display().to_string(), key_path.as_path().display().to_string());
-
         }
 
         Ok(MountPoint {
