@@ -376,7 +376,6 @@ impl<'a> EntryFields<'a> {
         // Most of this is handled by the `path` module of the standard
         // library, but we specially handle a few cases here as well.
 
-        println!("YINGYING entry.rs unpack_in_1");
         let mut file_dst = dst.to_path_buf();
         {
             let path = self.path().map_err(|e| {
@@ -385,9 +384,7 @@ impl<'a> EntryFields<'a> {
                     e,
                 )
             })?;
-            println!("YINGYING entry.rs unpack_in_2");
             for part in path.components() {
-                println!("YINGYING entry.rs part = {:#?} ", part);
                 match part {
                     // Leading '/' characters, root paths, and '.'
                     // components are just ignored and treated as "empty
@@ -405,29 +402,23 @@ impl<'a> EntryFields<'a> {
             }
         }
 
-        println!("YINGYING entry.rs unpack_in_3");
         // Skip cases where only slashes or '.' parts were seen, because
         // this is effectively an empty filename.
         if *dst == *file_dst {
-            println!("YINGYING entry.rs unpack_in_4");
             return Ok(true);
         }
 
-        println!("YINGYING entry.rs unpack_in_5");
         // Skip entries without a parent (i.e. outside of FS root)
         let parent = match file_dst.parent() {
             Some(p) => p,
             None => return Ok(false),
         };
 
-        println!("YINGYING entry.rs unpack_in_7");
         self.ensure_dir_created(&dst, parent)
             .map_err(|e| TarError::new(format!("failed to create `{}`", parent.display()), e))?;
 
-        println!("YINGYING entry.rs unpack_in_8");
         let canon_target = self.validate_inside_dst(&dst, parent)?;
 
-        println!("YINGYING entry.rs unpack_in_9");
         self.unpack(Some(&canon_target), &file_dst)
             .map_err(|e| TarError::new(format!("failed to unpack `{}`", file_dst.display()), e))?;
 
@@ -453,20 +444,15 @@ impl<'a> EntryFields<'a> {
 
     /// Returns access to the header of this entry in the archive.
     fn unpack(&mut self, target_base: Option<&Path>, dst: &Path) -> io::Result<Unpacked> {
-        println!("YINGYING entry.rs unpack_1");
         let kind = self.header.entry_type();
 
-        println!("YINGYING entry.rs unpack_2");
         if kind.is_dir() {
-            println!("YINGYING entry.rs unpack_3");
             self.unpack_dir(dst)?;
             if let Ok(mode) = self.header.mode() {
-                println!("YINGYING entry.rs unpack_4");
                 set_perms(dst, None, mode, self.preserve_permissions)?;
             }
             return Ok(Unpacked::__Nonexhaustive);
         } else if kind.is_hard_link() || kind.is_symlink() {
-            println!("YINGYING entry.rs unpack_5");
             let src = match self.link_name()? {
                 Some(name) => name,
                 None => {
@@ -477,7 +463,6 @@ impl<'a> EntryFields<'a> {
                 }
             };
 
-            println!("YINGYING entry.rs unpack_6");
             if src.iter().count() == 0 {
                 return Err(other(&format!(
                     "symlink destination for {} is empty",
@@ -486,7 +471,6 @@ impl<'a> EntryFields<'a> {
             }
 
             if kind.is_hard_link() {
-                println!("YINGYING entry.rs unpack_7");
                 //YINGYING_cp.join(src)omment_out start
                 let link_src = match target_base {
                     // If we're unpacking within a directory then ensure that
@@ -507,9 +491,7 @@ impl<'a> EntryFields<'a> {
                     }
                     None => src.into_owned(),
                 };
-		println!("YINGYING=========================================hard_link before fs::copy");
                 fs::copy(link_src, dst); //YINGYING added
-		println!("YINGYING==========================================hard_link after fs::copy");
                 /*fs::hard_link(&link_src, dst).map_err(|err| {
                     Error::new(
                         err.kind(),
@@ -523,10 +505,7 @@ impl<'a> EntryFields<'a> {
                 })?;*/
                 //YINGYING_comment_out end
             } else {
-                println!("YINGYING entry.rs unpack_8 comment out symlink");
-		println!("YINGYING===================symlink before fs::copy");
-		fs::copy(src, dst); //YINGYING added
-		println!("YINGYING=================symlink after fs::copy");
+		        fs::copy(src, dst); //YINGYING added
                 //YINGYING_comment_out start
                 /*symlink(&src, dst)
                     .or_else(|err_io| {
@@ -550,7 +529,6 @@ impl<'a> EntryFields<'a> {
                     })?;*/
                     //YINGYING_comment_out end
             };
-            println!("YINGYING entry.rs unpack_8.2");
             return Ok(Unpacked::__Nonexhaustive);
 
             #[cfg(target_arch = "wasm32")]
@@ -573,11 +551,9 @@ impl<'a> EntryFields<'a> {
             || kind.is_gnu_longname()
             || kind.is_gnu_longlink()
         {
-            println!("YINGYING entry.rs unpack_8.3");
             return Ok(Unpacked::__Nonexhaustive);
         };
 
-        println!("YINGYING entry.rs unpack_9");
         // Old BSD-tar compatibility.
         // Names that have a trailing slash should be treated as a directory.
         // Only applies to old headers.
@@ -588,7 +564,6 @@ impl<'a> EntryFields<'a> {
             }
             return Ok(Unpacked::__Nonexhaustive);
         }
-        println!("YINGYING entry.rs unpack_10");
 
         // Note the lack of `else` clause above. According to the FreeBSD
         // documentation:
@@ -605,13 +580,10 @@ impl<'a> EntryFields<'a> {
             OpenOptions::new().write(true).create_new(true).open(dst)
         }
         let mut f = (|| -> io::Result<std::fs::File> {
-            println!("YINGYING in entry.rs unpack() before open\n");
             let mut f = open(dst).or_else(|err| {
                 if err.kind() != ErrorKind::AlreadyExists {
-                     println!("YINGYING entry.rs unpack1\n");
                     Err(err)
                 } else if self.overwrite {
-                    println!("YINGYING entry.rs unpack2\n");
                     match fs::remove_file(dst) {
                         Ok(()) => open(dst),
                         Err(ref e) if e.kind() == io::ErrorKind::NotFound => open(dst),
@@ -621,9 +593,7 @@ impl<'a> EntryFields<'a> {
                     Err(err)
                 }
             })?;
-            println!("YINGYING in entry.rs unpack() after open\n");
             for io in self.data.drain(..) {
-                println!("YINGYING entry.rs unpack3\n");
                 match io {
                     EntryIo::Data(mut d) => {
                         let expected = d.limit();
@@ -638,9 +608,7 @@ impl<'a> EntryFields<'a> {
                         f.set_len(size)?;
                     }
                 }
-                 println!("YINGYING entry.rs unpack4\n");
             }
-             println!("YINGYING entry.rs unpack4.5\n");
             Ok(f)
         })()
         .map_err(|e| {
@@ -654,11 +622,8 @@ impl<'a> EntryFields<'a> {
                 e,
             )
         })?;
-        println!("YINGYING entry.rs unpack5\n");
         if self.preserve_mtime {
-            println!("YINGYING entry.rs unpack5.1\n");
             if let Ok(mtime) = self.header.mtime() {
-                println!("YINGYING entry.rs unpack5.2\n");
                 // For some more information on this see the comments in
                 // `Header::fill_platform_from`, but the general idea is that
                 // we're trying to avoid 0-mtime files coming out of archives
@@ -676,14 +641,12 @@ impl<'a> EntryFields<'a> {
                 })?; YINGYING_comment_out_ends */
             }
         }
-        println!("YINGYING entry.rs unpack6\n");
         if let Ok(mode) = self.header.mode() {
             set_perms(dst, Some(&mut f), mode, self.preserve_permissions)?;
         }
         if self.unpack_xattrs {
             set_xattrs(self, dst)?;
         }
-        println!("YINGYING entry.rs unpack7\n");
         return Ok(Unpacked::File(f));
 
         fn set_perms(
@@ -704,7 +667,6 @@ impl<'a> EntryFields<'a> {
                 )
             })
         }
-        println!("YINGYING entry.rs unpack8\n");
  
         #[cfg(unix)]
         fn _set_perms(

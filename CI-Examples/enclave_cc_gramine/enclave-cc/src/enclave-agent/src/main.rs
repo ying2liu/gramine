@@ -69,7 +69,6 @@ impl ImageService {
         let mut cid = req.get_container_id().to_string();
 
         if cid.is_empty() {
-		println!("YINGYING cid is empty  20220920--copy file");
             let v: Vec<&str> = image.rsplit('/').collect();
             if !v[0].is_empty() {
                 // ':' have special meaning for umoci during upack
@@ -78,17 +77,14 @@ impl ImageService {
                 return Err(anyhow!("Invalid image name. {}", image));
             }
         } else {
-			println!("YINGYING verfiy_cid");
             verify_cid(&cid)?;
         }
 
-/* YINGYING start to pull encrypted image*/        
         let keyprovider_config =
             format!("/ocitmp/{}", "ocicrypt_keyprovider_native.conf");
         std::env::set_var("OCICRYPT_KEYPROVIDER_CONFIG", keyprovider_config);
 
         let decrypt_config = "provider:attestation-agent:sample_kbc::null";
-/* YINGYING end to pull encrypted image */
 
         let source_creds = (!req.get_source_creds().is_empty()).then(|| req.get_source_creds());
 

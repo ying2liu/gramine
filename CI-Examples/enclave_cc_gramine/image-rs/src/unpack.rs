@@ -15,49 +15,40 @@ use tar::Archive;
 pub fn unpack(input: Vec<u8>, destination: &Path) -> Result<()> {
     let mut archive = Archive::new(input.as_slice());
 
-    println!("YINGYING unpack.rs_1");
     if destination.exists() {
         return Err(anyhow!(
             "unpack destination {:?} already exists",
             destination
         ));
     }
-    println!("YINGYING unpack.rs_2");
     fs::create_dir_all(destination)?;
 
-    println!("YINGYING unpack.rs_3");
     let mut dirs: HashMap<CString, [timeval; 2]> = HashMap::default();
     for file in archive.entries()? {
         let mut file = file?;
         file.unpack_in(destination)?;
-        println!("YINGYING unpack.rs_3.1");
 
         // tar-rs crate only preserve timestamps of files,
         // symlink file and directory are not covered.
         // upstream fix PR: https://github.com/alexcrichton/tar-rs/pull/217
         if file.header().entry_type().is_symlink() || file.header().entry_type().is_dir() {
             let mtime = file.header().mtime()? as i64;
-            println!("YINGYING unpack.rs_3.2");
 
             let atime = timeval {
                 tv_sec: mtime,
                 tv_usec: 0,
             };
-            println!("YINGYING unpack.rs_3.3");
             let path = CString::new(format!(
                 "{}/{}",
                 destination.display(),
                 file.path()?.display()
             ))?;
-            println!("YINGYING unpack.rs_3.4");
 
             let times = [atime, atime];
 
             if file.header().entry_type().is_dir() {
-                println!("YINGYING unpack.rs_3.5_dir");
                 dirs.insert(path, times);
             } else {
-                println!("YINGYING unpack.rs_3.5_not_dir commented out the follwings");
                 //YINGYING_comment_out start
                 /*
                 let ret = unsafe { libc::lutimes(path.as_ptr(), times.as_ptr()) };
@@ -75,7 +66,6 @@ pub fn unpack(input: Vec<u8>, destination: &Path) -> Result<()> {
         }
     }
 
-    println!("YINGYING unpack.rs_4");
     // Directory timestamps need update after all files are extracted.
     /* YINGYING_comment_out start
     for (k, v) in dirs.iter() {

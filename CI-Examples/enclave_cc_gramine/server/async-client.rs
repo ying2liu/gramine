@@ -100,10 +100,8 @@ async fn main() {
         PalGetSpecialKey(cstring0.as_ptr(), &mut seal_key, &128);
         fs::write(KEY_PATH, seal_key).expect("Unable to write key");
         println!("{:?}", seal_key);
-           }
-        }
+    }
 
-    println!("YINGYING 20221019 decrypt files");
     unsafe {
         let cstring1 = CString::new("/enc").expect("enccrypted folder failed");
         let cstring2 = CString::new(KEY_PATH).expect("key failed");
@@ -111,12 +109,10 @@ async fn main() {
         pf_init();
         pf_decrypt_files (cstring1.as_ptr(), cstring3.as_ptr(), false, cstring2.as_ptr()); 
     }
-    println!("YINGYING decrypt done");
  
     const APP: &str = "/dec/usr/bin/hello_world";
-    fs::set_permissions(&str, fs::Permissions::from_mode(0o777)).unwrap();
+    fs::set_permissions(APP:&str, fs::Permissions::from_mode(0o777)).unwrap();
 
-    println!("YINGYING will run hello_world");
     let output = Command::new("/dec/usr/bin/hello_world")
         // Tell the OS to record the command's output
         .stdout(Stdio::inherit())

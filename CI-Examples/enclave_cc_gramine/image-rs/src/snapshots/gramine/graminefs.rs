@@ -57,9 +57,8 @@ impl Snapshotter for Graminefs {
     fn mount(&mut self, layer_path: &[&str], mount_path: &Path) -> Result<MountPoint> {
         // From the description of https://github.com/occlum/occlum/blob/master/docs/runtime_mount.md#1-mount-trusted-unionfs-consisting-of-sefss ,
         // the source type of runtime mount is "unionfs".
-        println!("YINGYING gramine_fs 1");
-        //let fs_type = String::from("unionfs");
-        //let source = Path::new(&fs_type);
+        let fs_type = String::from("unionfs");
+        let source = Path::new(&fs_type);
 
         if !mount_path.exists() {
             fs::create_dir_all(mount_path)?;
@@ -71,8 +70,6 @@ impl Snapshotter for Graminefs {
         if !gramine_enc.exists() {
             println!("YINGYING gramine_enc doesn't exist");
             fs::create_dir_all(gramine_enc)?;
-        } else {
-            println!("YINGYING ===============enc already exists");
         }
 
         let key_path = Path::new(KEY_PATH);
