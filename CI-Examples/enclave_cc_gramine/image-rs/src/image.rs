@@ -96,7 +96,6 @@ impl Default for ImageClient {
 
         #[cfg(feature = "overlay_feature")]
         {
-            println!("YINGYING overlay_feature");
             let overlay_index = meta_store
                 .snapshot_db
                 .get(&SnapshotType::Overlay.to_string())
@@ -113,7 +112,6 @@ impl Default for ImageClient {
 
         #[cfg(feature = "occlum_feature")]
         {
-             println!("YINGYING occlum_feature");
             let occlum_unionfs_index = meta_store
                 .snapshot_db
                 .get(&SnapshotType::OcclumUnionfs.to_string())
@@ -132,7 +130,7 @@ impl Default for ImageClient {
 
         #[cfg(feature = "gramine_feature")]
         {
-             println!("YINGYING gramine_feature");
+            println!("YINGYING gramine_feature");
             let graminefs_index = meta_store
                 .snapshot_db
                 .get(&SnapshotType::Graminefs.to_string())
@@ -232,62 +230,10 @@ impl ImageClient {
             .rev()
             .map(|l| l.store_path.as_str())
             .collect::<Vec<&str>>();
-             println!("YINGYING client pull_image9");
-/*
-//YINGYING add encrpt file
-        #[link(name = "sgx_util")]
-        extern {
-            fn pf_encrypt_files(input_dir: *const c_char, output_dir: *const c_char, wrap_key_path: *const c_char)->u32;
-            fn pf_init()->u32;
-        }
-
-        let mut seal_key: [u8; 16] = [0; 16];
-        #[link(name = "pal")]
-        extern {
-	    fn PalGetSpecialKey(name: *const c_char, key: &mut [u8; 16], key_size: & u128)->u32;	
-        }
-
-        let new_rootfs = "/tmp/rootfs";*/
 
         if let Some(snapshot) = self.snapshots.get_mut(&self.config.default_snapshot) {
-            println!("YINGYING client pull_image default_snapshot");
             println!("{}", self.config.default_snapshot);           
- /*            // copy dirs to the specified mount directory
-            let mut layer_path_vec = layer_path.to_vec();
-            let len = layer_path_vec.len();
-            for _i in 0..len {
-                println!("YINGYING pull_image10.1\n");
-                let layer = layer_path_vec.pop().ok_or(anyhow!("Pop() failed from Vec"))?;
-                println!("YINGYING pull_image10.2\n");
-                CopyBuilder::new(layer, new_rootfs)
-                    .overwrite(true)
-                    .run()?;
-                }
-            fs::set_permissions(new_rootfs, fs::Permissions::from_mode(0o777))?;
 
-            let KEY_PATH = "/dev/attestation/keys/default";
-    	    let seal = 1;
-	    if seal == 0 {
-                let NEW_KEY = "0011223344556677";
-               fs::write(KEY_PATH, NEW_KEY).expect("Unable to write key");
-            } else {
-		unsafe {
-		   let cstring0 = CString::new("_sgx_mrsigner").expect("orignal folder failed");
-		    PalGetSpecialKey(cstring0.as_ptr(), &mut seal_key, &128);
-                    fs::write(KEY_PATH, seal_key).expect("Unable to write key");
-		    println!("{:?}", seal_key);
-		}
-
-            }
-
-            unsafe {
-                let cstring1 = CString::new(new_rootfs).expect("orignal folder failed");
-                let cstring2 = CString::new("/enc").expect("destination folder failed");
-                let cstring3 = CString::new(KEY_PATH).expect("key failed");
-                pf_init();
-                pf_encrypt_files (cstring1.as_ptr(), cstring2.as_ptr(), cstring3.as_ptr());
-            }
-*/
             snapshot.mount(&layer_path, &bundle_dir.join(BUNDLE_ROOTFS))?;
         } else {
             return Err(anyhow!(
@@ -295,15 +241,11 @@ impl ImageClient {
                 &self.config.default_snapshot
             ));
         }
-        println!("YINGYING client pull_image11");
         let image_config = image_data.image_config.clone();
-        println!("YINGYING client pull_image12");
         if image_config.os() != &Os::Linux {
-            println!("YINGYING client pull_image13");
             return Err(anyhow!("unsupport OS image {:?}", image_config.os()));
         }
         create_runtime_config(&image_config, bundle_dir)?;
-        println!("YINGYING client pull_image14");
 
         let image_id = image_data.id.clone();
         self.meta_store
@@ -311,7 +253,6 @@ impl ImageClient {
             .await
             .image_db
             .insert(image_data.id.clone(), image_data);
-        println!("YINGYING client pull_image15");
         Ok(image_id)
     }
 }

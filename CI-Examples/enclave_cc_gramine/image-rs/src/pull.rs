@@ -177,13 +177,11 @@ impl PullClient {
                 );
                 let destination = Path::new(&store_path);
 
-                println!("YINGYING pull_layer before unpack");
                 if let Err(e) = unpack(out, destination) {
                     fs::remove_dir_all(destination)?;
                     return Err(e);
                 }
 
-                println!("YINGYING pull_layer after unpack");
                 layer_meta.store_path = destination.display().to_string();
 
                 Ok::<_, anyhow::Error>(layer_meta)
