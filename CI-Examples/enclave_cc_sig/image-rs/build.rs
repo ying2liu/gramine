@@ -4,8 +4,8 @@
 //
 
 fn main() -> shadow_rs::SdResult<()> {
-    let deps_dir="/"/home/yliu79/zhiwei/image-rs/deps";
-    println!("cargo:rustc-link-search=/"/home/yliu79/zhiwei/image-rs/deps");
+    let deps_dir="/home/yliu79/zhiwei/image-rs/deps";
+    println!("cargo:rustc-link-search=/home/yliu79/zhiwei/image-rs/deps");
     println!("cargo:rustc-link-lib=dylib=sgx_util");
     println!("cargo:rustc-link-lib=dylib=pal");
  
