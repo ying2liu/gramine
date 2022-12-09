@@ -14,8 +14,6 @@ use std::os::raw::{c_char, c_uint};
 use std::ffi::CString;
 use std::fs;
 use std::os::unix::fs::PermissionsExt;
-use std::time::Duration;
-use std::thread::sleep;
 use std::process::{Command, Stdio};
 
 pub const SOCK_ADDR: &str = "tcp://0.0.0.0:7788";
@@ -79,7 +77,6 @@ async fn main() {
 
     #[link(name = "sgx_util")]
     extern {
-        fn pf_encrypt_files(input_dir: *const c_char, output_dir: *const c_char, wrap_key_path: *const c_char)->u32;
         fn pf_decrypt_files(input_dir: *const c_char, output_dir: *const c_char, Verify_path:bool, wrap_key_path: *const c_char)->u32;
         fn pf_init()->u32;
     }
@@ -89,17 +86,16 @@ async fn main() {
     }
 
     let mut seal_key: [u8; 16] = [0; 16];
-    let KEY_PATH = "/dev/attestation/keys/default";
+    let key_path = "/dev/attestation/keys/default";
     unsafe {
         let cstring0 = CString::new("_sgx_mrsigner").expect("orignal folder failed");
         PalGetSpecialKey(cstring0.as_ptr(), &mut seal_key, &128);
-        fs::write(KEY_PATH, seal_key).expect("Unable to write key");
-        println!("{:?}", seal_key);
+        fs::write(key_path, seal_key).expect("Unable to write key");
     }
 
     unsafe {
         let cstring1 = CString::new("/enc").expect("enccrypted folder failed");
-        let cstring2 = CString::new(KEY_PATH).expect("key failed");
+        let cstring2 = CString::new(key_path).expect("key failed");
         let cstring3 = CString::new("/dec").expect("decrypted folder failed");
         pf_init();
         pf_decrypt_files (cstring1.as_ptr(), cstring3.as_ptr(), false, cstring2.as_ptr());

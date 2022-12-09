@@ -28,12 +28,12 @@ const ERR_BAD_COMPRESSED_DIGEST: &str = "unsupported compressed digest format";
 
 /// The PullClient connects to remote OCI registry, pulls the container image,
 /// and save the image layers under data_dir and return the layer meta info.
-pub struct PullClient {
+pub struct PullClient<'a> {
     /// `oci-distribuion` client to talk with remote OCI registry.
     pub client: Client,
 
     /// OCI registry auth info.
-    pub auth: RegistryAuth,
+    pub auth: &'a RegistryAuth,
 
     /// OCI image reference.
     pub reference: Reference,
@@ -42,20 +42,14 @@ pub struct PullClient {
     pub data_dir: PathBuf,
 }
 
-impl PullClient {
+impl<'a> PullClient<'a> {
     /// Constructs a new PullClient struct with provided image info,
     /// data store dir and optional remote registry auth info.
-    pub fn new(image: &str, data_dir: &Path, auth_info: &Option<&str>) -> Result<PullClient> {
-        let mut auth = RegistryAuth::Anonymous;
-        if let Some(auth_info) = auth_info {
-            if let Some((username, password)) = auth_info.split_once(':') {
-                auth = RegistryAuth::Basic(username.to_string(), password.to_string());
-            } else {
-                return Err(anyhow!("Invalid authentication info ({:?})", auth_info));
-            }
-        }
-
-        let reference = Reference::try_from(image)?;
+    pub fn new(
+        reference: Reference,
+        data_dir: &Path,
+        auth: &'a RegistryAuth,
+    ) -> Result<PullClient<'a>> {
         let client = Client::default();
 
         Ok(PullClient {
@@ -69,8 +63,9 @@ impl PullClient {
     /// pull_manifest pulls an image manifest and config data.
     pub async fn pull_manifest(&mut self) -> Result<(OciImageManifest, String, String)> {
         self.client
-            .pull_manifest_and_config(&self.reference, &self.auth)
+            .pull_manifest_and_config(&self.reference, self.auth)
             .await
+            .map_err(|e| anyhow!("failed to pull manifest {}", e.to_string()))
     }
 
     /// pull_layers pulls an image layers and do ondemand decrypt/decompress.
@@ -99,7 +94,11 @@ impl PullClient {
             }
         });
 
-        let layer_metas = future::try_join_all(layer_metas).await?;
+        let layer_metas = future::join_all(layer_metas)
+            .await
+            .into_iter()
+            .filter_map(|v| v.ok())
+            .collect();
 
         Ok(layer_metas)
     }
@@ -169,10 +168,10 @@ impl PullClient {
 
             if diff_id.starts_with(DIGEST_SHA256) {
                 layer_meta.uncompressed_digest =
-                    format!("{}:{:x}", DIGEST_SHA256, sha2::Sha256::digest(&out));
+                    format!("{DIGEST_SHA256}:{:x}", sha2::Sha256::digest(&out));
             } else if diff_id.starts_with(DIGEST_SHA512) {
                 layer_meta.uncompressed_digest =
-                    format!("{}:{:x}", DIGEST_SHA512, sha2::Sha512::digest(&out));
+                    format!("{DIGEST_SHA512}:{:x}", sha2::Sha512::digest(&out));
             } else {
                 return Err(anyhow!("{}: {:?}", ERR_BAD_COMPRESSED_DIGEST, diff_id));
             }
@@ -227,9 +226,11 @@ mod tests {
             "docker.io/arronwang/busybox_encrypted",
         ];
 
-        for image in oci_images.iter() {
+        for image_url in oci_images.iter() {
             let tempdir = tempfile::tempdir().unwrap();
-            let mut client = PullClient::new(image, tempdir.path(), &None).unwrap();
+            let image = Reference::try_from(image_url.clone()).expect("create reference failed");
+            let mut client =
+                PullClient::new(image, tempdir.path(), &RegistryAuth::Anonymous).unwrap();
             let (image_manifest, _image_digest, image_config) =
                 client.pull_manifest().await.unwrap();
 
@@ -259,7 +260,8 @@ mod tests {
 
     #[tokio::test]
     async fn test_handle_layer() {
-        let oci_image = "docker.io/arronwang/busybox_gzip";
+        let oci_image = Reference::try_from("docker.io/arronwang/busybox_gzip")
+            .expect("create reference failed");
 
         let bad_media_err = format!("{}: {}", ERR_BAD_MEDIA_TYPE, IMAGE_CONFIG_MEDIA_TYPE);
 
@@ -289,7 +291,8 @@ mod tests {
         };
 
         let tempdir = tempfile::tempdir().unwrap();
-        let mut client = PullClient::new(oci_image, tempdir.path(), &None).unwrap();
+        let mut client =
+            PullClient::new(oci_image, tempdir.path(), &RegistryAuth::Anonymous).unwrap();
 
         let (_image_manifest, _image_digest, _image_config) = client.pull_manifest().await.unwrap();
 

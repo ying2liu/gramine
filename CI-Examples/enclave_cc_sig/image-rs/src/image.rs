@@ -3,21 +3,28 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::{anyhow, Result};
+use log::warn;
+use oci_distribution::secrets::RegistryAuth;
+use oci_distribution::Reference;
 use oci_spec::image::{ImageConfiguration, Os};
 use serde::Deserialize;
-use std::collections::HashMap;
+use std::collections::{BTreeSet, HashMap};
 use std::convert::TryFrom;
 use std::path::Path;
 use std::sync::atomic::AtomicUsize;
 use std::sync::Arc;
+use tokio::fs;
 use tokio::sync::Mutex;
 
+use crate::auth::credential_for_reference;
 use crate::bundle::{create_runtime_config, BUNDLE_ROOTFS};
 use crate::config::ImageConfig;
 use crate::decoder::Compression;
 use crate::meta_store::{MetaStore, METAFILE};
 use crate::pull::PullClient;
 
+use crate::secure_channel::SecureChannel;
+use crate::signature;
 #[cfg(feature = "overlay_feature")]
 use crate::snapshots::overlay::OverLay;
 
@@ -28,6 +35,14 @@ use crate::snapshots::occlum::unionfs::Unionfs;
 use crate::snapshots::gramine::graminefs::Graminefs;
 
 use crate::snapshots::{SnapshotType, Snapshotter};
+
+/// Image security config dir contains important information such as
+/// security policy configuration file and signature verification configuration file.
+/// Therefore, it is necessary to ensure that the directory is stored in a safe place.
+///
+/// The reason for using the `/run` directory here is that in general HW-TEE,
+/// the `/run` directory is mounted in `tmpfs`, which is located in the encrypted memory protected by HW-TEE.
+pub const IMAGE_SECURITY_CONFIG_DIR: &str = "/run/image-security";
 
 /// The metadata info for container image layer.
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Eq)]
@@ -128,6 +143,7 @@ impl Default for ImageClient {
 
         #[cfg(feature = "gramine_feature")]
         {
+             println!("gramine_feature");
             let graminefs_index = meta_store
                 .snapshot_db
                 .get(&SnapshotType::Graminefs.to_string())
@@ -157,6 +173,14 @@ impl ImageClient {
     /// and store the pulled data under user defined work_dir/layers.
     /// It will return the image ID with prepeared bundle: a rootfs directory,
     /// and config.json will be ready in the bundle_dir passed by user.
+    ///
+    /// If at least one of `security_validate` and `auth` in self.config is
+    /// enabled, `auth_info` **must** be given. There will establish a SecureChannel
+    /// due to the given `decrypt_config` which contains information about
+    /// `wrapped_aa_kbc_params`.
+    /// When `auth_info` parameter is given and `auth` in self.config is also enabled,
+    /// this function will only try to get auth from `auth_info`, and if fails then
+    /// then returns an error.
     pub async fn pull_image(
         &mut self,
         image_url: &str,
@@ -164,8 +188,75 @@ impl ImageClient {
         auth_info: &Option<&str>,
         decrypt_config: &Option<&str>,
     ) -> Result<String> {
-        let mut client =
-            PullClient::new(image_url, &self.config.work_dir.join("layers"), auth_info)?;
+        let reference = Reference::try_from(image_url)?;
+
+        // Try to get auth using input param.
+        let auth = if let Some(auth_info) = auth_info {
+            if let Some((username, password)) = auth_info.split_once(':') {
+                let auth = RegistryAuth::Basic(username.to_string(), password.to_string());
+                Some(auth)
+            } else {
+                return Err(anyhow!("Invalid authentication info ({:?})", auth_info));
+            }
+        } else {
+            None
+        };
+
+        // If one of self.config.auth and self.config.security_validate is enabled,
+        // there will establish a secure channel between image-rs and Attestation-Agent
+        let secure_channel = match self.config.auth || self.config.security_validate {
+            true => {
+                // Both we need a [`IMAGE_SECURITY_CONFIG_DIR`] dir
+                if !Path::new(IMAGE_SECURITY_CONFIG_DIR).exists() {
+                    fs::create_dir_all(IMAGE_SECURITY_CONFIG_DIR)
+                        .await
+                        .map_err(|e| {
+                            anyhow!("Create image security runtime config dir failed: {:?}", e)
+                        })?;
+                }
+
+                if let Some(wrapped_aa_kbc_params) = decrypt_config {
+                    let wrapped_aa_kbc_params = wrapped_aa_kbc_params.to_string();
+                    let aa_kbc_params =
+                        wrapped_aa_kbc_params.trim_start_matches("provider:attestation-agent:");
+
+                    // The secure channel to communicate with KBS.
+                    let secure_channel =
+                        Arc::new(Mutex::new(SecureChannel::new(aa_kbc_params).await?));
+                    Some(secure_channel)
+                } else {
+                    return Err(anyhow!("Secure channel creation needs aa_kbc_params."));
+                }
+            }
+            false => None,
+        };
+
+        // If no valid auth is given and config.auth is enabled, try to load
+        // auth from `auth.json`.
+        // If a proper auth is given, use this auth.
+        // If no valid auth is given and config.auth is disabled, use Anonymous auth.
+        let auth = match (self.config.auth, auth.is_none()) {
+            (true, true) => {
+                let secure_channel = secure_channel
+                    .as_ref()
+                    .expect("unexpected uninitialized secure channel")
+                    .clone();
+                match credential_for_reference(&reference, secure_channel).await {
+                    Ok(cred) => cred,
+                    Err(e) => {
+                        warn!(
+                            "get credential failed, use Anonymous auth instead: {}",
+                            e.to_string()
+                        );
+                        RegistryAuth::Anonymous
+                    }
+                }
+            }
+            (false, true) => RegistryAuth::Anonymous,
+            _ => auth.expect("unexpected uninitialized auth"),
+        };
+
+        let mut client = PullClient::new(reference, &self.config.work_dir.join("layers"), &auth)?;
         let (image_manifest, image_digest, image_config) = client.pull_manifest().await?;
   
         let id = image_manifest.config.digest.clone();
@@ -189,17 +280,13 @@ impl ImageClient {
         }
 
         if self.config.security_validate {
-            if let Some(wrapped_aa_kbc_params) = decrypt_config {
-                let wrapped_aa_kbc_params = wrapped_aa_kbc_params.to_string();
-                let aa_kbc_params =
-                    wrapped_aa_kbc_params.trim_start_matches("provider:attestation-agent:");
- 
-                signature::allows_image(image_url, &image_digest, aa_kbc_params)
-                    .await
-                    .map_err(|e| anyhow!("Security validate failed: {:?}", e))?;
-            } else {
-                return Err(anyhow!("Security validation need aa_kbc_params."));
-            }
+            let secure_channel = secure_channel
+                .as_ref()
+                .expect("unexpected uninitialized secure channel")
+                .clone();
+            signature::allows_image(image_url, &image_digest, secure_channel, &auth)
+                .await
+                .map_err(|e| anyhow!("Security validate failed: {:?}", e))?;
         }
 
         let mut image_data = ImageMeta {
@@ -216,10 +303,22 @@ impl ImageClient {
                 "Pulled number of layers mismatch with image config diff_ids"
             ));
         }
- 
+
+        let mut unique_layers = Vec::new();
+        let mut digests = BTreeSet::new();
+        for l in &image_manifest.layers {
+            if digests.contains(&l.digest) {
+                continue;
+            }
+
+            digests.insert(&l.digest);
+            unique_layers.push(l.clone());
+        }
+
+        let unique_layers_len = unique_layers.len();
         let layer_metas = client
             .pull_layers(
-                image_manifest.layers.clone(),
+                unique_layers,
                 diff_ids,
                 decrypt_config,
                 self.meta_store.clone(),
@@ -234,7 +333,13 @@ impl ImageClient {
             .collect();
  
         self.meta_store.lock().await.layer_db.extend(layer_db);
- 
+        if unique_layers_len != image_data.layer_metas.len() {
+            return Err(anyhow!(
+                " {} layers failed to pull",
+                unique_layers_len - image_data.layer_metas.len()
+            ));
+        }
+
         let image_id = create_bundle(&image_data, bundle_dir, snapshot)?;
  
         self.meta_store
@@ -282,6 +387,8 @@ mod tests {
 
         // TODO test with more OCI image registries and fix broken registries.
         let oci_images = vec![
+            // image with duplicated layers
+            "gcr.io/k8s-staging-cloud-provider-ibm/ibm-vpc-block-csi-driver:master",
             // Alibaba Container Registry
             "registry.cn-hangzhou.aliyuncs.com/acs/busybox:v1.29.2",
             // Amazon Elastic Container Registry
@@ -307,7 +414,7 @@ mod tests {
                 .is_ok());
         }
 
-        assert_eq!(image_client.meta_store.lock().await.image_db.len(), 4);
+        assert_eq!(image_client.meta_store.lock().await.image_db.len(), 5);
     }
 
     #[tokio::test]

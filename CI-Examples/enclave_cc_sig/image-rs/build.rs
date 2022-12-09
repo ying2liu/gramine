@@ -2,10 +2,12 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 //
+use std::env;
+use std::path::Path;
 
 fn main() -> shadow_rs::SdResult<()> {
-    let deps_dir="/home/yliu79/zhiwei/image-rs/deps";
-    println!("cargo:rustc-link-search=/home/yliu79/zhiwei/image-rs/deps");
+    let _dir = env::current_dir().unwrap();
+    println!("cargo:rustc-link-search=native={}", Path::new(&_dir).join("deps").display());
     println!("cargo:rustc-link-lib=dylib=sgx_util");
     println!("cargo:rustc-link-lib=dylib=pal");
  

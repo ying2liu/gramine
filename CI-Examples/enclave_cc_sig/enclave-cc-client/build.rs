@@ -1,18 +1,18 @@
-// Copyright (c) 2020 Ant Financial
+// Copyright (c) 2022 Alibaba Cloud
 //
 // SPDX-License-Identifier: Apache-2.0
 //
-
-// use std::fs::File;
-// use std::io::{Read, Write};
+use std::env;
+use std::path::Path;
 use ttrpc_codegen::Codegen;
 use ttrpc_codegen::Customize;
 
 fn main() {
-    let deps_dir="/home/yliu79/zhiwei/image-rs/deps";
-     println!("cargo:rustc-link-search=/home/yliu79/zhiwei/image-rs/deps");
-     println!("cargo:rustc-link-lib=dylib=sgx_util");
-
+    let _dir = env::current_dir().unwrap();
+    println!("cargo:rustc-link-search=native={}", Path::new(&_dir).join("deps").display());
+    println!("cargo:rustc-link-lib=dylib=sgx_util");
+    println!("cargo:rustc-link-lib=dylib=pal");
+ 
     let protos = vec![
         "protocols/protos/image.proto",
     ];
@@ -28,6 +28,4 @@ fn main() {
         })
         .run()
         .expect("Gen async code failed.");
-
 }
-

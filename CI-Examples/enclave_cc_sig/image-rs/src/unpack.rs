@@ -7,7 +7,6 @@ use libc::timeval;
 use std::collections::HashMap;
 use std::ffi::CString;
 use std::fs;
-use std::io;
 use std::path::Path;
 use tar::Archive;
 

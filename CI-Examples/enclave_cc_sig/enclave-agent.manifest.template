@@ -10,7 +10,7 @@ loader.insecure__use_cmdline_argv = true
 loader.insecure__use_host_env = true
 loader.log_level ="trace"
  
-loader.env.LD_LIBRARY_PATH = "/lib:{{ arch_libdir }}:/usr{{ arch_libdir }}"
+loader.env.LD_LIBRARY_PATH = "/lib:/usr/local/lib/rats-tls:{{ arch_libdir }}:/usr{{ arch_libdir }}"
 fs.mounts = [
  { path = "/lib", uri = "file:{{ gramine.runtimedir() }}" },
  { path = "{{ arch_libdir }}", uri = "file:{{ arch_libdir }}" },
@@ -19,9 +19,9 @@ fs.mounts = [
  { path = "/var", uri = "file:/var" },
  { path = "/etc/ssl", uri = "file:/etc/ssl" },
  { path = "/usr/lib", uri = "file:/usr/lib" },
+ { path = "/usr/local/lib/rats-tls", uri = "file:/usr/local/lib/rats-tls" },
  { path = "/dev/random", uri = "file:/dev/random" },
  { type = "tmpfs", path = "/tmp" }
-
  { type = "encrypted", path = "/enc", uri = "file:enc", key_name = "default"},
 ]
 #sys.enclave_reuse = true

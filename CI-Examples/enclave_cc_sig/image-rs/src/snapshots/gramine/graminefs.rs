@@ -9,14 +9,10 @@ use std::sync::atomic::AtomicUsize;
 use anyhow::{anyhow, Result};
 use dircpy::CopyBuilder;
 use fs_extra;
-use fs_extra::dir;
-use nix::mount::MsFlags;
-
 use crate::snapshots::{MountPoint, Snapshotter};
 use std::str;
 use std::os::raw::{c_char, c_uint};
 use std::ffi::CString;
-//use std::fs;
 use std::os::unix::fs::PermissionsExt;
 const GRAMINE_ROOTFS: &str = "/yingtmp/rootfs";
 const GRAMINE_ENC: &str = "/enc";
@@ -57,7 +53,6 @@ impl Snapshotter for Graminefs {
         // From the description of https://github.com/occlum/occlum/blob/master/docs/runtime_mount.md#1-mount-trusted-unionfs-consisting-of-sefss ,
         // the source type of runtime mount is "unionfs".
         let fs_type = String::from("unionfs");
-        let source = Path::new(&fs_type);
 
         if !mount_path.exists() {
             fs::create_dir_all(mount_path)?;
@@ -75,7 +70,7 @@ impl Snapshotter for Graminefs {
             fs::create_dir_all(gramine_enc)?;
         }
 
-        let key_path = Path::new(KEY_PATH);
+        let _key_path = Path::new(KEY_PATH);
         // store the rootfs in different places according to the cid
  /*       let cid = mount_path
             .parent()
@@ -142,27 +137,21 @@ impl Snapshotter for Graminefs {
                 .ok_or(anyhow!("Pop() failed from Vec"))?;
             CopyBuilder::new(layer, /*&mount_path*/ gramine_rootfs).overwrite(true).run()?;
         }
-//your_path.as_path().display().to_string();
         fs::set_permissions(gramine_rootfs, fs::Permissions::from_mode(0o777))?;
-        let key_path = "/dev/attestation/keys/default";
+        let _key_path = "/dev/attestation/keys/default";
         unsafe {
 	    let cstring0 = CString::new("_sgx_mrsigner").expect("orignal folder failed");
 	    PalGetSpecialKey(cstring0.as_ptr(), &mut seal_key, &128);
-            fs::write(key_path, seal_key).expect("Unable to write key");
+            fs::write(_key_path, seal_key).expect("Unable to write key");
 	    println!("{:?}", seal_key);
         }
         //as_ref().as_os_str().as_bytes()).unwrap()    
         unsafe {
             let orig_path = CString::new(gramine_rootfs).expect("orignal folder failed");
             let dest_path = CString::new(gramine_enc).expect("destination folder failed");
-            let key = CString::new(key_path).expect("key failed");
- //           let orig_path = CString::new(gramine_rootfs.as_os_str().as_bytes().unwrap()).expect("orignal folder failed");
- //           let dest_path = CString::new(gramine_enc).expect("destination folder failed");
- //           let key = CString::new(key_path).expect("key failed");
+            let key = CString::new(_key_path).expect("key failed");
             pf_init();
             pf_encrypt_files (orig_path.as_ptr(), dest_path.as_ptr(), key.as_ptr());
-//            pf_encrypt_files (gramine_rootfs.as_path().display().to_string(), gramine_enc.as_path().display().to_string(), key_path.as_path().display().to_string());
-
         }
 
         Ok(MountPoint {

@@ -30,7 +30,7 @@ impl std::fmt::Display for SnapshotType {
             Self::Graminefs => "gramine_graminefs",
         };
 
-        write!(f, "{}", out)
+        write!(f, "{out}")
     }
 }
 
