@@ -21,6 +21,7 @@ pub enum TransportName {
     Dir,
 }
 
+#[derive(Debug)]
 // Image contains information about the image which may be used in signature verification.
 pub struct Image {
     pub reference: Reference,

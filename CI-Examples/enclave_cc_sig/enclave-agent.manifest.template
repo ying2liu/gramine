@@ -21,15 +21,21 @@ fs.mounts = [
  { path = "/usr/lib", uri = "file:/usr/lib" },
  { path = "/usr/local/lib/rats-tls", uri = "file:/usr/local/lib/rats-tls" },
  { path = "/dev/random", uri = "file:/dev/random" },
+ { path = "/run/image-security", uri = "file:/run/image-security" },
  { type = "tmpfs", path = "/tmp" }
  { type = "encrypted", path = "/enc", uri = "file:enc", key_name = "default"},
 ]
 #sys.enclave_reuse = true
+sgx.remote_attestation = "dcap"
 sgx.file_check_policy = "allow_all_but_log"
 
-loader.pal_internal_mem_size = "512M"
-sgx.enclave_size = "2048M"
-sys.stack.size = "512M"
+#loader.pal_internal_mem_size = "512M"
+loader.pal_internal_mem_size = "1024M"
+#sgx.enclave_size = "2048M"
+sgx.enclave_size = "4096M"
+
+#sys.stack.size = "512M"
+sys.stack.size = "1024M"
 sgx.thread_num = 16
 
 sgx.debug = true

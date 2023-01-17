@@ -124,7 +124,7 @@ impl SignScheme for SimpleParameters {
                 KeyType::Gpg.to_string()
             ));
         }
-
+ 
         let pubkey_ring = match (&self.key_path, &self.key_data) {
             (None, None) => return Err(anyhow!("Neither keyPath or keyData specified.")),
             (Some(_), Some(_)) => return Err(anyhow!("Both keyPath and keyData specified.")),
@@ -133,7 +133,7 @@ impl SignScheme for SimpleParameters {
                 anyhow!("Read SignedBy keyPath failed: {:?}, path: {}", e, key_path)
             })?,
         };
-
+ 
         let sigs = get_signatures(image).await?;
         let mut reject_reasons: Vec<anyhow::Error> = Vec::new();
 
@@ -153,11 +153,11 @@ impl SignScheme for SimpleParameters {
                 }
             }
         }
-
+ 
         if reject_reasons.is_empty() {
             reject_reasons.push(anyhow!("Can not find any signatures."));
         }
-
+ 
         Err(anyhow!(format!(
             "The signatures do not satisfied! Reject reason: {:?}",
             reject_reasons

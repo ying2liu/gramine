@@ -24,6 +24,7 @@ impl ImageService {
     pub fn new() -> Self {
         let new_config = ImageConfig {
             default_snapshot: snapshots::SnapshotType::Graminefs,
+            security_validate: true,
             ..Default::default()
         };
         Self {
@@ -67,10 +68,16 @@ impl ImageService {
         } else {
             None
         };
-        let decrypt_config = if let Some(cfg) = config.clone() {
+        use tokio::io::{self, AsyncWriteExt};
+	let mut err = io::stderr();
+	err.write_all(format!("err msg: YINGYINGYING \n").as_bytes()).await?;
+	let decrypt_config = if let Some(cfg) = config.clone() {
+            err.write_all(format!("err msg: YINGYING in decryt_config \n").as_bytes()).await?;
             if let Some(v) = cfg["security_validate"].as_bool() {
+		err.write_all(format!("err msg: YINGYING in {}\n", v).as_bytes()).await?;
                 std::env::set_var("ENABLE_SECURITY_VALIDATE", &format!("{}", v));
             } else {
+                println!("YINGYING panic");
                 panic!("Expect bool true or false ");
             }
 

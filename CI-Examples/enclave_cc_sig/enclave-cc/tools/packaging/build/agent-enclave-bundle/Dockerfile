@@ -4,8 +4,8 @@ FROM rust:1.63-bullseye as builder
 RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
     protobuf-compiler
-RUN git clone --depth 1 https://github.com/confidential-containers/enclave-cc.git && \
-    cd enclave-cc/src/enclave-agent && \
+COPY src/ /enclave-cc/src/
+RUN cd /enclave-cc/src/enclave-agent && \
     rustup component add rustfmt && \
     make
 
@@ -22,7 +22,9 @@ RUN echo "deb [arch=amd64 signed-by=/usr/share/keyrings/intel-sgx.gpg] https://d
  && apt-get update \
  && env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     libsgx-dcap-ql \
+    libsgx-dcap-ql-dev \
     libsgx-dcap-quote-verify \
+    libsgx-dcap-quote-verify-dev \
     libsgx-dcap-default-qpl
 
 WORKDIR /opt
@@ -37,6 +39,10 @@ RUN echo "deb [arch=amd64 signed-by=/usr/share/keyrings/occlum.gpg] https://occl
  && wget -qO - https://occlum.io/occlum-package-repos/debian/public.key | gpg --dearmor --output /usr/share/keyrings/occlum.gpg \
  && apt-get update
 RUN env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    build-essential \
+    cmake \
+    git \
+    libssl-dev \
     jq \
     tzdata \
     binutils \
@@ -48,11 +54,16 @@ RUN env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommend
     occlum-toolchains-glibc \
     occlum
 
+RUN git clone --depth 1 https://github.com/inclavare-containers/rats-tls.git && \
+    cd rats-tls && \
+    cmake -DRATS_TLS_BUILD_MODE="occlum" -DBUILD_SAMPLES=on -H. -Bbuild && \
+    make -C build install
+
 WORKDIR /run/enclave-agent
 COPY --from=builder /enclave-cc/src/enclave-agent/target/release/enclave-agent .
-ADD enclave-agent.yaml .
-ADD jq.filter .
-ADD decrypt_config.conf .
+COPY tools/packaging/build/agent-enclave-bundle/enclave-agent.yaml .
+COPY tools/packaging/build/agent-enclave-bundle/jq.filter .
+COPY tools/packaging/build/agent-enclave-bundle/decrypt_config.conf .
 
 ARG SGX_MODE=HW
 RUN export PATH="$PATH:/opt/occlum/build/bin" && \
@@ -66,14 +77,12 @@ RUN export PATH="$PATH:/opt/occlum/build/bin" && \
         export DEBUG="--debug"; \
     fi; occlum package ${DEBUG}
 
-# TODO: we run occlum package to get a "clean" instance copied to a target
-# directory. The optimization here could be that we just use the occlum_instance
-# "working directory".
+# TODO: add new build stage and copy occlum_instance.tar.gz to it
 WORKDIR /run/rune
 RUN tar xzf /run/enclave-agent/occlum_instance/occlum_instance.tar.gz && \
     rm -rf /run/enclave-agent
 
-RUN apt-get purge -y wget gnupg tzdata jq occlum occlum-toolchains-glibc make binutils libfuse2 libfuse3-3 ca-certificates rsync && apt-get autoremove -y
+RUN apt-get purge -y wget gnupg tzdata jq occlum occlum-toolchains-glibc make binutils libfuse2 libfuse3-3 ca-certificates rsync build-essential cmake git && apt-get autoremove -y
 RUN echo "/run/rune/occlum_instance/build/lib/" | tee /etc/ld.so.conf.d/occlum-pal.conf && \
     echo "/opt/sgxsdk/lib64" | tee /etc/ld.so.conf.d/sgxsdk.conf && \
     ldconfig

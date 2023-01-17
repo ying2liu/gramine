@@ -55,6 +55,7 @@ impl PolicyReqType {
         // to be disabled because the ring crate pulled in by the sigstore-rs crate does not
         // support compiling on big-endian targets. There is an issue open to add
         // big-endian support to ring here: https://github.com/briansmith/ring/issues/1555
+        println!("{:?}", image);
         match self {
             PolicyReqType::Accept => Ok(()),
             PolicyReqType::Reject => Err(anyhow!(r#"The policy is "reject""#)),

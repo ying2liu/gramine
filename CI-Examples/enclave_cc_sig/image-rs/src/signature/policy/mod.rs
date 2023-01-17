@@ -64,15 +64,17 @@ impl Policy {
     ) -> Result<()> {
         // Get the policy set that matches the image.
         let reqs = self.requirements_for_image(&image);
+        println!("{:?}", reqs);
         if reqs.is_empty() {
             return Err(anyhow!(
                 "List of verification policy requirements must not be empty"
             ));
         }
 
-        // The image must meet the requirements of each policy in the policy set.
+       // The image must meet the requirements of each policy in the policy set.
         for req in reqs.iter() {
             req.allows_image(&mut image, auth).await?;
+     
         }
 
         Ok(())

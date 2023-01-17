@@ -1,3 +1,4 @@
+rm enclave-agent async-client
 cd enclave-cc/src/enclave-agent
 make clean
 make 

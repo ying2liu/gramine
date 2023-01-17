@@ -8,7 +8,8 @@ else
 endif
 
 all:
-	$(RUST_FLAGS) cargo build $(release)
+	RUSTFLAGS="-C link-args=-Wl,-rpath=/usr/local/lib/rats-tls" cargo build $(release) 
+  
 
 clean:
-	cargo clean && rm -f Cargo.lock
+	cargo clean

@@ -47,7 +47,7 @@ pub async fn allows_image(
     // Read the set of signature schemes that need to be verified
     // of the image from the policy configuration.
     let schemes = policy.signature_schemes(&image);
-
+ 
     // Get the necessary resources from KBS if needed.
     for scheme in schemes {
         scheme.init().await?;
@@ -60,7 +60,7 @@ pub async fn allows_image(
                 .await?;
         }
     }
-
+ 
     policy
         .is_image_allowed(image, auth)
         .await

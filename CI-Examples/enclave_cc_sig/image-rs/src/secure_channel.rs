@@ -98,6 +98,8 @@ impl SecureChannel {
     /// * `aa_kbc_params`: s string with format `<kbc_name>::<kbs_uri>`.
     pub async fn new(aa_kbc_params: &str) -> Result<Self> {
         // unzip here is unstable
+        use tokio::io::{self, AsyncWriteExt};
+        let mut err = io::stderr();
         if let Some((kbc_name, kbs_uri)) = aa_kbc_params.split_once("::") {
             if kbc_name.is_empty() {
                 return Err(anyhow!("aa_kbc_params: missing KBC name"));

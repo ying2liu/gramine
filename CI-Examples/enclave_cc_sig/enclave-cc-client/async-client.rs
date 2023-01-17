@@ -52,11 +52,12 @@ async fn main() {
             "image.pull_image()",
             now.elapsed(),
         );
-
+ 
+        let image_tag = "docker.io/xhuan28/eaa_encbox";
         //let image_tag = "docker.io/huaijin20191223/scratch-base:v1.8";
         //let image_tag = "docker.io/arronwang/busybox_kbs_encrypted";
         //let image_tag = "docker.io/huaijin20191223/ubuntu-base-enc";
-        let image_tag = "docker.io/huaijin20191223/ubuntu-base:HelloWorld_v1.1";
+//        let image_tag = "docker.io/huaijin20191223/ubuntu-base:HelloWorld_v1.1"; //YINGYING
         //let image_tag = "docker.io/ubuntu";
         //let image_tag = "docker.io/nginx";
         //let image_tag = "docker.io/httpd";
@@ -101,10 +102,10 @@ async fn main() {
         pf_decrypt_files (cstring1.as_ptr(), cstring3.as_ptr(), false, cstring2.as_ptr());
     }
 
-    const APP: &str = "/dec/usr/bin/hello_world";
-    fs::set_permissions(/*APP::&str*/"/dec/usr/bin/hello_world", fs::Permissions::from_mode(0o777)).unwrap();
+    const APP: &str = "/dec/helloworld.sh";
+    fs::set_permissions(/*APP::&str*/"/dec/helloworld.sh", fs::Permissions::from_mode(0o777)).unwrap();
 
-    let output = Command::new("/dec/usr/bin/hello_world")
+    let output = Command::new("sh /dec/helloworld.sh")
         // Tell the OS to record the command's output
         .stdout(Stdio::inherit())
         // execute the command, wait for it to complete, then capture the output
