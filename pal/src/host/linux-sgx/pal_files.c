@@ -481,6 +481,17 @@ static int file_rename(PAL_HANDLE handle, const char* type, const char* uri) {
     return 0;
 }
 
+static int file_utimensat(PAL_HANDLE handle, const struct timespec times[2], int flags) {
+
+    int ret = ocall_utimensat(handle->file.fd, handle->file.realpath, times, flags);
+    if (ret < 0) {
+        return unix_to_pal_error(ret);
+    }
+
+    free(handle->file.realpath);
+    return 0;
+}
+
 struct handle_ops g_file_ops = {
     .open           = &file_open,
     .read           = &file_read,
@@ -494,6 +505,7 @@ struct handle_ops g_file_ops = {
     .attrquerybyhdl = &file_attrquerybyhdl,
     .attrsetbyhdl   = &file_attrsetbyhdl,
     .rename         = &file_rename,
+    .utimensat      = &file_utimensat,
 };
 
 /* 'open' operation for directory stream. Directory stream does not have a
@@ -676,6 +688,18 @@ static int dir_rename(PAL_HANDLE handle, const char* type, const char* uri) {
     return 0;
 }
 
+static int dir_utimensat(PAL_HANDLE handle, const struct timespec times[2], int flags) {
+
+    int ret = ocall_utimensat(handle->file.fd, handle->file.realpath, times, flags);
+    if (ret < 0) {
+        return unix_to_pal_error(ret);
+    }
+
+    free(handle->file.realpath);
+    return 0;
+}
+
+
 struct handle_ops g_dir_ops = {
     .open           = &dir_open,
     .read           = &dir_read,
@@ -685,4 +709,5 @@ struct handle_ops g_dir_ops = {
     .attrquerybyhdl = &file_attrquerybyhdl,
     .attrsetbyhdl   = &file_attrsetbyhdl,
     .rename         = &dir_rename,
+    .utimensat      = &dir_utimensat,
 };

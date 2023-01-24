@@ -19,7 +19,6 @@
 #include "stat.h"
 
 #define BUF_SIZE (64 * 1024) /* read/write in 64KB chunks for sendfile() */
-
 /* The kernel would look up the parent directory, and remove the child from the inode. But we are
  * working with the PAL, so we open the file, truncate and close it. */
 long libos_syscall_unlink(const char* file) {
@@ -574,4 +573,157 @@ long libos_syscall_chroot(const char* filename) {
     unlock(&g_process.fs_lock);
 out:
     return ret;
+}
+
+static int libos_syscall_utime_at(int dirfd, const char *pathname, const struct timespec times[2], int flags)
+{
+    struct libos_dentry* dir = NULL;
+    struct libos_dentry* dent = NULL;   
+    int ret;
+
+    /* Clear invalid flags. */
+    flags &= O_ACCMODE | O_APPEND |  O_CLOEXEC | O_CREAT | O_DIRECT | O_DIRECTORY | O_DSYNC | O_EXCL
+             | O_LARGEFILE | O_NOATIME | O_NOCTTY | O_NOFOLLOW | O_NONBLOCK | O_PATH | O_SYNC
+             | O_TMPFILE | O_TRUNC;
+
+    if (!is_user_string_readable(pathname)) {
+        return -EFAULT;
+    }
+
+    lock(&g_dcache_lock);
+
+    if (*pathname != '/' && (ret = get_dirfd_dentry(dirfd, &dir)) < 0) {
+        goto out;
+    }
+
+    ret = path_lookupat(dir, pathname, LOOKUP_FOLLOW, &dent);
+    if (ret < 0) {
+        goto out;
+    }
+
+    if (!dent->inode) {
+        ret = -ENOENT;
+        goto out;
+    } else {
+        ret = check_permissions(dent, MAY_WRITE);
+            if (ret < 0) {
+                goto out;
+            }
+    }
+
+    struct libos_fs* fs = dent->inode->fs;
+    if (fs->d_ops && fs->d_ops->utimensat) {
+        ret = fs->d_ops->utimensat(dent, times, flags);
+        if (ret < 0) {
+            goto out;
+        }
+    }
+
+    put_inode(dent->inode);
+    dent->inode = NULL;
+    ret = 0;
+out:
+    unlock(&g_dcache_lock);
+    if (dir)
+        put_dentry(dir);
+    if (dent)
+        put_dentry(dent);
+    return ret;
+}
+
+int libos_syscall_utimensat(int dirfd, const char *pathname, const struct timespec times[2], int flags) {
+    struct timespec times_new[2];
+    uint64_t time = 0;
+    int ret;
+    int i;
+        
+    if ((times) && ((times[0].tv_nsec == /*UTIME_OMIT*/-2) || (times[1].tv_nsec == /*UTIME_OMIT*/-2))) {
+        return 0;
+    }
+
+    if ((!times) || (times[0].tv_nsec == /*UTIME_NOW*/ -1) || (times[1].tv_nsec == /*UTIME_NOW*/-1)) {
+        for (i = 0; i <2 ;i++) {
+            ret = PalSystemTimeQuery(&time);
+            if (ret < 0) {
+                return pal_to_unix_errno(ret);
+            }
+
+            times_new[i].tv_sec  = time / 1000000;
+            times_new[i].tv_nsec = (time % 1000000) * 1000;
+        }
+        ret = libos_syscall_utime_at(dirfd, pathname, times_new, flags);
+    } else {
+        for(i = 0 ; i < 2; i ++) {
+            if (times[i].tv_nsec < 0 || times[i].tv_nsec > 999999999) {
+                return -EINVAL;
+            }
+        }
+
+        ret = libos_syscall_utime_at(dirfd, pathname, times, flags);
+    }
+
+    return ret;
+}
+
+int libos_syscall_futimens(int dirfd, const struct timespec times[2]) {
+    if (dirfd < 0) {
+        return -EBADF;
+    }
+
+    struct libos_handle* hdl = get_fd_handle(dirfd, NULL, NULL);
+    if (!hdl) {
+        return -EBADF;
+    }
+
+    return libos_syscall_utimensat(dirfd, 0, times, 0);
+}
+
+static int timeval_to_timespec(const struct timeval *tv, struct timespec *ts) {
+    if (tv != NULL && ts != NULL) {
+        ts->tv_sec = tv->tv_sec;                                    
+        ts->tv_nsec = tv->tv_usec * 1000;
+        return 0;
+    } else {
+        return -1;
+    }   
+}
+
+int libos_syscall_utime(const char *filename, const struct utimbuf *times) {
+    struct timeval tv[2];
+    struct timespec ts[2];
+
+    if (times != NULL) {
+        tv[0].tv_sec = (time_t) times->actime;
+        tv[0].tv_usec = 0L;
+        tv[1].tv_sec = (time_t) times->modtime;
+        tv[1].tv_usec = 0L;
+
+        if (tv != NULL) {
+        timeval_to_timespec(&tv[0], &ts[0]);
+        timeval_to_timespec(&tv[1], &ts[1]);
+        }
+    }
+    return libos_syscall_utimensat(AT_FDCWD, filename, times ? ts : NULL, 0);
+}
+
+int libos_syscall_utimes(const char *path, const struct timeval times[2])
+{
+    struct timespec ts[2];
+
+    if (times != NULL) {
+        timeval_to_timespec(&times[0], &ts[0]);
+        timeval_to_timespec(&times[1], &ts[1]);
+    }
+
+    return libos_syscall_utimensat(AT_FDCWD, path, times ? ts : NULL, 0);
+}
+
+int libos_syscall_futimesat(int dirfd, const char *pathname, const struct timeval times[2]) {
+    struct timespec ts[2];
+    if (times != NULL) {
+        timeval_to_timespec(&times[0], &ts[0]);
+        timeval_to_timespec(&times[1], &ts[1]);
+    }
+
+    return libos_syscall_utimensat(dirfd, pathname, times ? ts : NULL, 0);
 }

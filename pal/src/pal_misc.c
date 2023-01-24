@@ -7,6 +7,7 @@
 
 #include "pal.h"
 #include "pal_internal.h"
+#include <linux/time.h>
 
 int PalSystemTimeQuery(uint64_t* time) {
     return _PalSystemTimeQuery(time);
@@ -46,4 +47,21 @@ int PalAttestationQuote(const void* user_report_data, size_t user_report_data_si
 
 int PalGetSpecialKey(const char* name, void* key, size_t* key_size) {
     return _PalGetSpecialKey(name, key, key_size);
+}
+
+int PalSystemUtimensat(PAL_HANDLE handle, const struct timespec times[2], int flags) {
+    if (!handle) {
+        return -PAL_ERROR_INVAL;
+    }
+
+    const struct handle_ops* ops = HANDLE_OPS(handle);
+    if (!ops) {
+        return -PAL_ERROR_BADHANDLE;
+    }
+
+    if (!ops->utimensat) {
+        return -PAL_ERROR_NOTSUPPORT;
+    }
+
+    return ops->utimensat(handle, times, flags);
 }

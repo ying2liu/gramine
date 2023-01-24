@@ -87,6 +87,7 @@ struct handle_ops {
 
     /* 'rename' is used to change name of a stream, or reset its share option */
     int (*rename)(PAL_HANDLE handle, const char* type, const char* uri);
+    int (*utimensat)(PAL_HANDLE handle, const struct timespec times[2], int flags);
 };
 
 extern const struct handle_ops* g_pal_handle_ops[];

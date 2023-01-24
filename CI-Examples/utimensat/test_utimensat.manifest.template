@@ -1,0 +1,30 @@
+# Hello World manifest file example
+
+loader.entrypoint = "file:{{ gramine.libos }}"
+libos.entrypoint = "/test_utimensat"
+loader.log_level = "trace"
+loader.log_file = "test_utimensat_debug.log"
+
+loader.env.LD_LIBRARY_PATH = "/lib"
+
+fs.mounts = [
+  { path = "/lib", uri = "file:{{ gramine.runtimedir() }}" },
+  { path = "/test_utimensat", uri = "file:test_utimensat" },
+  { path = "/yingtmp", uri = "file:/home/yliu79/ying_repo/gramine/CI-Examples/utimensat/yingtmp" },
+]
+
+sgx.debug = true
+sgx.nonpie_binary = true
+sgx.file_check_policy = "allow_all_but_log"
+
+sgx.trusted_files = [
+  "file:{{ gramine.libos }}",
+  "file:test_utimensat",
+  "file:{{ gramine.runtimedir() }}/",
+#  "file:test",
+#  "file:yingtmp/",
+]
+
+sgx.allowed_files = [
+  "file:/yingtmp/test",
+]

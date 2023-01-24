@@ -1,0 +1,64 @@
+#include <stdio.h>
+
+#include <sys/time.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
+static int timeval_to_timespec(const struct timeval *tv, struct timespec *ts) {
+    if (tv != NULL && ts != NULL) {
+        ts->tv_sec = tv->tv_sec;
+        ts->tv_nsec = tv->tv_usec * 1000;
+        return 0;
+    } else {
+        return -1;
+    }
+}
+
+int main(void) {
+    struct stat statbuf;
+    struct timespec times[2];
+    struct timeval tv[2];
+    int fd = open("/yingtmp/test", O_RDWR, 0777);
+
+    if (fd < 0) {
+        printf("open file failed, fd=%d\n", fd);
+    }
+#if 1	
+    if (utimensat(/*AT_FDCWD*/fd, "/yingtmp/test",NULL, 0) < 0) {
+        printf("utimensat times = NULL, failed\n");
+	} else {
+        printf("YINGYING utimensat times = NULL pass\n");
+    }
+
+    for (int i = 0; i < 2; i ++) {
+        gettimeofday(&tv[i], NULL);
+        timeval_to_timespec(&tv[i], &times[i]);
+    }
+    printf("times[0].tv_sec=%ld, times[0].tv_nsec=%ld\n", times[0].tv_sec, times[0].tv_nsec);
+    int ret = utimensat(/*AT_FDCWD*/fd, "/yingtmp/test", times, 0);
+    if (ret < 0) {
+        printf("utimensat failed, ret = %d\n", ret);
+	} else { 
+        printf("pass\n");
+   }
+#endif
+#if 0
+    times[0].tv_nsec = -2;
+	if (utimensat(/*AT_FDCWD*/fd, "/yingtmp/test", times, 0) < 0) {
+        printf("utimensat UTIME_OMIT failed\n");
+	} else {
+        printf("utimensat UTIME_OMIT passed\n");
+    }
+#endif 
+#if 1
+	times[0].tv_nsec = -1;
+    if (utimensat(/*AT_FDCWD*/fd, "/yingtmp/test", times, 0) < 0) {
+        printf("utimensat UTIME_NOW failed\n");
+    } else {
+        printf("YINGYING utimensat -2 pass\n");
+    }
+#endif    
+    close(fd);
+	return 0;
+}

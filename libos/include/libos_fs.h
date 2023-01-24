@@ -458,6 +458,7 @@ struct libos_d_ops {
      * all other fields are set.
      */
     int (*irestore)(struct libos_inode* inode, void* data);
+    int (*utimensat)(struct libos_dentry* dent, const struct timespec times[2], int flags);
 };
 
 /*

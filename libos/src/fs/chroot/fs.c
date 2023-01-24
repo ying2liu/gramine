@@ -493,6 +493,29 @@ out:
     return ret;
 }
 
+static int chroot_utimensat(struct libos_dentry* dent, const struct timespec times[2], int flags) {
+    int ret;
+    PAL_HANDLE palhdl;
+ 
+    assert(locked(&g_dcache_lock));
+    assert(dent->inode);
+    lock(&dent->inode->lock);
+
+    ret = chroot_temp_open(dent, dent->inode->type, &palhdl);
+    if (ret < 0)
+        goto out;
+
+    ret = PalSystemUtimensat(palhdl, times, flags);
+    if (ret < 0) {
+        ret = pal_to_unix_errno(ret);
+        goto out;
+    }
+    ret = 0;
+out:
+    unlock(&dent->inode->lock);
+    return ret;
+}
+
 struct libos_fs_ops chroot_fs_ops = {
     .mount      = &chroot_mount,
     .flush      = &chroot_flush,
@@ -518,6 +541,7 @@ struct libos_d_ops chroot_d_ops = {
     .unlink  = &chroot_unlink,
     .rename  = &chroot_rename,
     .chmod   = &chroot_chmod,
+    .utimensat = &chroot_utimensat,
 };
 
 struct libos_fs chroot_builtin_fs = {
