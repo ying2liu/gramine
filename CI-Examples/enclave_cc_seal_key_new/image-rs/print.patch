@@ -1,0 +1,25 @@
+diff --git a/src/secure_channel.rs b/src/secure_channel.rs
+index 0ebe0de..2e6bdfc 100644
+--- a/src/secure_channel.rs
++++ b/src/secure_channel.rs
+@@ -98,6 +98,9 @@ impl SecureChannel {
+     /// * `aa_kbc_params`: s string with format `<kbc_name>::<kbs_uri>`.
+     pub async fn new(aa_kbc_params: &str) -> Result<Self> {
+         // unzip here is unstable
++        use tokio::io::{self, AsyncWriteExt};
++        let mut err = io::stderr();
++        err.write_all(format!("YINGYING =================err msg: {}\n", aa_kbc_params).as_bytes()).await?;
+         if let Some((kbc_name, kbs_uri)) = aa_kbc_params.split_once("::") {
+             if kbc_name.is_empty() {
+                 return Err(anyhow!("aa_kbc_params: missing KBC name"));
+@@ -109,8 +112,10 @@ impl SecureChannel {
+ 
+             Ok(Self {
+                 client: if is_native_aa() {
++                    println!("YINGYING NativeAA");
+                     Client::NativeAA(AttestationAgent::new())
+                 } else {
++                    println!("YINGYING SecureChannel AA");
+                     Client::ServiceGPRC(
+                         GetResourceServiceClient::connect(AA_GETRESOURCE_ADDR).await?,
+                     )

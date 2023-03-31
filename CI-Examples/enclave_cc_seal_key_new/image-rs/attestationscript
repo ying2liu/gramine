@@ -1,0 +1,2 @@
+sudo -E make KBC=sample_kbc,offline_fs_kbc
+sudo -E make DESTDIR="/home/yliu79/enclave_cc_sig/image-rs/scripts" install

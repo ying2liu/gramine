@@ -1,0 +1,1 @@
+gramine-sgx enclave-agent -c /etc/decrypt_config.confg

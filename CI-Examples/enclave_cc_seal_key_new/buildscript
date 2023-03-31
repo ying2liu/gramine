@@ -1,0 +1,13 @@
+rm enclave-agent async-client
+cd enclave-cc/src/enclave-agent
+make clean
+make 
+cd -
+cp enclave-cc/src/enclave-agent/target/release/enclave-agent .
+cd enclave-cc-client
+cargo build --example async-client
+cd -
+cp ./enclave-cc-client/target/debug/examples/async-client .
+make SGX=1 clean
+make SGX=1
+

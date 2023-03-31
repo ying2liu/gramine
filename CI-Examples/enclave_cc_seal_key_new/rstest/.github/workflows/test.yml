@@ -1,0 +1,30 @@
+name: Test
+
+on: 
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 6 * * SAT'
+  pull_request:
+    branches:
+      - master
+  release:
+    types: # This configuration does not affect the page_build event above
+      - created
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      run: cargo build --all --verbose
+    - name: Run tests stable
+      run: RSTEST_TEST_CHANNEL=stable; cargo test --all --verbose
+    - name: Run tests beta
+      run: RSTEST_TEST_CHANNEL=beta; cargo test --all --verbose
+    - name: Run tests nightly
+      run: RSTEST_TEST_CHANNEL=nightly; cargo test --all --verbose

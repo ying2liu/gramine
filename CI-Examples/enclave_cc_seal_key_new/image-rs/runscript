@@ -1,0 +1,4 @@
+sudo -E cargo test --tests signature_verification
+#sudo -E RUST_BACKTRACE=full cargo test --tests signature_verification
+# RUST_BACKTRACE=1
+#sudo service aesmd status

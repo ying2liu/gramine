@@ -1,0 +1,14 @@
+YINGYING1
+YINGYING2
+~/enclave_cc_sig/image-rs/scripts ~/enclave_cc_sig/image-rs
+Cloning into '/home/yliu79/enclave_cc_sig/image-rs/scripts/attestation_agent'...
+~/enclave_cc_sig/image-rs/scripts/attestation_agent ~/enclave_cc_sig/image-rs/scripts ~/enclave_cc_sig/image-rs
+cd app &&  cargo build --release --no-default-features --features sample_kbc,offline_fs_kbc --target x86_64-unknown-linux-gnu
+    Updating crates.io index
+error: failed to select a version for the requirement `libgit2-sys = "^0.13.4"`
+candidate versions found which didn't match: 0.13.2+1.4.2, 0.13.1+1.4.2, 0.13.0+1.4.1, ...
+location searched: crates.io index
+required by package `git2 v0.14.4`
+    ... which satisfies dependency `git2 = "^0.14.2"` (locked to 0.14.4) of package `shadow-rs v0.11.0`
+    ... which satisfies dependency `shadow-rs = "^0.11.0"` (locked to 0.11.0) of package `attestation-agent v0.1.0 (/home/yliu79/enclave_cc_sig/image-rs/scripts/attestation_agent/app)`
+make: *** [Makefile:89: build] Error 101
