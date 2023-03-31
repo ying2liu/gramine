@@ -18,6 +18,7 @@
 #include "api.h"
 #include "libos_fs_encrypted.h"
 #include "libos_fs_pseudo.h"
+#include "pal.h"
 #include "toml_utils.h"
 
 /* user_report_data, target_info and quote are opaque blobs of predefined maximum sizes. Currently
@@ -369,6 +370,15 @@ static int key_load(struct libos_dentry* dent, char** out_data, size_t* out_size
 }
 
 static int key_save(struct libos_dentry* dent, const char* data, size_t size) {
+    /* special keys (currently only SGX sealing keys) must not be updated */
+    const char* sealing_key_names[] = { PAL_KEY_NAME_SGX_MRENCLAVE, PAL_KEY_NAME_SGX_MRSIGNER };
+    for (size_t i = 0; i < 2; i++) {
+        if (strcmp(dent->name, sealing_key_names[i]) == 0) {
+            log_error("It is imposible to update SGX sealing key `%s`", sealing_key_names[i]);
+            return -EPERM;
+        }
+    }
+
     struct libos_encrypted_files_key* key = get_encrypted_files_key(dent->name);
     if (!key)
         return -ENOENT;
@@ -405,6 +415,17 @@ static int init_sgx_attestation(struct pseudo_node* attestation) {
     struct pseudo_node* target_info = pseudo_add_str(attestation, "target_info", NULL);
     target_info->perm = PSEUDO_PERM_FILE_RW;
     target_info->str.save = &target_info_save;
+
+    /* dummy retrieval of SGX sealing keys, so that they appear under /dev/attestation/keys/ */
+    const char* sealing_key_names[] = { PAL_KEY_NAME_SGX_MRENCLAVE, PAL_KEY_NAME_SGX_MRSIGNER };
+    for (size_t i = 0; i < 2; i++) {
+        struct libos_encrypted_files_key* key;
+        int ret = get_or_create_encrypted_files_key(sealing_key_names[i], &key);
+        if (ret < 0) {
+            log_error("Cannot initialize SGX sealing key `%s`", sealing_key_names[i]);
+            return ret;
+        }
+    }
 
     if (!strcmp(g_pal_public_state->attestation_type, "none")) {
         log_debug("host is Linux-SGX and remote attestation type is 'none', skipping "
